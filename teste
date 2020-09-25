@@ -1,0 +1,26 @@
+
+main(){
+    selecionar dentro os disponiveis tipo Reproducao, mutacao e busca local aleatoriamente
+            OU
+    pegar a melhor combinação de heuristicas do banco de dados e mudar algum dos itens
+
+    while(criterio de parada):
+        
+        resultadosExecução = montarAlgoritmo(populacao, instancia, tipoReproducao, tipoMutacao, tipoBuscaLocal)
+        Se os resultados dessa combinação forem melhores que a antiga melhor, manter a atual
+        senão
+        montar outra combinação
+    salvar no banco a melhor combinação até o momento
+}
+
+
+algoritmoMontado(populacao, instancia, tipoReproducao){
+    while(criterio de parada):
+        reproduzir(populacao, instancia, tipoReproducao)   
+        mutar(populacao, instancia, tipoMutacao)
+        buscaLocal(populacao, instancia, tipoMutacao)
+
+    return melhorIndividuo[fitness]
+}
+
+
