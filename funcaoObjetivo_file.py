@@ -40,8 +40,10 @@ class funcaoObjetivo:
                     locus = locus + 1  
             
             locus = 0
-            print(self.parametros.TAMCROMOSSOMO, self.parametros.TAMPOPULACAO, len(populacao[0]))
+            
             for j in range(self.parametros.TAMCROMOSSOMO - 1):
+                print(individuo)
+                # print(novoIndividuo[j])
                 populacao[individuo][j] = novoIndividuo[j]
             
             populacao[individuo][self.parametros.TAMCROMOSSOMO - 1] = 0
