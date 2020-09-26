@@ -3,8 +3,7 @@ class Utils:
         self.parametros = parametros
     def inserir(self, individuoCopia, individuoCopiado):
         for i in range(self.parametros.TAMCROMOSSOMO):
-            individuoCopia[i] = individuoCopiado[i
-            ]
+            individuoCopia[i] = individuoCopiado[i]
     def zerar(self, individuo):
         for i in range(len(individuo)):
             individuo[i] = self.parametros.TAMCROMOSSOMO + 3

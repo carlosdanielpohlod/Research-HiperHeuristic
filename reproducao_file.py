@@ -10,37 +10,38 @@ class Reproduzir:
             self.reproduzir01(populacao, fluxo, distancias, pai01, pai02)
 
     def reproduzir01(self, populacao, fluxo, distancias, pai01, pai02):
+        utils = Utils(self.parametros)
         mutacao = Mutacao()
         escolhido = 0
-        novoIndividuo = []
+        novoIndividuo = [0] * len(populacao[0])
         genePassado = 0
-        listaAuxiliar = [[0 for x in range(self.parametros.NUMMAXIMOFILHOS + 2)] for y in range(self.parametros.TAMCROMOSSOMO)]
+        listaAuxiliar = [[0 for y in range(self.parametros.TAMCROMOSSOMO)]  for x in range(self.parametros.NUMMAXIMOFILHOS + 2)]
         contadorAuxiliar = 0
-        inserir(listaAuxiliar[contadorAuxiliar], populacao[pai01])
+        utils.inserir(listaAuxiliar[contadorAuxiliar], populacao[pai01])
         contadorAuxiliar = contadorAuxiliar + 1 
-        inserir(listaAuxiliar[contadorAuxiliar], populacao[pai02])
+        utils.inserir(listaAuxiliar[contadorAuxiliar], populacao[pai02])
         N = len(populacao[0])
-        for filho in (self.parametros.NUMMAXIMOFILHOS):
+        for filho in range(self.parametros.NUMMAXIMOFILHOS):
             contadorAuxiliar = contadorAuxiliar + 1
             genePassado = 0
             escolhido = 0
-            zerar(novoIndividuo)
+            utils.zerar(novoIndividuo)
             # novoIndividuo = [self.parametros.TAMCROMOSSOMO + 3]
             
         for i in range(N):
             escolhido = randint(0,2)
-            genePassado = randint(0, N)
+            genePassado = randint(0, N - 1)
 
             if(escolhido == 0):
                 # while(jaExiste(novoIndividuo, populacao[pai01][genePassado])):
                 while(populacao[pai01][genePassado] in novoIndividuo):
-                    genePassado = randint(0, N)
+                    genePassado = randint(0, N - 1)
                 
                 novoIndividuo[i] = populacao[pai01][genePassado]
             else:
                 # while(jaExiste(novoIndividuo, populacao[pai02][genePassado])):
                 while(populacao[pai02][genePassado] in novoIndividuo):
-                    genePassado = randint(0, N)
+                    genePassado = randint(0, N - 1)
                 
                     novoIndividuo[i] = populacao[pai02][genePassado]
             
@@ -51,10 +52,10 @@ class Reproduzir:
         self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
         # *numAvaliacao = *numAvaliacao + 1
         
-        inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
+        utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
         
     
     
-        ordenar(listaAuxiliar)
-        persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
+        utils.ordenar(listaAuxiliar)
+        utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
     

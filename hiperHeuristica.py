@@ -50,7 +50,7 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
     # print(fluxo[1][2])
     funcaoObjetivo.gerarPopulacao(populacao)
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-    print(populacao)
+    reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
     # while (numeroGeracoes < 10):
     #     funcaoObjetivo.gerarPopulacao(populacao)
     #     aux = selecaoPais.selecionarPais(1)
