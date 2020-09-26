@@ -23,7 +23,7 @@ class funcaoObjetivo:
             while(locus < N):
                 
 
-                num = randint(0,N)
+                num = randint(0,N - 2)
                 existe = False
 
                 for i in range(self.parametros.TAMCROMOSSOMO - 1):
@@ -42,22 +42,28 @@ class funcaoObjetivo:
             locus = 0
             
             for j in range(self.parametros.TAMCROMOSSOMO - 1):
-                print(individuo)
+                
                 # print(novoIndividuo[j])
                 populacao[individuo][j] = novoIndividuo[j]
             
             populacao[individuo][self.parametros.TAMCROMOSSOMO - 1] = 0
         
     def avaliarIndividuo(self,individuo, fluxo, distancias):
-    
+        
         fitness = 0
         N = len(individuo) - 1
+        
         for i in range(N):
             for j in range(N):
-                    fitness = distancias[i][j] * fluxo[ individuo[i] ] [individuo[j] ]
-        individuo[self.parametros.TAMINDIVIDUO - 1] = fitness
+                
+                fitness = fitness+distancias[i][j] * fluxo[ individuo[i] ] [individuo[j] ]
+                
+        # print(fitness)
+        individuo[self.parametros.TAMCROMOSSOMO - 1] = fitness
+        
     
     def avaliarPopulacao(self, populacao, fluxo, distancias):
-        for individuo in range(self.parametro):
-            avaliarIndividuo(populacao[individuo], fluxo, distancias)
+        for individuo in range(self.parametros.TAMPOPULACAO):
+            
+            self.avaliarIndividuo(populacao[individuo], fluxo, distancias)
     
