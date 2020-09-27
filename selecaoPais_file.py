@@ -47,14 +47,14 @@ class SelecaoPais:
             pai02 = randint(0, self.parametros.TAMPOPULACAO)
         
               
-        somatorioPopulacao = somatorioFitnessPopulacao(populacao)
+        somatorioPopulacao = self.somatorioFitnessPopulacao(populacao)
         mediaPopulacao = float(somatorioPopulacao / self.parametros.TAMPOPULACAO)
         
 
         while not encontrado:
             if antiCrash == self.parametros.TAMPOPULACAO * 3 :
                 aux = []
-                aux = selecaoComum(populacao, pai01, pai02, mediaPopulacao)
+                aux = self.selecaoComum(populacao, pai01, pai02, mediaPopulacao)
                 return aux
 
             antiCrash = antiCrash + 1

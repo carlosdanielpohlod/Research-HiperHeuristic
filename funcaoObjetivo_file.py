@@ -51,7 +51,7 @@ class funcaoObjetivo:
     def avaliarIndividuo(self,individuo, fluxo, distancias):
         
         fitness = 0
-        N = len(individuo) - 1
+        N = len(fluxo) 
         
         for i in range(N):
             for j in range(N):

@@ -25,7 +25,7 @@ fluxo = [   [0,1,2,3,1,2,3,4,2,3,4,5],
             [5,4,3,2,4,3,2,1,3,2,1,0]
         ]
 distancias = [
-           [0,5,2,4,1,0,0,6,2,1,1,1],
+            [0,5,2,4,1,0,0,6,2,1,1,1],
             [5,0,3,0,2,2,2,0,4,5,0,0],
             [2,3,0,0,0,0,0,5,5,2,2,2],
             [4,0,0,0,5,2,2,10,0,0,5,5],
@@ -45,10 +45,9 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
     pai01 = 0
     pai02 = 0
     populacao = [[0 for x in range(N)] for y in range(parametros.TAMPOPULACAO)]
-    # print(distancias[8])
     aux = []
-    # print(fluxo[1][2])
     funcaoObjetivo.gerarPopulacao(populacao)
+    # selecaoPais.selecionar(populacao, 1)
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
     reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
     # while (numeroGeracoes < 10):
