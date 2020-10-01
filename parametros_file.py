@@ -2,7 +2,7 @@ import random
 class Parametros:
     
     def __init__(self ):
-        self.TAMCROMOSSOMO = 12
+        self.TAMCROMOSSOMO = 13
         self.TAMPOPULACAO = 100
         self.MAXAVALIACOES = 91100
         self.EVMA = 0.001

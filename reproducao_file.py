@@ -10,7 +10,7 @@ class Reproduzir:
             self.reproduzir01(populacao, fluxo, distancias, pai01, pai02)
 
     def reproduzir01(self, populacao, fluxo, distancias, pai01, pai02):
-        N = len(fluxo[0])
+        N = len(fluxo[0]) 
         utils = Utils(self.parametros)
         mutacao = Mutacao()
         escolhido = 0
@@ -23,16 +23,17 @@ class Reproduzir:
         
         contadorAuxiliar = contadorAuxiliar + 1 
         utils.inserir(listaAuxiliar[contadorAuxiliar], populacao[pai02])
-        
+        print("antes do for")
         for filho in range(self.parametros.NUMMAXIMOFILHOS):
             contadorAuxiliar = contadorAuxiliar + 1
             genePassado = 0
             escolhido = 0
+            print("bug")
             utils.zerar(novoIndividuo)
             # novoIndividuo = [self.parametros.TAMCROMOSSOMO + 3]
         
         for i in range(N):
-            escolhido = randint(0,2)
+            escolhido = randint(0,1)
             genePassado = randint(0, N - 2)
             
             if(escolhido == 0):
