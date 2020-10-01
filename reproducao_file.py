@@ -23,12 +23,12 @@ class Reproduzir:
         
         contadorAuxiliar = contadorAuxiliar + 1 
         utils.inserir(listaAuxiliar[contadorAuxiliar], populacao[pai02])
-        print("antes do for")
+        
         for filho in range(self.parametros.NUMMAXIMOFILHOS):
             contadorAuxiliar = contadorAuxiliar + 1
             genePassado = 0
             escolhido = 0
-            print("bug")
+            
             utils.zerar(novoIndividuo)
             # novoIndividuo = [self.parametros.TAMCROMOSSOMO + 3]
         
@@ -46,12 +46,11 @@ class Reproduzir:
             else:
                 # while(jaExiste(novoIndividuo, populacao[pai02][genePassado])):
                 while(populacao[pai02][genePassado] in novoIndividuo):
-                    print(populacao[pai02][genePassado])
-                    print(novoIndividuo)
+                   
                     genePassado = randint(0, N - 2)
                 
                 novoIndividuo[i] = populacao[pai02][genePassado]
-                print(novoIndividuo)
+                
             
         
         if(mutacao.chanceMutar(self.parametros.PORCENTAGEMMUTACOES)):

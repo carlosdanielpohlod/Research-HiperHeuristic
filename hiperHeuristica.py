@@ -46,12 +46,12 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
     pai02 = 0
     populacao = [[0 for x in range(parametros.TAMCROMOSSOMO)] for y in range(parametros.TAMPOPULACAO)]
     aux = []
-    print("antes da funcao")
     funcaoObjetivo.gerarPopulacao(populacao)
     # selecaoPais.selecionar(populacao, 1)
+    
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
 
-    reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
+    # reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
     # while (numeroGeracoes < 10):
     #     funcaoObjetivo.gerarPopulacao(populacao)
     #     aux = selecaoPais.selecionarPais(1)
