@@ -1,3 +1,4 @@
+from operator import itemgetter
 class Utils:
     def __init__(self, parametros):
         self.parametros = parametros
@@ -14,13 +15,14 @@ class Utils:
             populacao[pai02][i] = matriz[1][i]
 
     def ordenar(self,matriz):
-            aux = [self.parametros.TAMCROMOSSOMO]
+            aux = [0] * self.parametros.TAMCROMOSSOMO
             
             for j in range(self.parametros.NUMMAXIMOFILHOS):
                 for i in range(self.parametros.NUMMAXIMOFILHOS + 1):
 
                     if(matriz[i][self.parametros.TAMCROMOSSOMO - 1] > matriz[i + 1][self.parametros.TAMCROMOSSOMO - 1] ):
                         for k in range (self.parametros.TAMCROMOSSOMO):
+                            
                             aux[k] = matriz[i][k]
                         
                         for k in range(self.parametros.TAMCROMOSSOMO):
@@ -29,4 +31,4 @@ class Utils:
                         for k in range(self.parametros.TAMCROMOSSOMO):
                             matriz[i + 1][k] = aux[k]
                 
-        
+    

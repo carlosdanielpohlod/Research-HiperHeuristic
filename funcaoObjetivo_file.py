@@ -11,7 +11,7 @@ class funcaoObjetivo:
     def gerarPopulacao(self, populacao):
         self.parametros.N 
 
-        novoIndividuo = [0] * self.parametros.N  
+        novoIndividuo = [0] * self.parametros.TAMCROMOSSOMO  
         existe = False
         num = 0
         individuo = 0  
