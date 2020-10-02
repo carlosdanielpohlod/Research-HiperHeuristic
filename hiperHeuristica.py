@@ -41,29 +41,23 @@ distancias = [
 
 def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros):
     numeroGeracoes = 0
-    
-    pai01 = 0
-    pai02 = 0
     populacao = [[0 for x in range(parametros.TAMCROMOSSOMO)] for y in range(parametros.TAMPOPULACAO)]
     aux = []
     funcaoObjetivo.gerarPopulacao(populacao)
-    # selecaoPais.selecionar(populacao, 1)
-    
+    aux = selecaoPais.selecionar(populacao, 1)
+    pai01 = aux[0]
+    pai02 = aux[1]
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-
     reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
-    # while (numeroGeracoes < 10):
-    #     funcaoObjetivo.gerarPopulacao(populacao)
-    #     aux = selecaoPais.selecionarPais(1)
-    #     pai01 = aux[0]
-    #     pai02 = aux[1]
-    #     reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
-    #     buscaLocal.busca(fluxo, distancias, 1)
+
+
+
+
 
 #int main(){
 
 parametros = Parametros()
-parametros.setParametros(3,4,6)
+# parametros.setParametros(95,4,6)
 selecaoPais = SelecaoPais(parametros)
 funcaoObjetivo = funcaoObjetivo(parametros)
 reproducao = Reproduzir(parametros, funcaoObjetivo)

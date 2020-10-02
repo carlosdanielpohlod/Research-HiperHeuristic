@@ -40,11 +40,11 @@ class SelecaoPais:
         antiCrash = 0
         pai01 = 0
         pai02 = 0
-        pai01 = randint(0, self.parametros.TAMPOPULACAO)
-        pai02 = randint(0, self.parametros.TAMPOPULACAO)
+        pai01 = randint(0, self.parametros.TAMPOPULACAO - 1)
+        pai02 = randint(0, self.parametros.TAMPOPULACAO - 1)
         while(pai01 == pai02):
-            pai01 = randint(0, self.parametros.TAMPOPULACAO)
-            pai02 = randint(0, self.parametros.TAMPOPULACAO)
+            pai01 = randint(0, self.parametros.TAMPOPULACAO - 1)
+            pai02 = randint(0, self.parametros.TAMPOPULACAO - 1)
         
               
         somatorioPopulacao = self.somatorioFitnessPopulacao(populacao)
@@ -52,6 +52,7 @@ class SelecaoPais:
         
 
         while not encontrado:
+            
             if antiCrash == self.parametros.TAMPOPULACAO * 3 :
                 aux = []
                 aux = self.selecaoComum(populacao, pai01, pai02, mediaPopulacao)
@@ -62,13 +63,13 @@ class SelecaoPais:
             if(populacao[pai01][self.parametros.TAMCROMOSSOMO - 1] <= mediaPopulacao):
             
                 while((populacao[pai02][self.parametros.TAMCROMOSSOMO - 1] <= mediaPopulacao)  or (pai01 == pai02)):
-                    pai02 = randint(0, self.parametros.TAMPOPULACAO)
+                    pai02 = randint(0, self.parametros.TAMPOPULACAO - 1)
                 
                 encontrado = True
             else:
                 if(populacao[pai02][self.parametros.TAMCROMOSSOMO - 1] <= mediaPopulacao):
                     while( (populacao[pai01][self.parametros.TAMCROMOSSOMO - 1] <= mediaPopulacao) or (pai01 == pai02)):
-                        pai02 = randint(0, self.parametros.TAMPOPULACAO)
+                        pai02 = randint(0, self.parametros.TAMPOPULACAO - 1)
                     
                     encontrado =True
         
