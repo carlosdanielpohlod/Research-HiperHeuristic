@@ -1,14 +1,15 @@
 from utils import *
 class BuscaLocal:
-    def __init__(self, parametros):
+    def __init__(self, parametros, funcaoObjetivo):
         self.parametros = parametros
+        self.funcaoObjetivo = funcaoObjetivo
     def alterarParametros(self, parametros):
         self.parametros = parametros
-    def busca(self, individuo, fluxo, distancias, funcaoObjetivo, indiceReproducao):
+    def busca(self, individuo, fluxo, distancias, indiceReproducao):
         if indiceReproducao == 1:
-            self.buscaLocal01(individuo, fluxo, distancias, funcaoObjetivo)
+            self.buscaLocal01(individuo, fluxo, distancias)
             
-    def buscaLocal01(self, individuo, fluxo, distancias, funcaoObjetivo):        
+    def buscaLocal01(self, individuo, fluxo, distancias):        
         for i in range(self.parametros.TAMCROMOSSOMO - 1):
             fitness = individuo[self.parametros.TAMCROMOSSOMO - 1]
 
@@ -19,7 +20,7 @@ class BuscaLocal:
                     individuo[j] = aux
                     auxilioFitness = individuo[self.parametros.TAMCROMOSSOMO - 1]
 
-                    funcaoObjetivo.avaliarIndividuo(individuo, fluxo, distancias)
+                    self.funcaoObjetivo.avaliarIndividuo(individuo, fluxo, distancias)
 
                     if(individuo[self.parametros.TAMCROMOSSOMO - 1] > fitness):
                         aux2 = individuo[j]

@@ -6,7 +6,7 @@ class Mutacao:
             self.mutar01(individuo)
 
     def mutar01(self, individuo):
-        N = len(individuo) - 1
+        N = len(individuo) - 2
         locus01 = randint(0, N)
         locus02 = randint(0, N)
         aux = 0

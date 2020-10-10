@@ -43,13 +43,16 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
     utils = Utils(parametros)
     numeroGeracoes = 0
     populacao = [[0 for x in range(parametros.TAMCROMOSSOMO)] for y in range(parametros.TAMPOPULACAO)]
-    aux = []
     funcaoObjetivo.gerarPopulacao(populacao)
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-    pai01, pai02 = selecaoPais.selecionar(populacao, 1)
-   
-    reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
-    melhor = utils.buscarMelhorIndividuo(populacao)
+    while(numeroGeracoes < 500):
+        # print(numeroGeracoes)
+        pai01, pai02 = selecaoPais.selecionar(populacao, 1)  
+        reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
+        melhor = utils.buscarMelhorIndividuo(populacao)
+        buscaLocal.busca(populacao[melhor], fluxo, distancias, 1)
+        numeroGeracoes = numeroGeracoes + 1
+    print(populacao[melhor])
     
     
 
@@ -64,8 +67,8 @@ parametros = Parametros()
 selecaoPais = SelecaoPais(parametros)
 funcaoObjetivo = funcaoObjetivo(parametros)
 reproducao = Reproduzir(parametros, funcaoObjetivo)
-# buscalLocal = BuscalLocal(parametros)
-buscaLocal = []
+buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
+# buscaLocal = []
 construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros)
 #}
 

@@ -36,29 +36,30 @@ class Reproduzir:
         
             for i in range(self.parametros.N):
                 escolhido = randint(0,1)
-                genePassado = randint(0, self.parametros.N - 1)
+                genePassado = randint(0, self.parametros.TAMCROMOSSOMO - 2)
                 
                 if(escolhido == 0):
                     # while(jaExiste(novoIndividuo, populacao[pai01][genePassado])):
                     while(populacao[pai01][genePassado] in novoIndividuo):
-                        genePassado = randint(0, self.parametros.N - 1)
-                    
+                        genePassado = randint(0, self.parametros.TAMCROMOSSOMO - 2)
+                        # print(genePassado)
                     novoIndividuo[i] = populacao[pai01][genePassado]
                     
                 else:
                     # while(jaExiste(novoIndividuo, populacao[pai02][genePassado])):
                     while(populacao[pai02][genePassado] in novoIndividuo):
-                    
-                        genePassado = randint(0, self.parametros.N - 1)
-                    
+                        
+                        genePassado = randint(0, self.parametros.TAMCROMOSSOMO - 2)
+                        # print(genePassado)
                     novoIndividuo[i] = populacao[pai02][genePassado]
                     
                 
             
             if(mutacao.chanceMutar(self.parametros.PORCENTAGEMMUTACOES)):
                 mutacao.mutar(novoIndividuo, 1)
-            
+            # print(novoIndividuo)
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
+
             # *numAvaliacao = *numAvaliacao + 1
             
             utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
