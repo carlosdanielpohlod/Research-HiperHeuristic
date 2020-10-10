@@ -11,7 +11,7 @@ class SelecaoPais:
     
         somatorio = 0
         for  i in range(self.parametros.TAMPOPULACAO):
-            somatorio += populacao[i][self.parametros.TAMCROMOSSOMO - 1]
+            somatorio = somatorio + populacao[i][self.parametros.TAMCROMOSSOMO - 1]
         return somatorio
     def selecaoComum(self, populacao, pai01,  pai02, mediaPopulacao):
     
@@ -43,16 +43,18 @@ class SelecaoPais:
         pai01 = randint(0, self.parametros.TAMPOPULACAO - 1)
         pai02 = randint(0, self.parametros.TAMPOPULACAO - 1)
         while(pai01 == pai02):
+           
             pai01 = randint(0, self.parametros.TAMPOPULACAO - 1)
             pai02 = randint(0, self.parametros.TAMPOPULACAO - 1)
         
               
         somatorioPopulacao = self.somatorioFitnessPopulacao(populacao)
+        
         mediaPopulacao = float(somatorioPopulacao / self.parametros.TAMPOPULACAO)
         
-
+        
         while not encontrado:
-            
+           
             if antiCrash == self.parametros.TAMPOPULACAO * 3 :
                 aux = []
                 aux = self.selecaoComum(populacao, pai01, pai02, mediaPopulacao)
@@ -61,9 +63,10 @@ class SelecaoPais:
             antiCrash = antiCrash + 1
             
             if(populacao[pai01][self.parametros.TAMCROMOSSOMO - 1] <= mediaPopulacao):
-            
+                
                 while((populacao[pai02][self.parametros.TAMCROMOSSOMO - 1] <= mediaPopulacao)  or (pai01 == pai02)):
                     pai02 = randint(0, self.parametros.TAMPOPULACAO - 1)
+                   
                 
                 encontrado = True
             else:

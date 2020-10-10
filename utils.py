@@ -13,7 +13,12 @@ class Utils:
         
             populacao[pai01][i] = matriz[0][i]
             populacao[pai02][i] = matriz[1][i]
-
+    def buscarMelhorIndividuo(self, populacao):
+        melhor = 0
+        for i in range(self.parametros.TAMPOPULACAO):
+            if(populacao[i][self.parametros.TAMINDIVIDUO - 1] < populacao[melhor][self.parametros.TAMINDIVIDUO - 1]):
+                melhor = i
+        return melhor
     def ordenar(self,matriz):
             aux = [0] * self.parametros.TAMCROMOSSOMO
             

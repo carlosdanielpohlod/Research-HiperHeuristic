@@ -40,15 +40,17 @@ distancias = [
         ]
 
 def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros):
+    utils = Utils(parametros)
     numeroGeracoes = 0
     populacao = [[0 for x in range(parametros.TAMCROMOSSOMO)] for y in range(parametros.TAMPOPULACAO)]
     aux = []
     funcaoObjetivo.gerarPopulacao(populacao)
-    aux = selecaoPais.selecionar(populacao, 1)
-    pai01 = aux[0]
-    pai02 = aux[1]
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
+    pai01, pai02 = selecaoPais.selecionar(populacao, 1)
+   
     reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
+    melhor = utils.buscarMelhorIndividuo(populacao)
+    
 
 
 
