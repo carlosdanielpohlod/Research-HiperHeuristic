@@ -51,6 +51,7 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
     reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 1)
     melhor = utils.buscarMelhorIndividuo(populacao)
     
+    
 
 
 

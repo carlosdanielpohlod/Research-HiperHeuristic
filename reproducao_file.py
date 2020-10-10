@@ -12,7 +12,7 @@ class Reproduzir:
 
 
     def reproduzir01(self, populacao, fluxo, distancias, pai01, pai02):
-        print(pai01, pai02)
+        
         utils = Utils(self.parametros)
         mutacao = Mutacao()
         escolhido = 0
@@ -62,12 +62,9 @@ class Reproduzir:
             # *numAvaliacao = *numAvaliacao + 1
             
             utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
-            print(novoIndividuo)
+           
         
         
         utils.ordenar(listaAuxiliar)
-        print(listaAuxiliar)
-        # print(listaAuxiliar[2][12])
-        input()
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
     

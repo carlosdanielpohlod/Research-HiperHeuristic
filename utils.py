@@ -16,7 +16,7 @@ class Utils:
     def buscarMelhorIndividuo(self, populacao):
         melhor = 0
         for i in range(self.parametros.TAMPOPULACAO):
-            if(populacao[i][self.parametros.TAMINDIVIDUO - 1] < populacao[melhor][self.parametros.TAMINDIVIDUO - 1]):
+            if(populacao[i][self.parametros.TAMCROMOSSOMO - 1] < populacao[melhor][self.parametros.TAMCROMOSSOMO - 1]):
                 melhor = i
         return melhor
     def ordenar(self,matriz):
