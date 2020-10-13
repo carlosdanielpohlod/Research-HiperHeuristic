@@ -76,6 +76,7 @@ class Reproduzir:
         utils = Utils(self.parametros)
         numeroFilhos = randint(1, self.parametros.NUMMAXIMOFILHOS)
         maisPrivilegiado = 0
+        i = 0
         if(populacao[pai01][self.parametros.TAMCROMOSSOMO - 1] < populacao[pai02][self.parametros.TAMCROMOSSOMO - 1]):
             maisPrivilegiado = pai01
             menosPrivilegiado = pai02
@@ -89,9 +90,23 @@ class Reproduzir:
             
             
             
-            for i in range(int(self.parametros.TAMCROMOSSOMO / 2)):
-                novoIndividuo[i] = populacao[maisPrivilegiado][i]
-            for genePassado in range(self.parametros.TAMCROMOSSOMO - 1):
+            cont = 0
+            i = randint(0, self.parametros.TAMCROMOSSOMO - 4)
+            
+            
+            while(cont < int(self.parametros.TAMCROMOSSOMO / 2 )):
+                cont = cont + 1
+                if(i + 2 >= self.parametros.TAMCROMOSSOMO - 1):
+                    i = 0
+                    novoIndividuo[i] = populacao[maisPrivilegiado][i]
+                else:
+                    novoIndividuo[i] = populacao[maisPrivilegiado][i]
+                    i = i + 2
+                    
+                
+                
+               
+            for genePassado in range(int(self.parametros.TAMCROMOSSOMO / 3)):
                if(not utils.existe(populacao[menosPrivilegiado][genePassado],novoIndividuo)):
                    novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[menosPrivilegiado][genePassado]
             
