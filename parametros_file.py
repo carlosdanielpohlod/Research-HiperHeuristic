@@ -4,6 +4,7 @@ class Parametros:
     def __init__(self):
         self.N = 12
         self.TAMCROMOSSOMO = self.N + 1 
+        self.INFINITO = self.N + 10
         self.TAMPOPULACAO = 100
         self.MAXAVALIACOES = 91100
         self.EVMA = 0.001

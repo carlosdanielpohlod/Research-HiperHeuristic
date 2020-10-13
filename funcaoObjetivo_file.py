@@ -1,7 +1,7 @@
 from random import randint
 from utils import *
 
-class funcaoObjetivo:
+class FuncaoObjetivo:
     def __init__(self, parametros):
         self.parametros = parametros
         self.utils = Utils(parametros)

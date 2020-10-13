@@ -1,5 +1,6 @@
 from mutacao_file import *
 from utils import *
+from random import *
 class Reproduzir:
     def __init__(self, parametros, funcaoObjetivo):
         self.parametros = parametros
@@ -8,6 +9,8 @@ class Reproduzir:
     def reproduzir(self, populacao, fluxo, distancias, pai01, pai02, indiceReproducao):
         if(indiceReproducao == 1):
             self.reproduzir01(populacao, fluxo, distancias, pai01, pai02)
+        if(indiceReproducao == 2):
+            self.reproduzir02(populacao, fluxo, distancias, pai01, pai02)
         
 
 
@@ -42,7 +45,7 @@ class Reproduzir:
                     # while(jaExiste(novoIndividuo, populacao[pai01][genePassado])):
                     while(populacao[pai01][genePassado] in novoIndividuo):
                         genePassado = randint(0, self.parametros.TAMCROMOSSOMO - 2)
-                        # print(genePassado)
+                        
                     novoIndividuo[i] = populacao[pai01][genePassado]
                     
                 else:
@@ -50,14 +53,14 @@ class Reproduzir:
                     while(populacao[pai02][genePassado] in novoIndividuo):
                         
                         genePassado = randint(0, self.parametros.TAMCROMOSSOMO - 2)
-                        # print(genePassado)
+                        
                     novoIndividuo[i] = populacao[pai02][genePassado]
                     
                 
             
             if(mutacao.chanceMutar(self.parametros.PORCENTAGEMMUTACOES)):
                 mutacao.mutar(novoIndividuo, 1)
-            # print(novoIndividuo)
+            
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
 
             # *numAvaliacao = *numAvaliacao + 1
@@ -68,4 +71,51 @@ class Reproduzir:
         
         utils.ordenar(listaAuxiliar)
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
-    
+    def reproduzir02(self, populacao, fluxo, distancias, pai01, pai02):
+
+        utils = Utils(self.parametros)
+        numeroFilhos = randint(1, self.parametros.NUMMAXIMOFILHOS)
+        maisPrivilegiado = 0
+        if(populacao[pai01][self.parametros.TAMCROMOSSOMO - 1] < populacao[pai02][self.parametros.TAMCROMOSSOMO - 1]):
+            maisPrivilegiado = pai01
+            menosPrivilegiado = pai02
+        else:
+            maisPrivilegiado = pai02
+            menosPrivilegiado = pai01 
+        for filho in range(numeroFilhos):
+            novoIndividuo = [22] * self.parametros.TAMCROMOSSOMO
+            
+            utils.zerar(novoIndividuo)
+            
+            
+            
+            for i in range(int(self.parametros.TAMCROMOSSOMO / 2)):
+                novoIndividuo[i] = populacao[maisPrivilegiado][i]
+            for genePassado in range(self.parametros.TAMCROMOSSOMO - 1):
+               if(not utils.existe(populacao[menosPrivilegiado][genePassado],novoIndividuo)):
+                   novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[menosPrivilegiado][genePassado]
+            
+            while(utils.posicaoVazia(novoIndividuo) != None):
+                # geneAleatorio = randint(0,self.parametros.TAMCROMOSSOMO - 2)
+                
+                pai = randint(0,1)
+                
+                if(pai == 0):
+                    for i in range(self.parametros.TAMCROMOSSOMO - 1):
+                        
+                        if(populacao[pai01][i] not in novoIndividuo):
+                            novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai01][i]
+                else:
+                    for i in range(self.parametros.TAMCROMOSSOMO - 1):
+                        if(populacao[pai02][i] not in novoIndividuo):
+                            novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai02][i]                    
+            self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
+            print('..........................')
+            print(populacao[pai01])
+            print(populacao[pai02])
+            print(novoIndividuo)
+            print('..........................')
+
+
+
+        

@@ -6,8 +6,9 @@ class Utils:
         for i in range(self.parametros.TAMCROMOSSOMO):
             individuoCopia[i] = individuoCopiado[i]
     def zerar(self, individuo):
-        for i in range(len(individuo)):
-            individuo[i] = self.parametros.TAMCROMOSSOMO + 3
+        for i in range(self.parametros.TAMCROMOSSOMO):
+            individuo[i] = self.parametros.INFINITO
+        
     def persistirMelhores(self, matriz, populacao,  pai01,  pai02):
         for i in range(self.parametros.TAMCROMOSSOMO):
         
@@ -19,6 +20,16 @@ class Utils:
             if(populacao[i][self.parametros.TAMCROMOSSOMO - 1] < populacao[melhor][self.parametros.TAMCROMOSSOMO - 1]):
                 melhor = i
         return melhor
+    def posicaoVazia(self, individuo):
+        for i in range(self.parametros.TAMCROMOSSOMO - 1):
+            if individuo[i] == self.parametros.INFINITO:
+                return i
+        return None
+    def existe(self, individuo01, individuo02):
+        for i in range(self.parametros.TAMCROMOSSOMO - 1):
+            if individuo01 == individuo02[i]:
+                return True
+        return False
     def ordenar(self,matriz):
             aux = [0] * self.parametros.TAMCROMOSSOMO
             
