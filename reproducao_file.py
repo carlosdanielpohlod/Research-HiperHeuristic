@@ -76,21 +76,28 @@ class Reproduzir:
         utils = Utils(self.parametros)
         numeroFilhos = randint(1, self.parametros.NUMMAXIMOFILHOS)
         maisPrivilegiado = 0
-        i = 0
+        listaAuxiliar = [[0 for y in range(self.parametros.TAMCROMOSSOMO)]  for x in range(self.parametros.NUMMAXIMOFILHOS + 2)]
+        contadorAuxiliar = 0
+        cont = 0
+        
         if(populacao[pai01][self.parametros.TAMCROMOSSOMO - 1] < populacao[pai02][self.parametros.TAMCROMOSSOMO - 1]):
             maisPrivilegiado = pai01
             menosPrivilegiado = pai02
         else:
             maisPrivilegiado = pai02
             menosPrivilegiado = pai01 
+
+        
+        utils.inserir(listaAuxiliar[contadorAuxiliar], populacao[pai01])
+        
+        contadorAuxiliar = contadorAuxiliar + 1 
+        utils.inserir(listaAuxiliar[contadorAuxiliar], populacao[pai02])
+
         for filho in range(numeroFilhos):
             novoIndividuo = [22] * self.parametros.TAMCROMOSSOMO
             
             utils.zerar(novoIndividuo)
             
-            
-            
-            cont = 0
             i = randint(0, self.parametros.TAMCROMOSSOMO - 4)
             
             
@@ -125,11 +132,10 @@ class Reproduzir:
                         if(populacao[pai02][i] not in novoIndividuo):
                             novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai02][i]                    
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
-            print('..........................')
-            print(populacao[pai01])
-            print(populacao[pai02])
-            print(novoIndividuo)
-            print('..........................')
+            utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
+        utils.ordenar(listaAuxiliar)
+        utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
+        
 
 
 
