@@ -8,7 +8,8 @@ class BuscaLocal:
     def busca(self, individuo, fluxo, distancias, indiceReproducao):
         if indiceReproducao == 1:
             self.buscaLocal01(individuo, fluxo, distancias)
-            
+    # def buscaLocal02(self, individuo, fluxi, distancias):
+
     def buscaLocal01(self, individuo, fluxo, distancias):        
         for i in range(self.parametros.TAMCROMOSSOMO - 1):
             fitness = individuo[self.parametros.TAMCROMOSSOMO - 1]

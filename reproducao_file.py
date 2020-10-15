@@ -112,10 +112,12 @@ class Reproduzir:
                     
                 
                 
+            genePassado = 0  
+            for i in range(int(self.parametros.TAMCROMOSSOMO / 3)):
                
-            for genePassado in range(int(self.parametros.TAMCROMOSSOMO / 3)):
-               if(not utils.existe(populacao[menosPrivilegiado][genePassado],novoIndividuo)):
-                   novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[menosPrivilegiado][genePassado]
+                while(utils.existe(populacao[menosPrivilegiado][genePassado],novoIndividuo)):
+                    genePassado = randint(0, self.parametros.TAMCROMOSSOMO - 1)
+                novoIndividuo[genePassado] = populacao[menosPrivilegiado][genePassado]
             
             while(utils.posicaoVazia(novoIndividuo) != None):
                 # geneAleatorio = randint(0,self.parametros.TAMCROMOSSOMO - 2)
@@ -123,12 +125,13 @@ class Reproduzir:
                 pai = randint(0,1)
                 
                 if(pai == 0):
-                    for i in range(self.parametros.TAMCROMOSSOMO - 1):
+                    for i in range(self.parametros.TAMCROMOSSOMO - 2):
                         
                         if(populacao[pai01][i] not in novoIndividuo):
+                            print(utils.posicaoVazia(novoIndividuo))
                             novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai01][i]
                 else:
-                    for i in range(self.parametros.TAMCROMOSSOMO - 1):
+                    for i in range(self.parametros.TAMCROMOSSOMO - 2):
                         if(populacao[pai02][i] not in novoIndividuo):
                             novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai02][i]                    
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)

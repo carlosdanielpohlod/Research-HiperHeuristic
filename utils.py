@@ -20,6 +20,8 @@ class Utils:
             if(populacao[i][self.parametros.TAMCROMOSSOMO - 1] < populacao[melhor][self.parametros.TAMCROMOSSOMO - 1]):
                 melhor = i
         return melhor
+    def declararMatriz(self, linhas, colunas):
+        return [[0 for x in range(colunas)] for y in range(linhas)]
     def posicaoVazia(self, individuo):
         for i in range(self.parametros.TAMCROMOSSOMO - 1):
             if individuo[i] == self.parametros.INFINITO:

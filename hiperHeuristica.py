@@ -3,13 +3,17 @@ from buscaLocal_file import BuscaLocal
 from funcaoObjetivo_file import *
 from selecaoPais_file import SelecaoPais
 from reproducao_file import Reproduzir
+from codHeuristicas import CodHeuristicas
+from storage.database.crud import salvarResultado
+from utils import Utils
 
-global codigoTipoReproducao
-codigoTipoReproducao = 0
-global codigoTipoMutacao
-codigoTipoMutacao = 0
-global codigoTipoBuscaLocal
-codigoTipoBuscaLocal = 0
+parametros = Parametros()
+selecaoPais = SelecaoPais(parametros)
+funcaoObjetivo = FuncaoObjetivo(parametros)
+reproducao = Reproduzir(parametros, funcaoObjetivo)
+buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
+codHeuristicas = CodHeuristicas()
+
 
 fluxo = [   [0,1,2,3,1,2,3,4,2,3,4,5],
             [1,0,1,2,2,1,2,3,3,2,3,4],
@@ -39,37 +43,33 @@ distancias = [
             [1,0,2,5,1,0,3,0,10,0,2,0]
         ]
 
-def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros):
+def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas):
     utils = Utils(parametros)
-    numeroGeracoes = 0
-    populacao = [[0 for x in range(parametros.TAMCROMOSSOMO)] for y in range(parametros.TAMPOPULACAO)]
+    numeroGeracoes = 15
+    populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
     funcaoObjetivo.gerarPopulacao(populacao)
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-    while(numeroGeracoes < 1):
-        # print(numeroGeracoes)
-        pai01, pai02 = selecaoPais.selecionar(populacao, 1)  
-        reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, 2)
+
+    for i in range(numeroGeracoes):    
+        pai01, pai02 = selecaoPais.selecionar(populacao, codHeuristicas.codSelecaoPais)  
+        reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, codHeuristicas.codReproducao)
         melhor = utils.buscarMelhorIndividuo(populacao)
-        buscaLocal.busca(populacao[melhor], fluxo, distancias, 1)
-        numeroGeracoes = numeroGeracoes + 1
-    # print(populacao[melhor])
-    
+        buscaLocal.busca(populacao[melhor], fluxo, distancias, codHeuristicas.codBuscaLocal)
+    return populacao[melhor][parametros.TAMCROMOSSOMO - 1]
     
 
 
 
+    
 
-
-#int main(){
 numExecucoes = 0
-while(numExecucoes < 30):
+codHeuristicas.codReproducao = 1
+codHeuristicas.codBuscaLocal = randint(1, 2)
+codHeuristicas.codSelecaoPais = randint(1,2)
+for i in range(30):
     numExecucoes = numExecucoes + 1
-    parametros = Parametros()
-    selecaoPais = SelecaoPais(parametros)
-    funcaoObjetivo = FuncaoObjetivo(parametros)
-    reproducao = Reproduzir(parametros, funcaoObjetivo)
-    buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
-    construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros)
+    melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+    salvarResultado(codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, melhorResultado)
     
-#}
+
 

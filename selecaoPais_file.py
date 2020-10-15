@@ -5,8 +5,16 @@ class SelecaoPais:
     def selecionar(self, populacao, codigoSelecao):
         aux = []
         if(codigoSelecao == 1):
-           aux = self.escolherPais01(populacao)
-           return aux
+           return self.escolherPais01(populacao)
+        if(codigoSelecao == 2):
+            return self.selecaoAleatoria(populacao)
+    def selecaoAleatoria(self, populacao):
+        pai01 = 0
+        pai02 = 0
+        while(pai01 == pai02):
+            pai01 = randint(0, self.parametros.TAMPOPULACAO - 1)
+            pai02 = randint(0, self.parametros.TAMPOPULACAO - 1)
+        return pai01, pai02
     def somatorioFitnessPopulacao(self, populacao):
     
         somatorio = 0
