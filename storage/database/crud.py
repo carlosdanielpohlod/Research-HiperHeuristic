@@ -16,6 +16,8 @@ def salvarResultado(codReproducao, codBuscaLocal, codSelecaoPais, fitness):
         print('inserido', resultados)
         resultados = Resultados()
         resultados = resultados.select(codReproducao).execute()
+
+        
         for resultado in resultados:
             print(resultado.codReproducao)
         db.close()
