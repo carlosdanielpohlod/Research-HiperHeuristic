@@ -61,15 +61,15 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
 
 
     
-
-numExecucoes = 0
+# Atribui algumas heuristicas para iniciar o algoritmo
 codHeuristicas.codReproducao = 1
 codHeuristicas.codBuscaLocal = randint(1, 2)
 codHeuristicas.codSelecaoPais = randint(1,2)
-for i in range(30):
-    numExecucoes = numExecucoes + 1
-    melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-    salvarResultado(codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, melhorResultado)
+# Hiper heuristica
+
+melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+salvarResultado(codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, melhorResultado)
+
     
 
 

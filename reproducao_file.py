@@ -126,14 +126,25 @@ class Reproduzir:
                 
                 if(pai == 0):
                     for i in range(self.parametros.TAMCROMOSSOMO - 2):
+                        print('.....inicio')
+                        print(populacao[pai01][i])
+                        print(novoIndividuo)
                         
-                        if(populacao[pai01][i] not in novoIndividuo):
-                            print(utils.posicaoVazia(novoIndividuo))
+                        print('....fim')
+                        if((populacao[pai01][i] not in novoIndividuo) and (utils.posicaoVazia(novoIndividuo) != None)):
+                            
                             novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai01][i]
+                            
                 else:
                     for i in range(self.parametros.TAMCROMOSSOMO - 2):
-                        if(populacao[pai02][i] not in novoIndividuo):
-                            novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai02][i]                    
+                        print('.....inicio')
+                        print(populacao[pai02][i])
+                        print(novoIndividuo)
+                        
+                        print('....fim')
+                        if((populacao[pai02][i] not in novoIndividuo)and (utils.posicaoVazia(novoIndividuo) != None)):
+                            novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai02][i]          
+                                      
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
             utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
         utils.ordenar(listaAuxiliar)
