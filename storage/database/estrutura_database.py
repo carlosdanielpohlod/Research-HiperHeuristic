@@ -9,11 +9,13 @@ class Resultados(peewee.Model):
     codSelecaoPais = peewee.IntegerField()
     class Meta:
         database = db
-def criarTabelas():
-    try:
-        resultados = Resultados()
-        resultados.create_table()
-        print("Tabela reultados foi criada")
-    except NameError:
-        print("erro", NameError)
+
+try:
+    resultados = Resultados()
+    resultados.create_table()
+    print("Tabela reultados foi criada")
+except NameError:
+    print("erro", NameError)
+
+
 
