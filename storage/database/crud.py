@@ -9,20 +9,26 @@ def salvarResultado(codReproducao, codBuscaLocal, codSelecaoPais, fitness):
     
     try:
         db.connect()
-        # data = [{"codReproducao=  codReproducao,"codBuscaLocal": 0, "codSelecaoPais": codSelecaoPais, "fitness": "100"}]
         resultados = Resultados(codReproducao =  codReproducao,codBuscaLocal=  0, codSelecaoPais=  codSelecaoPais, fitness= 100)
         resultados.save()
-        
-        print('inserido', resultados)
-        resultados = Resultados()
-        resultados = resultados.select(codReproducao).execute()
-
-        
-        for resultado in resultados:
-            print(resultado.codReproducao)
         db.close()
-    except NameError:
-        print(NameError)
+    except peewee.OperationalError:
+        print("erro", peewee.OperationalError)
     class Meta:
         database = db
 
+def melhorHeuristica():
+    
+    try:
+        db.connect()
+        resultados = Resultados()
+        resultados = resultados.select().order_by("fitness").limit(1).execute()
+        
+        for resultado in resultados:
+            return [resultado.codReproducao, resultado.codBuscaLocal, resultado.codSelecaoPais, resultado.fitness]
+        
+        db.close()
+    except peewee.OperationalError:
+        print("erro", peewee.OperationalError)
+    class Meta:
+        database = db

@@ -4,7 +4,7 @@ from funcaoObjetivo_file import *
 from selecaoPais_file import SelecaoPais
 from reproducao_file import Reproduzir
 from codHeuristicas import CodHeuristicas
-from storage.database.crud import salvarResultado
+from storage.database.crud import *
 from utils import Utils
 
 parametros = Parametros()
@@ -58,17 +58,9 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
     return populacao[melhor][parametros.TAMCROMOSSOMO - 1]
     
 
-
-
-    
-# Atribui algumas heuristicas para iniciar o algoritmo
-codHeuristicas.codReproducao = 1
-codHeuristicas.codBuscaLocal = randint(1, 2)
-codHeuristicas.codSelecaoPais = randint(1,2)
-# Hiper heuristica
-
+codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, codHeuristicas.fitness = melhorHeuristica()
 melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-salvarResultado(codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, melhorResultado)
+# salvarResultado(codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, melhorResultado)
 
     
 
