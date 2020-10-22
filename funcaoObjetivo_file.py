@@ -52,7 +52,7 @@ class FuncaoObjetivo:
         
         fitness = 0
         
-        
+        # print(individuo)
         for i in range(self.parametros.N):
             for j in range(self.parametros.N):
                 

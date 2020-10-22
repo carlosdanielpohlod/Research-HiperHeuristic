@@ -125,27 +125,28 @@ class Reproduzir:
                 pai = randint(0,1)
                 
                 if(pai == 0):
-                    for i in range(self.parametros.TAMCROMOSSOMO - 2):
-                        print('.....inicio')
-                        print(populacao[pai01][i])
-                        print(novoIndividuo)
+                    for i in range(self.parametros.TAMCROMOSSOMO - 1):
+                        # print('.....inicio')
+                        # print(populacao[pai01][i])
+                        # print(novoIndividuo)
                         
-                        print('....fim')
+                        # print('....fim')
                         if((populacao[pai01][i] not in novoIndividuo) and (utils.posicaoVazia(novoIndividuo) != None)):
                             
                             novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai01][i]
                             
                 else:
-                    for i in range(self.parametros.TAMCROMOSSOMO - 2):
-                        print('.....inicio')
-                        print(populacao[pai02][i])
-                        print(novoIndividuo)
+                    for i in range(self.parametros.TAMCROMOSSOMO - 1):
+                        # print('.....inicio')
+                        # print(populacao[pai02][i])
+                        # print(novoIndividuo)
                         
-                        print('....fim')
+                        # print('....fim')
                         if((populacao[pai02][i] not in novoIndividuo)and (utils.posicaoVazia(novoIndividuo) != None)):
                             novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai02][i]          
-                                      
+                          
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
+            # print(novoIndividuo)         
             utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
         utils.ordenar(listaAuxiliar)
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)

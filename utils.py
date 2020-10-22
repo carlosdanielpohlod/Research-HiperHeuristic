@@ -27,9 +27,9 @@ class Utils:
             if individuo[i] == self.parametros.INFINITO:
                 return i
         return None
-    def existe(self, individuo01, individuo02):
+    def existe(self, gene, individuo02):
         for i in range(self.parametros.TAMCROMOSSOMO - 1):
-            if individuo01 == individuo02[i]:
+            if gene == individuo02[i]:
                 return True
         return False
     def ordenar(self,matriz):
