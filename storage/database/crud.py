@@ -12,6 +12,7 @@ def salvarResultado(codReproducao, codBuscaLocal, codSelecaoPais, fitness):
         resultados = Resultados(codReproducao =  codReproducao,codBuscaLocal=  0, codSelecaoPais=  codSelecaoPais, fitness= 100)
         resultados.save()
         db.close()
+        print("Melhor resultado salvo")
     except peewee.OperationalError:
         print("erro", peewee.OperationalError)
     class Meta:

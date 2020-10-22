@@ -6,4 +6,3 @@ class CodHeuristicas:
         self.codSelecaoPais = 0
         self.fitness = 0
     
-    
