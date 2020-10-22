@@ -7,14 +7,14 @@ db = peewee.SqliteDatabase('conhecimento.db')
 
 def salvarResultado(codReproducao, codBuscaLocal, codSelecaoPais, fitness):
     
-    try:
-        db.connect()
-        resultados = Resultados(codReproducao =  codReproducao,codBuscaLocal=  0, codSelecaoPais=  codSelecaoPais, fitness= 100)
-        resultados.save()
-        db.close()
-        print("Melhor resultado salvo")
-    except peewee.OperationalError:
-        print("erro", peewee.OperationalError)
+    # try:
+    # db.connect()
+    resultados = Resultados(codReproducao =  codReproducao,codBuscaLocal=  1, codSelecaoPais=  codSelecaoPais, fitness= fitness)
+    resultados.save()
+    db.close()
+    print("Melhor resultado salvo")
+    # except peewee.OperationalError:
+    #     print("erro", peewee.OperationalError)
     class Meta:
         database = db
 
