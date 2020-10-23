@@ -38,5 +38,7 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
         pai01, pai02 = selecaoPais.selecionar(populacao, codHeuristicas.codSelecaoPais)  
         reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, codHeuristicas.codReproducao)
         melhor = utils.buscarMelhorIndividuo(populacao)
+        # print(populacao[melhor])
         buscaLocal.busca(populacao[melhor], fluxo, distancias, codHeuristicas.codBuscaLocal)
+        # print(populacao[melhor])
     return populacao[melhor][parametros.TAMCROMOSSOMO - 1]

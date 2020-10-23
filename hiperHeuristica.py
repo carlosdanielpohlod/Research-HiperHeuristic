@@ -24,7 +24,7 @@ for i in range(10):
     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
     if(melhorResultado > codHeuristicas.fitness):
         
-        codHeuristicas.codBuscaLocal = 1
+        codHeuristicas.codBuscaLocal = randint(1, 2)
         codHeuristicas.codReproducao = 1
         codHeuristicas.codSelecaoPais = randint(1, 2)
     else:
