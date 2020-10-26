@@ -33,9 +33,10 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
     populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
     funcaoObjetivo.gerarPopulacao(populacao)
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-
+    # print(populacao)
     for i in range(numeroGeracoes):    
         pai01, pai02 = selecaoPais.selecionar(populacao, codHeuristicas.codSelecaoPais)  
+        # print(populacao[pai01], populacao[pai02])
         reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, codHeuristicas.codReproducao)
         melhor = utils.buscarMelhorIndividuo(populacao)
         # print(populacao[melhor])

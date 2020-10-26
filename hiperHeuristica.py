@@ -18,19 +18,19 @@ codHeuristicas = CodHeuristicas()
 
 
 codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, codHeuristicas.fitness = melhorHeuristica()
+
 #Hiper Heuritica
 for i in range(10):
 
     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
     if(melhorResultado > codHeuristicas.fitness):
-        
-        codHeuristicas.codBuscaLocal = randint(1, 2)
+        codHeuristicas.codBuscaLocal = randint(1, 3)
         codHeuristicas.codReproducao = 1
         codHeuristicas.codSelecaoPais = randint(1, 2)
     else:
         codHeuristicas.fitness = melhorResultado
-    
-salvarResultado(codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, codHeuristicas.fitness)
+if(input("Quer salvar o resultado?")  == 's'):
+    salvarResultado(codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, codHeuristicas.fitness)
 
     
 

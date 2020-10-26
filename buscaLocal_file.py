@@ -1,15 +1,18 @@
 from utils import *
+from random import randint
 class BuscaLocal:
     def __init__(self, parametros, funcaoObjetivo):
         self.parametros = parametros
         self.funcaoObjetivo = funcaoObjetivo
     def alterarParametros(self, parametros):
         self.parametros = parametros
-    def busca(self, individuo, fluxo, distancias, indiceReproducao):
-        if indiceReproducao == 1:
+    def busca(self, individuo, fluxo, distancias, indiceBuscaLocal):
+        if indiceBuscaLocal == 1:
             self.buscaLocal01(individuo, fluxo, distancias)
-        if indiceReproducao == 2:
+        if indiceBuscaLocal == 2:
             self.buscaLocal02(individuo, fluxo, distancias)
+        if indiceBuscaLocal == 3:
+            self.subOrdenacao(individuo, fluxo, distancias)
     # def buscaLocal02(self, individuo, fluxi, distancias):
 
     def buscaLocal01(self, individuo, fluxo, distancias):        
@@ -72,3 +75,18 @@ class BuscaLocal:
 
 
 
+    def subOrdenacao(self, individuo, fluxo, distancias):  
+        indice = randint(0, self.parametros.TAMCROMOSSOMO - 1)
+        print("Antes ", individuo)   
+        for i in range(self.parametros.TAMCROMOSSOMO - 2):
+            if(individuo[i + 1] > individuo[i]):
+                fitnessAnterior = individuo[self.parametros.TAMCROMOSSOMO - 1]
+                aux = individuo[i]
+                individuo[i] = individuo[i + 1]
+                individuo[i + 1] = aux
+                self.funcaoObjetivo.avaliarIndividuo(individuo, fluxo, distancias)
+                if(fitnessAnterior < individuo[self.parametros.TAMCROMOSSOMO - 1]):
+                    individuo[i + 1] = individuo[i]
+                    individuo[i] = aux
+                    individuo[self.parametros.TAMCROMOSSOMO - 1] = fitnessAnterior
+        print("Depois ", individuo)

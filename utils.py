@@ -29,6 +29,7 @@ class Utils:
         return None
     def existe(self, gene, individuo02):
         for i in range(self.parametros.TAMCROMOSSOMO - 1):
+            
             if gene == individuo02[i]:
                 return True
         return False

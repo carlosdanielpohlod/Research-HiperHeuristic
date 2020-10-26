@@ -9,7 +9,7 @@ def salvarResultado(codReproducao, codBuscaLocal, codSelecaoPais, fitness):
     
     # try:
     # db.connect()
-    resultados = Resultados(codReproducao =  codReproducao,codBuscaLocal=  1, codSelecaoPais=  codSelecaoPais, fitness= fitness)
+    resultados = Resultados(codReproducao =  codReproducao,codBuscaLocal=  codBuscaLocal, codSelecaoPais=  codSelecaoPais, fitness= fitness)
     resultados.save()
     db.close()
     print("Melhor resultado salvo")
