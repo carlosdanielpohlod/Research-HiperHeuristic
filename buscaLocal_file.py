@@ -77,7 +77,7 @@ class BuscaLocal:
 
     def subOrdenacao(self, individuo, fluxo, distancias):  
         indice = randint(0, self.parametros.TAMCROMOSSOMO - 1)
-        print("Antes ", individuo)   
+        # print("Antes ", individuo)   
         for i in range(self.parametros.TAMCROMOSSOMO - 2):
             if(individuo[i + 1] > individuo[i]):
                 fitnessAnterior = individuo[self.parametros.TAMCROMOSSOMO - 1]
@@ -89,4 +89,4 @@ class BuscaLocal:
                     individuo[i + 1] = individuo[i]
                     individuo[i] = aux
                     individuo[self.parametros.TAMCROMOSSOMO - 1] = fitnessAnterior
-        print("Depois ", individuo)
+        # print("Depois ", individuo)

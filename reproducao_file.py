@@ -95,17 +95,18 @@ class Reproduzir:
             else:
                 novoIndividuo[i] = populacao[maisPrivilegiado][i]
                 i = i + 2
-        print("Primeira fase", novoIndividuo)
-        input()
+       
+        
         
         for i in range(self.parametros.TAMCROMOSSOMO):
             indice = populacao[menosPrivilegiado][i]
-            if(indice not in novoIndividuo):
-                novoIndividuo = populacao[menosPrivilegiado][i]
-        print("Mais privilegiado ", populacao[maisPrivilegiado])
-        print("Menos privilegiado ", populacao[menosPrivilegiado])
+            
+            if((indice not in novoIndividuo)and utils.posicaoVazia(novoIndividuo) != None):
+                novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[menosPrivilegiado][i]
+
+
         self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
-        print(novoIndividuo)
+
 
             
     # def reproduzir02(self, populacao, fluxo, distancias, pai01, pai02):
@@ -163,22 +164,22 @@ class Reproduzir:
                 
     #             if(pai == 0):
     #                 for i in range(self.parametros.TAMCROMOSSOMO - 1):
-    #                     # print('.....inicio')
-    #                     # print(populacao[pai01][i])
-    #                     # print(novoIndividuo)
+    
+    
+    
                         
-    #                     # print('....fim')
+    
     #                     if((populacao[pai01][i] not in novoIndividuo) and (utils.posicaoVazia(novoIndividuo) != None)):
                             
     #                         novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai01][i]
                             
     #             else:
     #                 for i in range(self.parametros.TAMCROMOSSOMO - 1):
-    #                     # print('.....inicio')
-    #                     # print(populacao[pai02][i])
-    #                     # print(novoIndividuo)
+    
+    
+    
                         
-    #                     # print('....fim')
+    
     #                     if((populacao[pai02][i] not in novoIndividuo)and (utils.posicaoVazia(novoIndividuo) != None)):
     #                         novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[pai02][i]          
                 
@@ -186,9 +187,9 @@ class Reproduzir:
     #         # contadorAuxiliar = contadorAuxiliar + 1
     #         utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
           
-    #     print(listaAuxiliar)
+    
     #     utils.ordenar(listaAuxiliar)
-    #     # print("Lista ordenada")
+    
         
     #     utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
         
