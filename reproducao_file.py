@@ -5,7 +5,7 @@ class Reproduzir:
     def __init__(self, parametros, funcaoObjetivo):
         self.parametros = parametros
         self.funcaoObjetivo = funcaoObjetivo
-  
+        
     def reproduzir(self, populacao, fluxo, distancias, pai01, pai02, indiceReproducao):
         if(indiceReproducao == 1):
             self.reproduzir01(populacao, fluxo, distancias, pai01, pai02)
@@ -86,7 +86,7 @@ class Reproduzir:
         else:
             maisPrivilegiado = pai02
             menosPrivilegiado = pai01 
-        novoIndividuo = [22] * self.parametros.TAMCROMOSSOMO
+        novoIndividuo = [self.parametros.INFINITO] * self.parametros.TAMCROMOSSOMO
         for i in range(self.parametros.TAMCROMOSSOMO):
             i = randint(0, self.parametros.TAMCROMOSSOMO - 4)
             if(i + 2 >= self.parametros.TAMCROMOSSOMO - 1):

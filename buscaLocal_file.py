@@ -4,6 +4,7 @@ class BuscaLocal:
     def __init__(self, parametros, funcaoObjetivo):
         self.parametros = parametros
         self.funcaoObjetivo = funcaoObjetivo
+        self.taxaMelhora = 0
     def alterarParametros(self, parametros):
         self.parametros = parametros
     def busca(self, individuo, fluxo, distancias, indiceBuscaLocal):
@@ -74,19 +75,23 @@ class BuscaLocal:
                         fitness = individuo[self.parametros.TAMCROMOSSOMO - 1]
 
 
-
+    
     def subOrdenacao(self, individuo, fluxo, distancias):  
-        indice = randint(0, self.parametros.TAMCROMOSSOMO - 1)
+        indice = randint(0, self.parametros.TAMCROMOSSOMO - 4)
         # print("Antes ", individuo)   
         for i in range(self.parametros.TAMCROMOSSOMO - 2):
-            if(individuo[i + 1] > individuo[i]):
+            if(individuo[indice + 1] > individuo[indice]):
                 fitnessAnterior = individuo[self.parametros.TAMCROMOSSOMO - 1]
-                aux = individuo[i]
-                individuo[i] = individuo[i + 1]
-                individuo[i + 1] = aux
+                aux = individuo[indice]
+                individuo[indice] = individuo[indice + 1]
+                individuo[indice + 1] = aux
                 self.funcaoObjetivo.avaliarIndividuo(individuo, fluxo, distancias)
                 if(fitnessAnterior < individuo[self.parametros.TAMCROMOSSOMO - 1]):
-                    individuo[i + 1] = individuo[i]
-                    individuo[i] = aux
+                    individuo[indice + 1] = individuo[indice]
+                    individuo[indice] = aux
                     individuo[self.parametros.TAMCROMOSSOMO - 1] = fitnessAnterior
-        # print("Depois ", individuo)
+            while(indice + 1 == self.parametros.TAMCROMOSSOMO - 2):
+                indice = randint(0, self.parametros.TAMCROMOSSOMO - 2)
+            
+                
+        

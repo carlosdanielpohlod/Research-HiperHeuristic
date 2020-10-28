@@ -36,7 +36,7 @@ class SelecaoPais:
         return [pai01, pai02]
             
     
-    
+        
 
     def escolherPais01(self, populacao):
         mediaHabilidade = 0.0

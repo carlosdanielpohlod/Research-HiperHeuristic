@@ -33,21 +33,40 @@ class Utils:
             if gene == individuo02[i]:
                 return True
         return False
+    def printMatriz(self, matriz):
+        
+        for i in range(len(matriz)):
+            print(matriz[i])
     def ordenar(self,matriz):
-            aux = [0] * self.parametros.TAMCROMOSSOMO
-            
-            for j in range(self.parametros.NUMMAXIMOFILHOS):
-                for i in range(self.parametros.NUMMAXIMOFILHOS + 1):
+        aux = [0] * self.parametros.TAMCROMOSSOMO
+        
+        for j in range(self.parametros.NUMMAXIMOFILHOS):
+            for i in range(self.parametros.NUMMAXIMOFILHOS + 1):
 
-                    if(matriz[i][self.parametros.TAMCROMOSSOMO - 1] > matriz[i + 1][self.parametros.TAMCROMOSSOMO - 1] ):
-                        for k in range (self.parametros.TAMCROMOSSOMO):
-                            
-                            aux[k] = matriz[i][k]
+                if(matriz[i][self.parametros.TAMCROMOSSOMO - 1] > matriz[i + 1][self.parametros.TAMCROMOSSOMO - 1] ):
+                    for k in range (self.parametros.TAMCROMOSSOMO):
                         
-                        for k in range(self.parametros.TAMCROMOSSOMO):
-                            matriz[i][k] = matriz[i + 1][k]
+                        aux[k] = matriz[i][k]
+                    
+                    for k in range(self.parametros.TAMCROMOSSOMO):
+                        matriz[i][k] = matriz[i + 1][k]
+                    
+                    for k in range(self.parametros.TAMCROMOSSOMO):
+                        matriz[i + 1][k] = aux[k]
+    def bubbleSort(self, matriz):
+        aux = [self.parametros.INFINITO] * self.parametros.TAMCROMOSSOMO
+        
+        for j in range(self.parametros.TAMPOPULACAO):
+            for i in range(self.parametros.TAMPOPULACAO - 1):
+
+                if(matriz[i][self.parametros.TAMCROMOSSOMO - 1] > matriz[i + 1][self.parametros.TAMCROMOSSOMO - 1] ):
+                    for k in range (self.parametros.TAMCROMOSSOMO):
                         
-                        for k in range(self.parametros.TAMCROMOSSOMO):
-                            matriz[i + 1][k] = aux[k]
-                
+                        aux[k] = matriz[i][k]
+                    
+                    for k in range(self.parametros.TAMCROMOSSOMO):
+                        matriz[i][k] = matriz[i + 1][k]
+                    
+                    for k in range(self.parametros.TAMCROMOSSOMO):
+                        matriz[i + 1][k] = aux[k]     
     

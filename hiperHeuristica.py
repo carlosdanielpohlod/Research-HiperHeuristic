@@ -14,18 +14,14 @@ reproducao = Reproduzir(parametros, funcaoObjetivo)
 buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
 
-
-
-
 codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, codHeuristicas.fitness = melhorHeuristica()
 
 #Hiper Heuritica
 for i in range(10):
-
     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
     if(melhorResultado > codHeuristicas.fitness):
-        codHeuristicas.codBuscaLocal = randint(1, 3)
-        codHeuristicas.codReproducao = 2
+        codHeuristicas.codBuscaLocal = randint(1,3)
+        codHeuristicas.codReproducao = randint(1,2)
         codHeuristicas.codSelecaoPais = randint(1, 2)
     else:
         codHeuristicas.fitness = melhorResultado
