@@ -39,7 +39,7 @@ class Utils:
             print(matriz[i])
     def ordenar(self,matriz):
         aux = [0] * self.parametros.TAMCROMOSSOMO
-        
+        # tamMatriz = len(matri)
         for j in range(self.parametros.NUMMAXIMOFILHOS):
             for i in range(self.parametros.NUMMAXIMOFILHOS + 1):
 
@@ -69,4 +69,4 @@ class Utils:
                     
                     for k in range(self.parametros.TAMCROMOSSOMO):
                         matriz[i + 1][k] = aux[k]     
-    
+                    

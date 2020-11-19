@@ -1,12 +1,17 @@
 from utils import *
 from random import randint
+from copy import *
 class BuscaLocal:
     def __init__(self, parametros, funcaoObjetivo):
         self.parametros = parametros
         self.funcaoObjetivo = funcaoObjetivo
-        self.taxaMelhora = 0
+        self.score = 0
     def alterarParametros(self, parametros):
         self.parametros = parametros
+
+    def calcularScore(self, original, perturbado):
+        diferenca = ((original - perturbado)) 
+        self.score = (diferenca * original) / 10000
     def busca(self, individuo, fluxo, distancias, indiceBuscaLocal):
         if indiceBuscaLocal == 1:
             self.buscaLocal01(individuo, fluxo, distancias)
@@ -16,7 +21,8 @@ class BuscaLocal:
             self.subOrdenacao(individuo, fluxo, distancias)
     # def buscaLocal02(self, individuo, fluxi, distancias):
 
-    def buscaLocal01(self, individuo, fluxo, distancias):        
+    def buscaLocal01(self, individuo, fluxo, distancias):     
+        original = copy(individuo)
         for i in range(self.parametros.TAMCROMOSSOMO - 1):
             fitness = individuo[self.parametros.TAMCROMOSSOMO - 1]
 
@@ -39,11 +45,13 @@ class BuscaLocal:
                         
                     else:
                         fitness = individuo[self.parametros.TAMCROMOSSOMO - 1]
-    
+        # print(original, individuo)
+        self.calcularScore(original[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
+        
 
     def buscaLocal02(self, individuo, fluxo, distancias):     
 
-
+        original = copy(individuo)
         for i in range(self.parametros.TAMCROMOSSOMO - 1):
             fitness = individuo[self.parametros.TAMCROMOSSOMO - 1]
             direitaToEsquerda = self.parametros.TAMCROMOSSOMO - 1
@@ -74,9 +82,10 @@ class BuscaLocal:
                         
                         fitness = individuo[self.parametros.TAMCROMOSSOMO - 1]
 
-
+        self.calcularScore(original[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
     
     def subOrdenacao(self, individuo, fluxo, distancias):  
+        original = copy(individuo)
         indice = randint(0, self.parametros.TAMCROMOSSOMO - 4)
         # print("Antes ", individuo)   
         for i in range(self.parametros.TAMCROMOSSOMO - 2):
@@ -92,6 +101,6 @@ class BuscaLocal:
                     individuo[self.parametros.TAMCROMOSSOMO - 1] = fitnessAnterior
             while(indice + 1 == self.parametros.TAMCROMOSSOMO - 2):
                 indice = randint(0, self.parametros.TAMCROMOSSOMO - 2)
-            
+        self.calcularScore(original[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])  
                 
         

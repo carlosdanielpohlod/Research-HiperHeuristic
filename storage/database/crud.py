@@ -1,4 +1,4 @@
-from storage.database.estrutura_database import Resultados,db
+from storage.database.estrutura_database import Resultados,db,Heuristica
 import peewee
 db = peewee.SqliteDatabase('conhecimento.db')
 
@@ -17,6 +17,10 @@ def salvarResultado(codReproducao, codBuscaLocal, codSelecaoPais, fitness):
     #     print("erro", peewee.OperationalError)
     class Meta:
         database = db
+def salvarScore(codHeuristica, score):
+    novaHeuristica = Heuristica(codHeuristica = codHeuristica, score = score)
+    novaHeuristica.save()
+    db.close()
 
 def melhorHeuristica():
     
