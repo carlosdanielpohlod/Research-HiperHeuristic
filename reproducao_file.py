@@ -6,7 +6,7 @@ class Reproduzir:
         self.parametros = parametros
         self.funcaoObjetivo = funcaoObjetivo
         self.score = 0
-    # def calcularScore(self, anterior, novo):
+   
     def calcularScore(self, original, perturbado):
         diferenca = ((original - perturbado)) 
         self.score = (diferenca * original) / 10000
@@ -20,7 +20,7 @@ class Reproduzir:
 
 
     def reproduzir01(self, populacao, fluxo, distancias, pai01, pai02):
-        # listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1] = (populacao[pai01][self.parametros.TAMCROMOSSOMO - 1] + populacao[pai02][self.parametros.TAMCROMOSSOMO - 1]) / 2
+       
         utils = Utils(self.parametros)
         mutacao = Mutacao()
         escolhido = 0
@@ -73,7 +73,7 @@ class Reproduzir:
         
         
         utils.ordenar(listaAuxiliar)
-        print(listaAuxiliar)
+        
         if(listaAuxiliar[0] != novoIndividuo): 
             self.calcularScore(listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1], novoIndividuo[self.parametros.TAMCROMOSSOMO - 1])
            
@@ -81,8 +81,8 @@ class Reproduzir:
 
     
     def reproduzir02(self, populacao, fluxo, distancias, pai01, pai02):
-        # listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1] = (populacao[pai01][self.parametros.TAMCROMOSSOMO - 1] + populacao[pai02][self.parametros.TAMCROMOSSOMO - 1]) / 2
-        # print(populacao[pai01], populacao[pai02],"\n")
+        
+        
         utils = Utils(self.parametros)
         numeroFilhos = randint(1, self.parametros.NUMMAXIMOFILHOS)
         maisPrivilegiado = 0
@@ -119,20 +119,20 @@ class Reproduzir:
                 
                 if((indice not in novoIndividuo)and utils.posicaoVazia(novoIndividuo) != None):
                     novoIndividuo[utils.posicaoVazia(novoIndividuo)] = populacao[menosPrivilegiado][i]
-            # print("filho ", novoIndividuo)
+           
             
 
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
             utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
         utils.ordenar(listaAuxiliar)
-        # print(listaAuxiliar)
+       
         if(listaAuxiliar[0] != novoIndividuo):
             
             self.calcularScore(listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1], novoIndividuo[self.parametros.TAMCROMOSSOMO - 1])
-            # if(novoIndividuo[self.parametros.TAMCROMOSSOMO - 1] > listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1]):
-            #     print("individuo ", novoIndividuo, "é pior q o melhor ",listaAuxiliar[0])
+           
+           
 
-            #     print("Piorou com o score de", self.score)
-            # else:
-                # print("Melhorou com score de", self.score)
+           
+           
+               
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)

@@ -32,7 +32,7 @@ class HeuristicaUsada(peewee.Model):
     class Meta:
         database = db
         heuristica = peewee.CompositeKey('tipoHeuristica', 'execucao','codHeuristica')
-        db_table = 'heuristica'
+        db_table = 'heuristicausada'
 class ScoreHeuristica(peewee.Model):
     heuristicaUsada = peewee.ForeignKeyField(HeuristicaUsada,to_field= 'heuristicaUsada_id')
     score = peewee.DoubleField()
