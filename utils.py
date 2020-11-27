@@ -1,6 +1,8 @@
 from operator import itemgetter
+from random import *
+from codHeuristicas import CodHeuristicas
 class Utils:
-    def __init__(self, parametros):
+    def __init__(self, parametros = None):
         self.parametros = parametros
     def inserir(self, individuoCopia, individuoCopiado):
         for i in range(self.parametros.TAMCROMOSSOMO):
@@ -37,6 +39,22 @@ class Utils:
         
         for i in range(len(matriz)):
             print(matriz[i])
+    def codToString(self, codHeuristicas):
+        return f'{codHeuristicas.codReproducao},{codHeuristicas.codBuscaLocal},{codHeuristicas.codSelecaoPais}'
+    def castArray(self, array):
+        array = array.split(',')
+        for i in range(len(array)):
+            array[i] = int(array[i])
+        return array
+
+    def setCodigosHeuriticas(self, codHeuristicas, codigos):
+        if(codigos == 'random'):
+           
+            codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais =  [randint(1,2), randint(1,3), randint(1,2)]
+        else:
+            codigos = self.castArray(codigos)
+            codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais = codigos
+            
     def ordenar(self,matriz):
         aux = [0] * self.parametros.TAMCROMOSSOMO
         # tamMatriz = len(matri)
@@ -69,4 +87,4 @@ class Utils:
                     
                     for k in range(self.parametros.TAMCROMOSSOMO):
                         matriz[i + 1][k] = aux[k]     
-                    
+    

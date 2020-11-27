@@ -8,32 +8,48 @@ from storage.database.crud import *
 from heuristica import *
 from escolha.ThompsonSampling import *
 from escolha.HeuristicaEscolha import *
+from utils import *
+
 
 parametros = Parametros()
+utils = Utils()
 selecaoPais = SelecaoPais(parametros)
 funcaoObjetivo = FuncaoObjetivo(parametros)
 reproducao = Reproduzir(parametros, funcaoObjetivo)
 buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
-somatorio = 0
-scoreAuxilio = 0
-heuristicaAuxilio = 0
+jaInseridos = []
+# idExecucao = novaExecucao()
 
-idExecucao = novaExecucao()
-
-# codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, codHeuristicas.fitness = [1,1,1,1000]
-heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())
-
-heuristicaEscolha.inicializar([{'codHeuristica':1},{'codHeuristica':2},{'codHeuristica':3}])
+codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal,codHeuristicas.codSelecaoPais = [0,0,1]
 
 
-# for i in range(50):
+
+heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())    
+for i in range(10):
     
-#     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-#     escolhaBuscaLocal.escolher()
-#     escolhaReproducao.escolher()
-#     escolhaPais.escolher()
-  
+    construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+    stringAlgoritmoUsado = utils.codToString(codHeuristicas)
+
+    if(stringAlgoritmoUsado not in jaInseridos):
+        heuristicaEscolha.inicializar([stringAlgoritmoUsado])
+        jaInseridos.append(stringAlgoritmoUsado)
+
+    heuristicaEscolha.atualizar([{'label':stringAlgoritmoUsado, 'reward':1}])
+    if(i < 5):
+        utils.setCodigosHeuriticas(codHeuristicas=codHeuristicas, codigos='random')
+        
+    else: 
+        
+        utils.setCodigosHeuriticas(codHeuristicas, heuristicaEscolha.escolher())
+        
+        
+    
+    
+
+
+
+
 
 
 

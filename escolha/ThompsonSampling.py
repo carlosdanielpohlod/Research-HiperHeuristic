@@ -7,16 +7,13 @@ class ThompsonSampling:
         self.experimento = BernoulliExperiment(priors=self.beta)
         
         
-    def atualizarRecompensas(self,estrategias):
-        for opcao in estrategias:
-            self.experimento.addRewards([{estrategias['codHeuristicas']:['recompensa']}])
+    def atualizar(self,reward):
+        self.experimento.add_rewards(reward)
     def inicializar(self, estrategias):
         for opcao in estrategias:
-            self.beta.add_one(mean=0.5, variance=0.2, effective_size=10, label=opcao['codHeuristica'])
+            self.beta.add_one(mean=0.5, variance=0.2, effective_size=10, label=opcao)
 
     def escolher(self, estrategias):
-        self.atualizarRecompensas(self.experimento, estrategias)
-
-        return experimento.choose_arm()
+        return self.experimento.choose_arm()
         
         
