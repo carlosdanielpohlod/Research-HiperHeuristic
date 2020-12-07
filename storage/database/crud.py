@@ -5,14 +5,14 @@ db = peewee.SqliteDatabase('conhecimento.db')
 
 
 
-def salvarResultado(codReproducao, codBuscaLocal, codSelecaoPais, fitness):
+def salvarResultado(codExecucao, codReproducao, codBuscaLocal, codSelecaoPais, fitness):
 
-    resultados = Resultados(codReproducao =  codReproducao,codBuscaLocal=  codBuscaLocal, codSelecaoPais=  codSelecaoPais, fitness= fitness)
+    resultados = Resultados(execucao_id = codExecucao, codReproducao =  codReproducao,codBuscaLocal=  codBuscaLocal, codSelecaoPais=  codSelecaoPais, fitness= fitness)
     resultados.save()
     db.close()
-    print("Melhor resultado salvo")
+    # print("Salvo")
    
-def salvarHiperHeuristica(idExecucao, tipoHeuristica, codHeuristica ):
+def salvarHeuristicaUsada(idExecucao, tipoHeuristica, codHeuristica ):
     h = HeuristicaUsada()
     id = db.execute_sql("select heuristicaUsada_id from heuristicausada limit(1)")
 #   ARRUMAR AQUI

@@ -46,11 +46,15 @@ class Utils:
         for i in range(len(array)):
             array[i] = int(array[i])
         return array
-
+    def sumRecompensas(self, reward,stringAlgoritmoUsado, heuristicaEscolha):
+        if(int(reward) <= 0):
+            heuristicaEscolha.atualizar([{'label':stringAlgoritmoUsado, 'reward':0}])
+        else:
+            for i in range(int(reward)):
+                heuristicaEscolha.atualizar([{'label':stringAlgoritmoUsado, 'reward':1}])
     def setCodigosHeuriticas(self, codHeuristicas, codigos):
         if(codigos == 'random'):
-           
-            codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais =  [randint(1,2), randint(1,3), randint(1,2)]
+            codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais =  [randint(1,2), randint(1,3),2]
         else:
             codigos = self.castArray(codigos)
             codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais = codigos

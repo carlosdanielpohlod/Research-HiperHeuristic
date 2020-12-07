@@ -1,33 +1,13 @@
 from utils import Utils
 from random import *
+from storage.files.operacaoArquivos import *
 
-fluxo = [   [0,1,2,3,1,2,3,4,2,3,4,5],
-            [1,0,1,2,2,1,2,3,3,2,3,4],
-            [2,1,0,1,3,2,1,2,4,3,2,3],
-            [3,2,1,0,4,3,2,1,5,4,3,2],
-            [1,2,3,4,0,1,2,3,1,2,3,4],
-            [2,1,2,3,1,0,1,2,2,1,2,3],
-            [3,2,1,2,2,1,0,1,3,2,1,2],
-            [4,3,2,1,3,2,1,0,4,3,2,1],
-            [2,3,4,5,1,2,3,4,0,1,2,3],
-            [3,2,3,4,2,1,2,3,1,0,1,2],
-            [4,3,2,3,3,2,1,2,2,1,0,1],
-            [5,4,3,2,4,3,2,1,3,2,1,0]
-        ]
-distancias = [
-            [0,5,2,4,1,0,0,6,2,1,1,1],
-            [5,0,3,0,2,2,2,0,4,5,0,0],
-            [2,3,0,0,0,0,0,5,5,2,2,2],
-            [4,0,0,0,5,2,2,10,0,0,5,5],
-            [1,2,0,5,0,10,0,0,0,5,1,1],
-            [0,2,0,2,10,0,5,1,1,5,4,0],
-            [0,2,0,2,0,5,0,10,5,2,3,3],
-            [6,0,5,10,0,1,10,0,0,0,5,0],
-            [2,4,5,0,0,1,5,0,0,0,10,10],
-            [1,5,2,0,5,5,2,0,0,0,5,0],
-            [1,0,2,5,1,4,3,5,10,5,0,2],
-            [1,0,2,5,1,0,3,0,10,0,2,0]
-        ]
+utils = Utils()
+arquivo = ArquivosManager('storage/files/nug12.dat','r')
+fluxo =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
+distancias =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
+arquivo.lerFluxo(fluxo)
+arquivo.lerDistancias(distancias)
 
 def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas):
     utils = Utils(parametros)

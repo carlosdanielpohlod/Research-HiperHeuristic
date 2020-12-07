@@ -43,8 +43,4 @@ class ArquivosManager:
                 matriz[i][j] = int(matriz[i][j])
 
 
-arquivo = ArquivosManager('storage/files/nug12.dat','r')
-fluxo =  [[0 for x in range(arquivo.tam)] for y in range(arquivo.tam)]
-distancias =  [[0 for x in range(arquivo.tam)] for y in range(arquivo.tam)]
-arquivo.lerFluxo(fluxo)
-arquivo.lerDistancias(distancias)
+
