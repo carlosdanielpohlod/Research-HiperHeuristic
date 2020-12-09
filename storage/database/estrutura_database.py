@@ -10,7 +10,7 @@ class Resultados(peewee.Model):
     fitness = peewee.DoubleField()
     codReproducao = peewee.IntegerField()
     codBuscaLocal = peewee.IntegerField()
-    codSelecaoPais = peewee.IntegerField()
+    codMutacao = peewee.IntegerField()
     execucao = peewee.ForeignKeyField(Execucao,to_field= 'execucao_id')
     class Meta:
         database = db
@@ -69,6 +69,6 @@ def criarTabelas():
         print("Tabela scoreHeuristica foi criada")
     except NameError:
         print("erro", NameError)
-# criarTabelas()
+criarTabelas()
 
 

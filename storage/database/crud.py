@@ -5,9 +5,9 @@ db = peewee.SqliteDatabase('conhecimento.db')
 
 
 
-def salvarResultado(codExecucao, codReproducao, codBuscaLocal, codSelecaoPais, fitness):
+def salvarResultado(codExecucao, codReproducao, codBuscaLocal, codMutacao, fitness):
 
-    resultados = Resultados(execucao_id = codExecucao, codReproducao =  codReproducao,codBuscaLocal=  codBuscaLocal, codSelecaoPais=  codSelecaoPais, fitness= fitness)
+    resultados = Resultados(execucao_id = codExecucao, codReproducao =  codReproducao,codBuscaLocal=  codBuscaLocal, codMutacao=  codMutacao, fitness= fitness)
     resultados.save()
     db.close()
     # print("Salvo")
@@ -41,7 +41,7 @@ def melhorHeuristica():
         resultados = resultados.select().order_by("fitness").limit(1).execute()
         
         for resultado in resultados:
-            return [resultado.codReproducao, resultado.codBuscaLocal, resultado.codSelecaoPais, resultado.fitness]
+            return [resultado.codReproducao, resultado.codBuscaLocal, resultado.codMutacao, resultado.fitness]
         
         db.close()
     except peewee.OperationalError:
