@@ -40,7 +40,7 @@ class Utils:
         for i in range(len(matriz)):
             print(matriz[i])
     def codToString(self, codHeuristicas):
-        return f'{codHeuristicas.codReproducao},{codHeuristicas.codBuscaLocal},{codHeuristicas.codSelecaoPais}'
+        return f'{codHeuristicas.codReproducao},{codHeuristicas.codBuscaLocal},{codHeuristicas.codMutacao}'
     def castArray(self, array):
         array = array.split(',')
         for i in range(len(array)):
@@ -54,11 +54,18 @@ class Utils:
                 heuristicaEscolha.atualizar([{'label':stringAlgoritmoUsado, 'reward':1}])
     def setCodigosHeuriticas(self, codHeuristicas, codigos):
         if(codigos == 'random'):
-            codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais =  [randint(1,2), randint(1,3),2]
+            codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao =  [randint(1,2), randint(1,3),randint(1,3)]
         else:
             codigos = self.castArray(codigos)
-            codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais = codigos
-            
+            codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = codigos
+    def infactivelCheck(self, individuo, msg = ''):
+        for i in range(len(individuo) - 1):
+            val = individuo[i]
+            for j in range(len(individuo) - i):
+                if(i != j and individuo[j] == val):
+                    print("Infactivel -> ", individuo[j], 'repetiu em ', individuo, msg)     
+                    return 
+
     def ordenar(self,matriz):
         aux = [0] * self.parametros.TAMCROMOSSOMO
         # tamMatriz = len(matri)

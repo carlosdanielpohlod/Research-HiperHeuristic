@@ -2,12 +2,12 @@ from random import randint
 class SelecaoPais:
     def __init__(self, parametros):
         self.parametros = parametros
-    def selecionar(self, populacao, codigoSelecao):
-        aux = []
-        if(codigoSelecao == 1):
-           return self.escolherPais01(populacao)
-        if(codigoSelecao == 2):
-            return self.selecaoAleatoria(populacao)
+    # def selecionar(self, populacao, codigoSelecao):
+    #     aux = []
+    #     if(codigoSelecao == 1):
+    #        return self.escolherPais01(populacao)
+    #     if(codigoSelecao == 2):
+    #         return self.selecaoAleatoria(populacao)
     def selecaoAleatoria(self, populacao):
         pai01 = 0
         pai02 = 0
@@ -38,7 +38,7 @@ class SelecaoPais:
     
         
 
-    def escolherPais01(self, populacao):
+    def selecionar(self, populacao, fluxo, distancias):
         mediaHabilidade = 0.0
         mediaPais = 0 
         minimoAceitavel = 0 

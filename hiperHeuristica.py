@@ -9,13 +9,14 @@ from heuristica import *
 from escolha.ThompsonSampling import *
 from escolha.HeuristicaEscolha import *
 from utils import *
-
+from mutacao_file import Mutacao
 
 parametros = Parametros()
 utils = Utils()
 selecaoPais = SelecaoPais(parametros)
 funcaoObjetivo = FuncaoObjetivo(parametros)
-reproducao = Reproduzir(parametros, funcaoObjetivo)
+mutacao = Mutacao(parametros)
+reproducao = Reproduzir(parametros, funcaoObjetivo, mutacao)
 buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
 jaInseridos = []
@@ -25,22 +26,22 @@ jaInseridos = []
 
 # idExecucao = novaExecucao()
 
-codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal,codHeuristicas.codSelecaoPais = [0,0,1]
+codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal,codHeuristicas.codSelecaoPais = [0,0,0]
 
 
 heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())    
-for i in range(400):
+
+
+for i in range(100):
     
     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
     stringAlgoritmoUsado = utils.codToString(codHeuristicas)
-
+    # salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, melhorResultado )
     if(stringAlgoritmoUsado not in jaInseridos):
         heuristicaEscolha.inicializar([stringAlgoritmoUsado])
         jaInseridos.append(stringAlgoritmoUsado)
 
-
-    reward = reproducao.score + buscaLocal.score #score() retorna 1 se score > 0; senao retorna 0
-    utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
+    utils.sumRecompensas((reproducao.score + buscaLocal.score), stringAlgoritmoUsado, heuristicaEscolha)
     if(i < 20):
         utils.setCodigosHeuriticas(codHeuristicas=codHeuristicas, codigos='random')
         
@@ -48,8 +49,8 @@ for i in range(400):
         escolhido = heuristicaEscolha.escolher()
         
         utils.setCodigosHeuriticas(codHeuristicas, escolhido)
-    # salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, melhorResultado )
-        
+    # print("CodMutação ", reproducao.codMutacao)
+    
     
     
 
