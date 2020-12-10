@@ -69,6 +69,6 @@ def criarTabelas():
         print("Tabela scoreHeuristica foi criada")
     except NameError:
         print("erro", NameError)
-criarTabelas()
+# criarTabelas()
 
 

@@ -10,6 +10,7 @@ from escolha.ThompsonSampling import *
 from escolha.HeuristicaEscolha import *
 from utils import *
 from mutacao_file import Mutacao
+from escolha.RandomChoice import RandomChoice
 
 parametros = Parametros()
 utils = Utils()
@@ -26,29 +27,30 @@ jaInseridos = []
 
 # idExecucao = novaExecucao()
 
-codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal,codHeuristicas.codSelecaoPais = [0,0,0]
 
 
-heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())    
 
+heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
+heuristicaEscolha.inicializar([2,3,3])
 
-for i in range(100):
-    
+for i in range(50):
+    codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal,codHeuristicas.codMutacao = heuristicaEscolha.escolher()
     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-    stringAlgoritmoUsado = utils.codToString(codHeuristicas)
+    print(melhorResultado)
+    # stringAlgoritmoUsado = utils.codToString(codHeuristicas)
     # salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codSelecaoPais, melhorResultado )
-    if(stringAlgoritmoUsado not in jaInseridos):
-        heuristicaEscolha.inicializar([stringAlgoritmoUsado])
-        jaInseridos.append(stringAlgoritmoUsado)
+    # if(stringAlgoritmoUsado not in jaInseridos):
+    #     heuristicaEscolha.inicializar([stringAlgoritmoUsado])
+    #     jaInseridos.append(stringAlgoritmoUsado)
 
-    utils.sumRecompensas((reproducao.score + buscaLocal.score), stringAlgoritmoUsado, heuristicaEscolha)
-    if(i < 20):
-        utils.setCodigosHeuriticas(codHeuristicas=codHeuristicas, codigos='random')
+    # utils.sumRecompensas((reproducao.score + buscaLocal.score), stringAlgoritmoUsado, heuristicaEscolha)
+    # if(i < 20):
+    #     utils.setCodigosHeuriticas(codHeuristicas=codHeuristicas, codigos='random')
         
-    else: 
-        escolhido = heuristicaEscolha.escolher()
+    # else: 
+    #     escolhido = heuristicaEscolha.escolher()
         
-        utils.setCodigosHeuriticas(codHeuristicas, escolhido)
+    #     utils.setCodigosHeuriticas(codHeuristicas, escolhido)
     # print("CodMutação ", reproducao.codMutacao)
     
     
