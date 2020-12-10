@@ -22,7 +22,7 @@ class TipoHeuristica(peewee.Model):
     class Meta:
         database = db
         
-        db_table = 'tipoheurisca'
+        db_table = 'tipoheuristica'
 class HeuristicaUsada(peewee.Model):
     heuristicaUsada_id = peewee.IntegerField(primary_key=True)
     tipoHeuristica = peewee.ForeignKeyField(TipoHeuristica,to_field= 'tipoHeuristica_id')
@@ -69,6 +69,12 @@ def criarTabelas():
         print("Tabela scoreHeuristica foi criada")
     except NameError:
         print("erro", NameError)
+    
+    db.execute_sql("INSERT INTO tipoheuristica (nome) VALUES('reprodução')")
+    db.execute_sql("INSERT INTO tipoheuristica (nome) VALUES('busca local')")
+    db.execute_sql("INSERT INTO tipoheuristica (nome) VALUES('mutação')")
+    print("Tipos de heuristicas inseridos")
+# criarTipos()
 # criarTabelas()
 
 

@@ -13,7 +13,7 @@ class ThompsonSampling:
         for opcao in estrategias:
             self.beta.add_one(mean=0.5, variance=0.2, effective_size=10, label=opcao)
 
-    def escolher(self, estrategias):
+    def escolher(self):
         return self.experimento.choose_arm()
         
         
