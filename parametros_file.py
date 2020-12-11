@@ -12,8 +12,10 @@ class Parametros:
         self.PORCENTAGEMMUTACOES = 0  
         self.NUMMAXIMOFILHOS = 2
         self.PORCENTAGEMREPRODUCOES = 0
-
-
+        self.idExecucao = 0
+        self.REPRODUCAO = 1
+        self.MUTACAO = 3
+        self.BUSCALOCAL = 2
     def setParametros(self, porcentagemmutacoes, numaximofilhos, porcentagemreproducoes):
         self.PORCENTAGEMMUTACOES = porcentagemmutacoes    
         self.NUMMAXIMOFILHOS = numaximofilhos

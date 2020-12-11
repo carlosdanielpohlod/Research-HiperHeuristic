@@ -13,25 +13,9 @@ def salvarResultado(codExecucao, codReproducao, codBuscaLocal, codMutacao, fitne
     # print("Salvo")
    
 def salvarHeuristicaUsada(idExecucao, tipoHeuristica, codHeuristica, score ):
-    h = HeuristicaUsada
-    result = h.select(h.heuristicaUsada_id).where((h.execucao_id == idExecucao)&
-    (h.tipoHeuristica_id == tipoHeuristica)&(h.codHeuristica == codHeuristica)).limit(1)
-
-    # print(result)
-#   ARRUMAR AQUI
-    for v in result: 
-        result =  v.heuristicaUsada_id   
-        print("Id ",v.heuristicaUsada_id)
-        if(v == None):
-            print("Numtem")
-            new = HeuristicaUsada(tipoHeuristica_id = tipoHeuristica, execucao_id = idExecucao, codHeuristica = codHeuristica)
-            result = new.save()
-            print(result)
-    # result = h.select('heuristicaUsada_id').where(h.execucao_id == idExecucao).where(h.tipoHeuristica_id == tipoHeuristica).where(h.codHeuristica == codHeuristica).limit(1).execute()
-    # result = result.heuristicaUsada_id
-
-
-    salvarScore(result, codHeuristica, score)     
+ 
+    result = HeuristicaUsada.get_or_create(tipoHeuristica_id = tipoHeuristica, execucao_id = idExecucao, codHeuristica = codHeuristica)
+    salvarScore(result[0].heuristicaUsada_id, codHeuristica, score)     
     return 
 def salvarScore(heuristicaUsada_id, codHeuristica, score):
     novoScore = ScoreHeuristica(heuristicaUsada_id = heuristicaUsada_id, codHeuristica = codHeuristica, score = score)
