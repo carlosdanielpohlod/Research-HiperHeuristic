@@ -12,7 +12,11 @@ from utils import *
 from mutacao_file import Mutacao
 from escolha.RandomChoice import RandomChoice
 
+
+idExecucao = novaExecucao()
+
 parametros = Parametros()
+parametros.idExecucao = idExecucao
 utils = Utils()
 selecaoPais = SelecaoPais(parametros)
 funcaoObjetivo = FuncaoObjetivo(parametros)
@@ -22,10 +26,6 @@ buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
 jaInseridos = []
 
-
-
-
-idExecucao = novaExecucao()
 
 codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal,codHeuristicas.codSelecaoPais = [0,0,0]
 

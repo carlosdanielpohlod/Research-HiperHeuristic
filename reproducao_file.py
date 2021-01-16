@@ -92,6 +92,12 @@ class Reproduzir:
             self.calcularScore(listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1], novoIndividuo[self.parametros.TAMCROMOSSOMO - 1])
            
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
+
+
+
+
+
+        
         salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.REPRODUCAO, 1, self.score)
     
     def reproduzir02(self, populacao, fluxo, distancias, pai01, pai02):
