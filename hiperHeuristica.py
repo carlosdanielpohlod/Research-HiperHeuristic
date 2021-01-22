@@ -27,31 +27,18 @@ codHeuristicas = CodHeuristicas()
 jaInseridos = []
 
 
-codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal,codHeuristicas.codSelecaoPais = [0,0,0]
-
-
-heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())    
-
+heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
+heuristicaEscolha.inicializar([2,3,3])
 
 for i in range(10):
-    
+    codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-    stringAlgoritmoUsado = utils.codToString(codHeuristicas)
+    
     salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
-    if(stringAlgoritmoUsado not in jaInseridos):
-        heuristicaEscolha.inicializar([stringAlgoritmoUsado])
-        jaInseridos.append(stringAlgoritmoUsado)
-
-    utils.sumRecompensas((reproducao.score + buscaLocal.score), stringAlgoritmoUsado, heuristicaEscolha)
-    if(i < 20):
-        utils.setCodigosHeuriticas(codHeuristicas=codHeuristicas, codigos='random')
-        
-    else: 
-        escolhido = heuristicaEscolha.escolher()
-        
-        utils.setCodigosHeuriticas(codHeuristicas, escolhido)
-  
-    # print("CodMutação ", reproducao.codMutacao)
+    
+    
+    
+    
     
     
     
