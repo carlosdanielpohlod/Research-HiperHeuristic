@@ -1,6 +1,7 @@
 from operator import itemgetter
 from random import *
 from codHeuristicas import CodHeuristicas
+
 class Utils:
     def __init__(self, parametros = None):
         self.parametros = parametros
