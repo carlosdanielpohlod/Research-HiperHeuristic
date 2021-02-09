@@ -10,10 +10,22 @@ class Reproduzir:
         self.mutacao = mutacao
         self.codMutacao = 0
     
-    def calcularScore(self, original, perturbado):
-        diferenca = ((original - perturbado)) 
-        self.score = (diferenca * original) / 10000
+    def mediaPais(self, pai01, pai02):
+        return (pai01[self.parametros.TAMCROMOSSOMO - 1] + pai02[self.parametros.TAMCROMOSSOMO - 1]) / 2
+        
+    def mediaFilhos(self, listaAuxiliar):
+        i = 2
+        somatario = 0
+        
+        for i in range(len(listaAuxiliar)):
+            somatorio = i[self.parametros.TAMCROMOSSMO - 1] + somatorio
+        return somatorio / (len(listaAuxiliar) - 2)
 
+    def calcularScore(self, pai01, pai02, listaAuxiliar):
+        mediapais = self.mediaPais(pai01,pai02)
+        diferenca = ((mediapais - listaAuxiliar)) 
+        self.score = (diferenca * mediapais) / 10000
+        
     def reproduzir(self, populacao, fluxo, distancias, pai01, pai02, indiceReproducao):
         if(indiceReproducao == 1):
             self.reproduzir01(populacao, fluxo, distancias, pai01, pai02)
@@ -32,7 +44,8 @@ class Reproduzir:
             
         else:
             self.mutacao.score = 0
-    
+    def log(self,pai01, pai02, filho):
+        print(f'{filho[self.parametros.TAMCROMOSSOMO - 1]} filho de {pai01[self.parametros.TAMCROMOSSOMO - 1]} | {pai02[self.parametros.TAMCROMOSSOMO - 1]}')
     def reproduzir01(self, populacao, fluxo, distancias, pai01, pai02):
        
         utils = Utils(self.parametros)
@@ -82,18 +95,19 @@ class Reproduzir:
             
             self.aux_mutacao(novoIndividuo, fluxo, distancias)
             
+
             utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
-           
+            self.log(populacao[pai01], populacao[pai02], novoIndividuo)
         
         
         utils.ordenar(listaAuxiliar)
         
         if(listaAuxiliar[0] != novoIndividuo): 
-            self.calcularScore(listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1], novoIndividuo[self.parametros.TAMCROMOSSOMO - 1])
-           
+            self.calcularScore(pai01, pai02, listaAuxiliar)
+        
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
 
-
+        print(f'manteve {listaAuxiliar[0]} | {listaAuxiliar[1]}')
 
 
 
@@ -145,14 +159,16 @@ class Reproduzir:
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
             
             self.aux_mutacao(novoIndividuo, fluxo, distancias)
-            
+            self.log(populacao[pai01], populacao[pai02], novoIndividuo)
             utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
             
         utils.ordenar(listaAuxiliar)
        
         if(listaAuxiliar[0] != novoIndividuo):
             
-            self.calcularScore(listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1], novoIndividuo[self.parametros.TAMCROMOSSOMO - 1])
+            self.calcularScore(pai01, pai02, listaAuxiliar)
        
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
+
+        print(f'manteve {listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1]} | {listaAuxiliar[1][self.parametros.TAMCROMOSSOMO - 1]} score: {self.score}')
         salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.REPRODUCAO, 2, self.score)

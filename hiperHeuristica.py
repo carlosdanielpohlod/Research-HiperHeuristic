@@ -29,7 +29,6 @@ jaInseridos = []
 
 heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
 heuristicaEscolha.inicializar([2,3,3])
-
 for i in range(10):
     codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)

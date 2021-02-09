@@ -1,7 +1,7 @@
 from utils import Utils
 from random import *
 from storage.files.operacaoArquivos import *
-
+from storage.database.crud import salvarResultado
 utils = Utils()
 arquivo = ArquivosManager('storage/files/nug12.dat','r')
 fluxo =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
@@ -22,7 +22,7 @@ def construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, flu
         reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, codHeuristicas.codReproducao)
         
         utils.bubbleSort(populacao)
-        melhor = randint(0,4) 
+        melhor =  utils.buscarMelhorIndividuo(populacao)
         buscaLocal.busca(populacao[melhor], fluxo, distancias, codHeuristicas.codBuscaLocal)    
-        
+        # salvarResultado(codExecucao=parametros.idExecucao, codBuscaLocal=codHeuristicas.codBuscaLocal,codReproducao=codHeuristicas.codBuscaLocal,codMutacao=codHeuristicas.codMutacao, fitness=populacao[utils.buscarMelhorIndividuo(populacao)])
     return populacao[melhor][parametros.TAMCROMOSSOMO - 1]

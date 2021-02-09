@@ -42,7 +42,10 @@ def ultimaExecucao():
         return i.execucao_id
 
 
-getScoreHeuristicaSimplified('reproducao',2,ultimaExecucao())
+
+getScoreHeuristicaSimplified('reproducao',1,ultimaExecucao())
+
+
     
 
 
