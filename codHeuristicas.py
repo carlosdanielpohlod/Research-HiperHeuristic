@@ -6,4 +6,7 @@ class CodHeuristicas:
         self.codSelecaoPais = 0
         self.codMutacao = 0
         self.fitness = 0
-    
+
+        self.qtdReproducao = 2
+        self.qtdBuscaLocal = 3
+        self.qtdMutacao = 3

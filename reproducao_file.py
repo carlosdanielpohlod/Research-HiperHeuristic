@@ -13,17 +13,18 @@ class Reproduzir:
     def mediaPais(self, pai01, pai02):
         return (pai01[self.parametros.TAMCROMOSSOMO - 1] + pai02[self.parametros.TAMCROMOSSOMO - 1]) / 2
         
-    def mediaFilhos(self, listaAuxiliar):
-        i = 2
-        somatario = 0
+    def mediaFilhos(self, listaAuxiliar, pai01, pai02):
+        somatorio = 0
         
         for i in range(len(listaAuxiliar)):
-            somatorio = i[self.parametros.TAMCROMOSSMO - 1] + somatorio
+            if((pai01 != listaAuxiliar[i]) and (pai02 != listaAuxiliar[i])):
+                somatorio = listaAuxiliar[i][self.parametros.TAMCROMOSSOMO - 1] + somatorio
         return somatorio / (len(listaAuxiliar) - 2)
 
     def calcularScore(self, pai01, pai02, listaAuxiliar):
         mediapais = self.mediaPais(pai01,pai02)
-        diferenca = ((mediapais - listaAuxiliar)) 
+        mediaFilhos = self.mediaFilhos(listaAuxiliar, pai01, pai02)
+        diferenca = ((mediapais - mediaFilhos)) 
         self.score = (diferenca * mediapais) / 10000
         
     def reproduzir(self, populacao, fluxo, distancias, pai01, pai02, indiceReproducao):
@@ -35,11 +36,13 @@ class Reproduzir:
     def aux_mutacao(self, novoIndividuo, fluxo, distancias):
         if(self.mutacao.chanceMutar()):
             
-            aux = copy.deepcopy(novoIndividuo)
+            individuoCopia = copy.deepcopy(novoIndividuo)
             self.mutacao.mutar(novoIndividuo, self.codMutacao, fluxo, distancias)
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
-            if(aux[self.parametros.TAMCROMOSSOMO - 1] < novoIndividuo[self.parametros.TAMCROMOSSOMO - 1]):
-                novoIndividuo = copy.deepcopy(aux)
+            self.mutacao.calcularScore(individuoCopia[self.parametros.TAMCROMOSSOMO - 1], novoIndividuo[self.parametros.TAMCROMOSSOMO - 1])
+
+            if(individuoCopia[self.parametros.TAMCROMOSSOMO - 1] < novoIndividuo[self.parametros.TAMCROMOSSOMO - 1]):
+                novoIndividuo = copy.deepcopy(individuoCopia)
             salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.MUTACAO, self.codMutacao, self.score)    
             
         else:
@@ -97,17 +100,17 @@ class Reproduzir:
             
 
             utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
-            self.log(populacao[pai01], populacao[pai02], novoIndividuo)
+            # self.log(populacao[pai01], populacao[pai02], novoIndividuo)
         
         
         utils.ordenar(listaAuxiliar)
         
         if(listaAuxiliar[0] != novoIndividuo): 
-            self.calcularScore(pai01, pai02, listaAuxiliar)
+            self.calcularScore(populacao[pai01], populacao[pai02], listaAuxiliar)
         
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
 
-        print(f'manteve {listaAuxiliar[0]} | {listaAuxiliar[1]}')
+        # print(f'manteve {listaAuxiliar[0]} | {listaAuxiliar[1]}')
 
 
 
@@ -159,16 +162,16 @@ class Reproduzir:
             self.funcaoObjetivo.avaliarIndividuo(novoIndividuo, fluxo, distancias)
             
             self.aux_mutacao(novoIndividuo, fluxo, distancias)
-            self.log(populacao[pai01], populacao[pai02], novoIndividuo)
+            # self.log(populacao[pai01], populacao[pai02], novoIndividuo)
             utils.inserir(listaAuxiliar[contadorAuxiliar], novoIndividuo)
             
         utils.ordenar(listaAuxiliar)
        
         if(listaAuxiliar[0] != novoIndividuo):
             
-            self.calcularScore(pai01, pai02, listaAuxiliar)
+            self.calcularScore(populacao[pai01], populacao[pai02], listaAuxiliar)
        
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
 
-        print(f'manteve {listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1]} | {listaAuxiliar[1][self.parametros.TAMCROMOSSOMO - 1]} score: {self.score}')
+        # print(f'manteve {listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1]} | {listaAuxiliar[1][self.parametros.TAMCROMOSSOMO - 1]} score: {self.score}')
         salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.REPRODUCAO, 2, self.score)

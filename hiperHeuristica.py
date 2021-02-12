@@ -11,7 +11,7 @@ from escolha.HeuristicaEscolha import *
 from utils import *
 from mutacao_file import Mutacao
 from escolha.RandomChoice import RandomChoice
-
+from random import *
 
 idExecucao = novaExecucao()
 
@@ -28,8 +28,9 @@ jaInseridos = []
 
 
 heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
-heuristicaEscolha.inicializar([2,3,3])
-for i in range(10):
+heuristicaEscolha.inicializar([codHeuristicas.qtdReproducao,codHeuristicas.qtdBuscaLocal,codHeuristicas.qtdMutacao])
+
+for i in range(20):
     codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
     
