@@ -26,15 +26,26 @@ buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
 jaInseridos = []
 
+heuristicaEscolha = HeuristicaEscolha(ThompsonSampling())
 
-heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
-heuristicaEscolha.inicializar([codHeuristicas.qtdReproducao,codHeuristicas.qtdBuscaLocal,codHeuristicas.qtdMutacao])
 
-for i in range(20):
-    codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
-    melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+heuristicaEscolha.inicializar([['1,1,1'],['1,1,2']])
+
+
+
+
+
+
+
+
+# heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
+# heuristicaEscolha.inicializar([codHeuristicas.qtdReproducao,codHeuristicas.qtdBuscaLocal,codHeuristicas.qtdMutacao])
+
+# for i in range(20):
+#     codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
+#     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
     
-    salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
+#     salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
     
     
     
