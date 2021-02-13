@@ -43,24 +43,31 @@ class Utils:
     def codToString(self, codHeuristicas):
         return f'{codHeuristicas.codReproducao},{codHeuristicas.codBuscaLocal},{codHeuristicas.codMutacao}'
     def castArray(self, array):
+        
         array = array.split(',')
         for i in range(len(array)):
             array[i] = int(array[i])
         return array
     def sumRecompensas(self, reward,stringAlgoritmoUsado, heuristicaEscolha):
         if(int(reward) <= 0):
+            
             heuristicaEscolha.atualizar([{'label':stringAlgoritmoUsado, 'reward':0}])
         else:
             for i in range(int(reward)):
+                # print(stringAlgoritmoUsado)
                 heuristicaEscolha.atualizar([{'label':stringAlgoritmoUsado, 'reward':1}])
+
     def setCodigosHeuriticas(self, codHeuristicas, codigos):
         if(codigos == 'random'):
             codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao =  [randint(1,2), randint(1,3),randint(1,3)]
         else:
+            
             codigos = self.castArray(codigos)
             codHeuristicas.codReproducao, codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = codigos
     def getTodasCombinacoes(self,codHeuristicas):
-        return [['1,2,3'],['1,3,2'],['2,1,2'],['1,2,1'],['2,2,1'],['1,1,1'],['2,2,2'],['2,3,3'],['2,1,3'],['2,1,1'],['1,2,2'],['1,3,3']]
+        
+
+        return [['1,2,3'],['3,1,1'],['1,3,2'],['2,3,1'],['2,1,2'],['1,2,1'],['2,2,1'],['1,1,1'],['2,2,2'],['2,3,3'],['2,1,3'],['2,1,1'],['1,2,2'],['1,3,3']]
     def infactivelCheck(self, individuo, msg = ''):
         for i in range(len(individuo) - 1):
             val = individuo[i]

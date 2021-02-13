@@ -27,10 +27,11 @@ def getScoreHeuristica(heuristicaUsada_id, execucao_id):
 
 def getScoreHeuristicaSimplified(tipoHeuristica_id,codHeuristica,  execucao_id):
     
-
+    
     result = HeuristicaUsada.select(HeuristicaUsada.heuristicaUsada_id).where(HeuristicaUsada.codHeuristica == codHeuristica, HeuristicaUsada.execucao_id == execucao_id, HeuristicaUsada.tipoHeuristica_id == codStringToNumber(tipoHeuristica_id)).execute()
     score = ScoreHeuristica.select(ScoreHeuristica.score).where(ScoreHeuristica.heuristicaUsada_id == extrairHeuristicaUsada_id(result)).execute()
-    
+    if score == None:
+        score = 0
     return extrairScoreHeuristica(score)
 
 def mediaHeuristicasExecucao(execucao_id):
