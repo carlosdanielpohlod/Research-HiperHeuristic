@@ -8,7 +8,10 @@ db = peewee.SqliteDatabase('conhecimento.db')
 def salvarResultado(codExecucao, codReproducao, codBuscaLocal, codMutacao, fitness):
 
     resultados = Resultados(execucao_id = codExecucao, codReproducao =  codReproducao,codBuscaLocal=  codBuscaLocal, codMutacao=  codMutacao, fitness= fitness)
+    
     resultados.save()
+    # print(codExecucao, codReproducao, codBuscaLocal, codMutacao, fitness)
+    # print(resultados.fitness)
     db.close()
     # print("Salvo")
    

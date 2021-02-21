@@ -1,4 +1,5 @@
 from random import randint
+from utils import *
 class SelecaoPais:
     def __init__(self, parametros):
         self.parametros = parametros
@@ -8,6 +9,13 @@ class SelecaoPais:
     #        return self.escolherPais01(populacao)
     #     if(codigoSelecao == 2):
     #         return self.selecaoAleatoria(populacao)
+    def melhorEAleatorio(self, populacao):
+        utils = Utils(self.parametros)
+        pai01 = utils.buscarMelhorIndividuo(populacao)
+        pai02 = randint(0, self.parametros.TAMPOPULACAO - 1)
+        while(pai01 == pai02):
+           pai02 = randint(0, self.parametros.TAMPOPULACAO - 1) 
+        return pai01, pai02
     def selecaoAleatoria(self, populacao):
         pai01 = 0
         pai02 = 0

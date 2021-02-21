@@ -29,9 +29,11 @@ def getScoreHeuristicaSimplified(tipoHeuristica_id,codHeuristica,  execucao_id):
     
     
     result = HeuristicaUsada.select(HeuristicaUsada.heuristicaUsada_id).where(HeuristicaUsada.codHeuristica == codHeuristica, HeuristicaUsada.execucao_id == execucao_id, HeuristicaUsada.tipoHeuristica_id == codStringToNumber(tipoHeuristica_id)).execute()
+    print(extrairHeuristicaUsada_id(result))
     score = ScoreHeuristica.select(ScoreHeuristica.score).where(ScoreHeuristica.heuristicaUsada_id == extrairHeuristicaUsada_id(result)).execute()
     if score == None:
         score = 0
+    
     return extrairScoreHeuristica(score)
 
 def mediaHeuristicasExecucao(execucao_id):
@@ -60,13 +62,31 @@ def exibirResultados(k, heuristica):
     print("Numero de chamadas ",len(score))
     print("media ",numpy.mean(somatorio))
 
-for i  in range(1,3):
-    exibirResultados(i, 'reproducao')
+def exibirEstatisticasGerais(execucao_id,codReproducao,codMutacao,codBuscaLocal):
+    result = Resultados.select().where(Resultados.codReproducao == codReproducao, Resultados.codMutacao == codMutacao, Resultados.codBuscaLocal == codBuscaLocal, Resultados.execucao_id == execucao_id).order_by(Resultados.fitness.desc()).execute()
+    # print(result)
+    print(f'execucao da sequencia {codReproducao,codMutacao,codBuscaLocal}')
+    for i in result:
+        try:
+            print(i.fitness)
+        except:
+            print('Nd')
+        
+heuristicas = ['1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
 
-for i in range(1,4):
-    exibirResultados(i, 'busca local')
-for i in range(1,4):
-    exibirResultados(i, 'mutacao')
+# for i in heuristicas:
+   
+#     exibirEstatisticasIndividuais(int(i[0]),'reproducao')
+#     exibirEstatisticasIndividuais(int(i[2]),'busca local')
+#     exibirEstatisticasIndividuais(int(i[4]),'mutacao')
+
+# for i  in range(1,3):
+#     exibirEstatisticasIndividuais(i, 'reproducao')
+
+# for i in range(1,4):
+#    exibirEstatisticasIndividuais(i, 'busca local')
+# for i in range(1,4):
+#     exibirEstatisticasIndividuais(i, 'mutacao')
 
 
 

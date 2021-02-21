@@ -34,6 +34,7 @@ def getCodeHeuristica(heuristica):
     for i in heuristica:
         codHeuristica = i.codHeuristica
     return codHeuristica
+
 def extrairHeuristicaUsada_id(result):
     resp = []
     for i in result:
