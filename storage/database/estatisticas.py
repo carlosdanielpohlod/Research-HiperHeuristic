@@ -81,11 +81,11 @@ def exibirEstatisticasGerais(execucao_id,codReproducao,codMutacao,codBuscaLocal)
         
 heuristicas = ['1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
 
-# for i in heuristicas:
+for i in heuristicas:
    
-#     exibirEstatisticasGerais(87,int(i[0]),int(i[2]),int(i[4]))
+    exibirEstatisticasGerais(100,int(i[0]),int(i[2]),int(i[4]))
 
-exibirEstatisticasGerais(ultimaExecucao(),1,3,2)
+# exibirEstatisticasGerais(ultimaExecucao(),1,3,2)
 # for i  in range(1,3):
 #     exibirEstatisticasIndividuais(i, 'reproducao')
 
