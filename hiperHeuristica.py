@@ -32,37 +32,25 @@ mutacao = Mutacao(parametros)
 reproducao = Reproduzir(parametros, funcaoObjetivo, mutacao)
 buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
-jaInseridos = []
 
 heuristicaEscolha = HeuristicaEscolha(ThompsonSampling())
 
 
 # heuristicaEscolha.inicializar({'1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3'})
-heuristicas = ['1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
+heuristicas = ['1,3,1','1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
 populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
-
-for string in heuristicas:
-    funcaoObjetivo.gerarPopulacao(populacao)
-    funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-    # print('Chamando ', string[0], string[2], string[4])
-    for i in range(40):
-        
-        codHeuristicas.codReproducao = string[0]
-        codHeuristicas.codBuscaLocal = string[2]
-        codHeuristicas.codMutacao = string[4]
-        melhorResultado = construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-        salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
-    # print(string[0], string[2], string[4], melhorResultado)
+funcaoObjetivo.gerarPopulacao(populacao)
+funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
 
 
-# heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
-# heuristicaEscolha.inicializar([codHeursticas.qtdReproducao,codHeuristicas.qtdBuscaLocal,codHeuristicas.qtdMutacao])
-
-# for i in range(20):
-#     codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
-#     melhorResultado = construirHeuristica(reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-    
-#     salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
+heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
+heuristicaEscolha.inicializar([codHeuristicas.qtdReproducao,codHeuristicas.qtdBuscaLocal,codHeuristicas.qtdMutacao])
+print('executando ...')
+for i in range(40):
+    codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
+    melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+   
+    salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
     
     
     

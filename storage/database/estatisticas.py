@@ -29,10 +29,11 @@ def getScoreHeuristicaSimplified(tipoHeuristica_id,codHeuristica,  execucao_id):
     
     
     result = HeuristicaUsada.select(HeuristicaUsada.heuristicaUsada_id).where(HeuristicaUsada.codHeuristica == codHeuristica, HeuristicaUsada.execucao_id == execucao_id, HeuristicaUsada.tipoHeuristica_id == codStringToNumber(tipoHeuristica_id)).execute()
-    print(extrairHeuristicaUsada_id(result))
+    if(len(extrairHeuristicaUsada_id(result)) == 0):
+        score = 'vazio'
+        return score
     score = ScoreHeuristica.select(ScoreHeuristica.score).where(ScoreHeuristica.heuristicaUsada_id == extrairHeuristicaUsada_id(result)).execute()
-    if score == None:
-        score = 0
+    
     
     return extrairScoreHeuristica(score)
 
@@ -46,9 +47,10 @@ def ultimaExecucao():
     for i in ultimo :
         return i.execucao_id
 
-def exibirResultados(k, heuristica):
+def exibirEstatisticasIndividuais(k, heuristica):
 
     score = getScoreHeuristicaSimplified(heuristica,k,ultimaExecucao())
+
     count = 0
     somatorio = 0
     for i in score:
@@ -56,11 +58,16 @@ def exibirResultados(k, heuristica):
             count = count + 1
         else: 
             somatorio = i
+    if(score == 'vazio'):
+        score = 0
+    else:
+        print("Numero de chamadas ",len(score))
+    
+        print("media ",numpy.mean(int(somatorio)))
     print("\n", heuristica, k)
     print("zeros ", count)
     print("Execução id", ultimaExecucao())
-    print("Numero de chamadas ",len(score))
-    print("media ",numpy.mean(somatorio))
+    
 
 def exibirEstatisticasGerais(execucao_id,codReproducao,codMutacao,codBuscaLocal):
     result = Resultados.select().where(Resultados.codReproducao == codReproducao, Resultados.codMutacao == codMutacao, Resultados.codBuscaLocal == codBuscaLocal, Resultados.execucao_id == execucao_id).order_by(Resultados.fitness.desc()).execute()
@@ -76,10 +83,9 @@ heuristicas = ['1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','
 
 # for i in heuristicas:
    
-#     exibirEstatisticasIndividuais(int(i[0]),'reproducao')
-#     exibirEstatisticasIndividuais(int(i[2]),'busca local')
-#     exibirEstatisticasIndividuais(int(i[4]),'mutacao')
+#     exibirEstatisticasGerais(87,int(i[0]),int(i[2]),int(i[4]))
 
+exibirEstatisticasGerais(ultimaExecucao(),1,3,2)
 # for i  in range(1,3):
 #     exibirEstatisticasIndividuais(i, 'reproducao')
 

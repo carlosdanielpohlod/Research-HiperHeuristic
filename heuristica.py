@@ -11,7 +11,7 @@ def construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selec
     
    
 
-    for i in range(15):    
+    for i in range(5):    
         pai01, pai02 = selecaoPais.melhorEAleatorio(populacao)  
         reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, codHeuristicas.codReproducao)
         
