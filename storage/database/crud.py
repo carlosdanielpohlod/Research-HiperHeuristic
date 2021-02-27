@@ -5,9 +5,9 @@ db = peewee.SqliteDatabase('conhecimento.db')
 
 
 
-def salvarResultado(codExecucao, codReproducao, codBuscaLocal, codMutacao, fitness):
+def salvarResultado(codExecucao, codHeuristicas, fitness, mediaPopulacao):
 
-    resultados = Resultados(execucao_id = codExecucao, codReproducao =  codReproducao,codBuscaLocal=  codBuscaLocal, codMutacao=  codMutacao, fitness= fitness)
+    resultados = Resultados(execucao_id = codExecucao,mediaPopulacao = mediaPopulacao, codReproducao =  codHeuristicas.codReproducao,codBuscaLocal=  codHeuristicas.codBuscaLocal, codMutacao=  codHeuristicas.codMutacao, fitness= fitness)
     
     resultados.save()
     # print(codExecucao, codReproducao, codBuscaLocal, codMutacao, fitness)

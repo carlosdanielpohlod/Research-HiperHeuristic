@@ -11,6 +11,7 @@ class Resultados(peewee.Model):
     codReproducao = peewee.IntegerField()
     codBuscaLocal = peewee.IntegerField()
     codMutacao = peewee.IntegerField()
+    mediaPopulacao = peewee.DoubleField(null = True)
     execucao = peewee.ForeignKeyField(Execucao,to_field= 'execucao_id')
     class Meta:
         database = db

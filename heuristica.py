@@ -11,13 +11,13 @@ def construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selec
     
    
 
-    for i in range(5):    
+    for i in range(2):    
         pai01, pai02 = selecaoPais.melhorEAleatorio(populacao)  
         reproducao.reproduzir(populacao, fluxo, distancias, pai01, pai02, codHeuristicas.codReproducao)
         
         utils.bubbleSort(populacao)
-        melhor =  utils.buscarMelhorIndividuo(populacao)
-
-        buscaLocal.busca(populacao[melhor], fluxo, distancias, codHeuristicas.codBuscaLocal)    
-        # salvarResultado(codExecucao=parametros.idExecucao, codBuscaLocal=codHeuristicas.codBuscaLocal,codReproducao=codHeuristicas.codBuscaLocal,codMutacao=codHeuristicas.codMutacao, fitness=float(populacao[melhor][parametros.TAMCROMOSSOMO - 1]))
-    return populacao[melhor][parametros.TAMCROMOSSOMO - 1]
+        escolhido = randint(0, 5)
+        buscaLocal.busca(populacao[escolhido], fluxo, distancias, codHeuristicas.codBuscaLocal)  
+        melhor = utils.buscarMelhorIndividuo(populacao)  
+        salvarResultado(mediaPopulacao = utils.mediaPopulacao(populacao), codExecucao=parametros.idExecucao, codHeuristicas = codHeuristicas, fitness=float(populacao[melhor][parametros.TAMCROMOSSOMO - 1]))
+    return populacao[escolhido][parametros.TAMCROMOSSOMO - 1]

@@ -38,20 +38,20 @@ populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = par
 
 for string in heuristicas:
     somatorio = 0
+  
+        
+    funcaoObjetivo.gerarPopulacao(populacao)
+    funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
+    # print('Chamando ', string[0], string[2], string[4])
     for i in range(10):
         
-        funcaoObjetivo.gerarPopulacao(populacao)
-        funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-        # print('Chamando ', string[0], string[2], string[4])
-        for i in range(40):
-            
-            codHeuristicas.codReproducao = string[0]
-            codHeuristicas.codBuscaLocal = string[2]
-            codHeuristicas.codMutacao = string[4]
-            melhorResultado = construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-            salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
-        somatorio = somatorio + melhorResultado 
-    print('media de ',string[0], string[2], string[4],' -> ', somatorio/10)
+        codHeuristicas.codReproducao = string[0]
+        codHeuristicas.codBuscaLocal = string[2]
+        codHeuristicas.codMutacao = string[4]
+        melhorResultado = construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+        salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
+    somatorio = somatorio + melhorResultado 
+print('media de ',string[0], string[2], string[4],' -> ', somatorio/10)
 
 
     

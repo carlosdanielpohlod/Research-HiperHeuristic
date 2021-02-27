@@ -25,7 +25,7 @@ arquivo.lerDistancias(distancias)
 
 parametros = Parametros()
 
-utils = Utils()
+utils = Utils(parametros)
 selecaoPais = SelecaoPais(parametros)
 funcaoObjetivo = FuncaoObjetivo(parametros)
 mutacao = Mutacao(parametros)
@@ -42,23 +42,30 @@ populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = par
 
 
 
-heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
-heuristicaEscolha.inicializar([codHeuristicas.qtdReproducao,codHeuristicas.qtdBuscaLocal,codHeuristicas.qtdMutacao])
+heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())    
+heuristicaEscolha.inicializar(heuristicas)
 print('executando ...')
 somatorio = 0
 for i in range(10):
-
+    melhorResultado = 0
     funcaoObjetivo.gerarPopulacao(populacao)
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
     idExecucao = novaExecucao()
     parametros.idExecucao = idExecucao
-    print("Id da execucao ", idExecucao)
-
-    for i in range(40):
-        codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
+    utils.bubbleSort(populacao)
+    print('Melhor inicial ', populacao[0][parametros.TAMCROMOSSOMO - 1])
+    salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = melhorResultado, mediaPopulacao = utils.mediaPopulacao(populacao) )
+    for i in range(10):
+        utils.setCodigosHeuriticas(codHeuristicas, heuristicaEscolha.escolher())
+  
         melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+        reward = int(reproducao.score + mutacao.score + buscaLocal.score)
+        stringAlgoritmoUsado = utils.codToString(codHeuristicas)
+        
+        utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
+        
     
-        salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
+    
     somatorio = somatorio + melhorResultado
     print('Melhor Individuo ', melhorResultado)
 print("Media final -> ", somatorio/10)   

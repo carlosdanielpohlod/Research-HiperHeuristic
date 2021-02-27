@@ -92,6 +92,12 @@ class Utils:
                     
                     for k in range(self.parametros.TAMCROMOSSOMO):
                         matriz[i + 1][k] = aux[k]
+    def mediaPopulacao(self, populacao):
+        somatorio = 0
+    
+        for i in range(self.parametros.TAMPOPULACAO):
+            somatorio = somatorio + populacao[i][self.parametros.TAMCROMOSSOMO - 1]
+        return somatorio / self.parametros.TAMPOPULACAO
     def bubbleSort(self, matriz):
         aux = [self.parametros.INFINITO] * self.parametros.TAMCROMOSSOMO
         
