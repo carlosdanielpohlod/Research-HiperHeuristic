@@ -34,7 +34,13 @@ def getCodeHeuristica(heuristica):
     for i in heuristica:
         codHeuristica = i.codHeuristica
     return codHeuristica
-
+def extrairMediaPopulacaoEFitness(result):
+    resp = []
+    fitness = []
+    for i in result:
+        resp.append(i.mediaPopulacao)
+        fitness.append(i.fitness)
+    return resp, fitness
 def extrairHeuristicaUsada_id(result):
     resp = []
     for i in result:

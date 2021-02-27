@@ -53,8 +53,9 @@ for i in range(10):
     idExecucao = novaExecucao()
     parametros.idExecucao = idExecucao
     utils.bubbleSort(populacao)
+    print('idExecucao ', idExecucao)
     print('Melhor inicial ', populacao[0][parametros.TAMCROMOSSOMO - 1])
-    salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = melhorResultado, mediaPopulacao = utils.mediaPopulacao(populacao) )
+    salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
     for i in range(10):
         utils.setCodigosHeuriticas(codHeuristicas, heuristicaEscolha.escolher())
   

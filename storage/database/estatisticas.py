@@ -1,6 +1,6 @@
 from estrutura_database import *
 from utils_database import *
-
+from grafico_file import Grafico
 
 import numpy 
 import peewee
@@ -78,13 +78,17 @@ def exibirEstatisticasGerais(execucao_id,codReproducao,codMutacao,codBuscaLocal)
             print(i.fitness)
         except:
             print('Nd')
-        
-heuristicas = ['1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
+def mediaPopulacaoEFitnessPorExecucao(execucao_id):
+    return extrairMediaPopulacaoEFitness(Resultados.select(Resultados.mediaPopulacao, Resultados.fitness).where(Resultados.execucao_id == execucao_id).execute())
 
-for i in heuristicas:
+# heuristicas = ['1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
+
+# for i in heuristicas:
    
-    exibirEstatisticasGerais(100,int(i[0]),int(i[2]),int(i[4]))
-
+#     exibirEstatisticasGerais(100,int(i[0]),int(i[2]),int(i[4]))
+grafico = Grafico
+pop, best = mediaPopulacaoEFitnessPorExecucao(230)
+grafico.evolucaoPopulacaoXBest(pop, best)
 # exibirEstatisticasGerais(ultimaExecucao(),1,3,2)
 # for i  in range(1,3):
 #     exibirEstatisticasIndividuais(i, 'reproducao')
