@@ -17,6 +17,11 @@ def extrairScoreHeuristica(heuristica):
     for i in heuristica:
         score.append(i.score)
     return score
+def extrairCodesResultados(codes):
+    result = []
+    for i in codes:
+        result.append(f'{i.codReproducao}, {i.codBuscaLocal}, {i.codMutacao}')
+    return result
 def codStringToNumber(tipoHeuristica_id):
     if(tipoHeuristica_id == "busca local"):
         return 2

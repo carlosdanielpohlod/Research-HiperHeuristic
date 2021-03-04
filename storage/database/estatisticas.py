@@ -80,15 +80,16 @@ def exibirEstatisticasGerais(execucao_id,codReproducao,codMutacao,codBuscaLocal)
             print('Nd')
 def mediaPopulacaoEFitnessPorExecucao(execucao_id):
     return extrairMediaPopulacaoEFitness(Resultados.select(Resultados.mediaPopulacao, Resultados.fitness).where(Resultados.execucao_id == execucao_id).execute())
-
+def codesPorExecucao(execucao_id):
+    return extrairCodesResultados(Resultados.select(Resultados.codReproducao, Resultados.codBuscaLocal, Resultados.codMutacao).where(Resultados.execucao_id == execucao_id).execute())
 # heuristicas = ['1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
 
 # for i in heuristicas:
    
 #     exibirEstatisticasGerais(100,int(i[0]),int(i[2]),int(i[4]))
-grafico = Grafico
-pop, best = mediaPopulacaoEFitnessPorExecucao(230)
-grafico.evolucaoPopulacaoXBest(pop, best)
+grafico = Grafico()
+# print(codesPorExecucao(266))
+grafico.graficoArea(codesPorExecucao(266))
 # exibirEstatisticasGerais(ultimaExecucao(),1,3,2)
 # for i  in range(1,3):
 #     exibirEstatisticasIndividuais(i, 'reproducao')

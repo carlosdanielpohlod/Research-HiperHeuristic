@@ -25,7 +25,7 @@ arquivo.lerDistancias(distancias)
 
 parametros = Parametros()
 parametros.idExecucao = idExecucao
-utils = Utils()
+utils = Utils(parametros)
 selecaoPais = SelecaoPais(parametros)
 funcaoObjetivo = FuncaoObjetivo(parametros)
 mutacao = Mutacao(parametros)
@@ -37,19 +37,24 @@ heuristicas = ['2,2,3','1,3,1','1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','
 populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
 
 for string in heuristicas:
+    melhorResultado = 0
     somatorio = 0
-  
-        
     funcaoObjetivo.gerarPopulacao(populacao)
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-    # print('Chamando ', string[0], string[2], string[4])
+    idExecucao = novaExecucao()
+    parametros.idExecucao = idExecucao
+    utils.bubbleSort(populacao)
+    print('idExecucao ', idExecucao)
+    print('melhor resultado antes ', populacao[0][parametros.TAMCROMOSSOMO - 1])
+    codHeuristicas.codReproducao = string[0]
+    codHeuristicas.codBuscaLocal = string[2]
+    codHeuristicas.codMutacao = string[4]
     for i in range(10):
         
-        codHeuristicas.codReproducao = string[0]
-        codHeuristicas.codBuscaLocal = string[2]
-        codHeuristicas.codMutacao = string[4]
+        
         melhorResultado = construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-        salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
+        # salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
+    print("Melhor resultado depois ",melhorResultado)
     somatorio = somatorio + melhorResultado 
 print('media de ',string[0], string[2], string[4],' -> ', somatorio/10)
 
