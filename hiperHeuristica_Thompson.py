@@ -15,15 +15,16 @@ from random import *
 from storage.files.operacaoArquivos import *
 
 
+parametros = Parametros()
 
 
-arquivo = ArquivosManager('storage/files/nug12.dat','r')
+arquivo = ArquivosManager(f'storage/files/{parametros.INSTANCIA}.dat','r')
 fluxo =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
 distancias =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
 arquivo.lerFluxo(fluxo)
+# print(fluxo)
 arquivo.lerDistancias(distancias)
 
-parametros = Parametros()
 
 utils = Utils(parametros)
 selecaoPais = SelecaoPais(parametros)
@@ -46,8 +47,9 @@ heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())
 heuristicaEscolha.inicializar(heuristicas)
 print('executando ...')
 somatorio = 0
-for i in range(1):
+for i in range(10): 
     melhorResultado = 0
+   
     funcaoObjetivo.gerarPopulacao(populacao)
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
     idExecucao = novaExecucao()
@@ -56,7 +58,7 @@ for i in range(1):
     print('idExecucao ', idExecucao)
     print('Melhor inicial ', populacao[0][parametros.TAMCROMOSSOMO - 1])
     salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
-    for i in range(20):
+    for i in range(10):
         utils.setCodigosHeuriticas(codHeuristicas, heuristicaEscolha.escolher())
   
         melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
@@ -69,7 +71,7 @@ for i in range(1):
     
     somatorio = somatorio + melhorResultado
     print('Melhor Individuo ', melhorResultado)
-# print("Media final -> ", somatorio/10)   
+print("Media final -> ", somatorio/10)   
         
     
     

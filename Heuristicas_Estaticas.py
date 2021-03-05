@@ -17,7 +17,7 @@ from storage.files.operacaoArquivos import *
 
 idExecucao = novaExecucao()
 
-arquivo = ArquivosManager('storage/files/nug12.dat','r')
+arquivo = ArquivosManager('storage/files/nug20.dat','r')
 fluxo =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
 distancias =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
 arquivo.lerFluxo(fluxo)

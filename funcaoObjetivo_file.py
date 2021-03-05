@@ -51,15 +51,12 @@ class FuncaoObjetivo:
     def avaliarIndividuo(self,individuo, fluxo, distancias):
         
         fitness = 0
-        try:
-            # print(individuo)
-            for i in range(self.parametros.N):
-                for j in range(self.parametros.N):
-                    
-                    fitness = fitness+distancias[i][j] * fluxo[ individuo[i] ] [individuo[j] ]
-        except:
-            print(individuo)          
-        # print(fitness)
+        
+        for i in range(self.parametros.N):
+            for j in range(self.parametros.N):
+                
+                fitness = fitness + distancias[i][j] * fluxo[ individuo[i] ] [individuo[j] ]
+    
         individuo[self.parametros.TAMCROMOSSOMO - 1] = fitness
         
     

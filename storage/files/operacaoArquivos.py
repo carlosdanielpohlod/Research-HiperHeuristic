@@ -8,7 +8,7 @@ class ArquivosManager:
         tamanho = self.dadosArquivo[0].split(' ')
         tamanho = tamanho[0].replace('\n','')
         return int(tamanho)
-    def lerFluxo(self, fluxo):
+    def lerDistancias(self, fluxo):
         k = 2
         i = 0
         while(k < self.tam + 2):
@@ -23,7 +23,7 @@ class ArquivosManager:
         while '' in vetor:
             vetor.remove('')
 
-    def lerDistancias(self, distancias):
+    def lerFluxo(self, distancias):
         k = self.tam + 3
         i = 0
         while(k < self.tam + self.tam + 3):
