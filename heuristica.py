@@ -21,3 +21,6 @@ def construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selec
         melhor = utils.buscarMelhorIndividuo(populacao)  
         salvarResultado(mediaPopulacao = utils.mediaPopulacao(populacao), codExecucao=parametros.idExecucao, codHeuristicas = codHeuristicas, fitness=float(populacao[melhor][parametros.TAMCROMOSSOMO - 1]))
     return populacao[melhor][parametros.TAMCROMOSSOMO - 1]
+
+
+    

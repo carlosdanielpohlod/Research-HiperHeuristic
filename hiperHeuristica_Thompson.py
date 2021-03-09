@@ -35,30 +35,44 @@ buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
 
 heuristicaEscolha = HeuristicaEscolha(ThompsonSampling())
-
+parametros.N = arquivo.tam
 
 # heuristicaEscolha.inicializar({'1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3'})
-heuristicas = ['1,3,1','1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
+heuristicas = ['0,0,0','1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
 populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
 
 
 
-heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())    
-heuristicaEscolha.inicializar(heuristicas)
+
 print('executando ...')
 somatorio = 0
+
+mi = []
+mf = []
 for i in range(10): 
+
+
+
+
+
+
+
     melhorResultado = 0
-   
+    heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())    
+    heuristicaEscolha.inicializar(heuristicas)
+
     funcaoObjetivo.gerarPopulacao(populacao)
     funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
     idExecucao = novaExecucao()
     parametros.idExecucao = idExecucao
+
     utils.bubbleSort(populacao)
-    print('idExecucao ', idExecucao)
-    print('Melhor inicial ', populacao[0][parametros.TAMCROMOSSOMO - 1])
+    print(idExecucao)
+    mi.append(populacao[0][parametros.TAMCROMOSSOMO - 1])
+
+
     salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
-    for i in range(10):
+    for i in range(40):
         utils.setCodigosHeuriticas(codHeuristicas, heuristicaEscolha.escolher())
   
         melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
@@ -70,13 +84,15 @@ for i in range(10):
     
     
     somatorio = somatorio + melhorResultado
-    print('Melhor Individuo ', melhorResultado)
-print("Media final -> ", somatorio/10)   
+    mf.append(melhorResultado)
+print(mi)
+print("")
+print(mf)
         
+
+
     
-    
-    
-    
+
     
 
 

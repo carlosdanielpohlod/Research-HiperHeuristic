@@ -2,8 +2,8 @@ import random
 class Parametros:
     
     def __init__(self):
-        self.INSTANCIA = 'nug12'
-        self.N = 12
+        self.INSTANCIA = 'nug20'
+        self.N = 20
         self.TAMCROMOSSOMO = self.N + 1 
         self.INFINITO = self.N + 10
         self.TAMPOPULACAO = 100

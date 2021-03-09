@@ -3,10 +3,11 @@ from grafico_file import *
 
 grafico = Grafico()
 funcoes = FuncoesEstatisticas()
-def bestXmediaPop():
-    best, pop = funcoes.mediaPopulacaoEFitnessPorExecucao(266)
-    grafico.evolucaoPopulacaoXBest(best, pop)
-def areaHeuristicas():
-    grafico.graficoArea(funcoes.codesPorExecucao(266))
-    
-areaHeuristicas()
+def bestXmediaPop(id):
+    best, pop = funcoes.mediaPopulacaoEFitnessPorExecucao(id)
+    grafico.evolucaoPopulacaoXBest(best, pop, i)
+def areaSimples(id):
+    grafico.graficoSimples(funcoes.codesPorExecucao(id))
+
+for i in range(512, 512 + 9):  
+    bestXmediaPop(i)
