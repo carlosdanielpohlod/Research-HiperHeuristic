@@ -1,8 +1,21 @@
+import os
 class ArquivosManager:
-    def __init__(self, nome, operacao):
+    def __init__(self):
+        self.file = None
+        self.dadosArquivo = None
+        self.tam = None
+
+    def setParams(self, nome, operacao):
         self.file = open(nome, operacao)
         self.dadosArquivo = self.file.readlines()
         self.tam = self.tamanhoInstancia()
+    
+    def allFilesDir(self, pasta = 'storage/files/nug', prefix = False):
+        caminhos = [os.path.join(pasta, nome) for nome in os.listdir(pasta)]
+        if not prefix:
+            caminhos = [i.removeprefix(f'{pasta}\\') for i in caminhos]
+        return caminhos
+
     def tamanhoInstancia(self):
         
         tamanho = self.dadosArquivo[0].split(' ')
