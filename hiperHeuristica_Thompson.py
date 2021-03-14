@@ -26,41 +26,37 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
     buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
     codHeuristicas = CodHeuristicas()
     heuristicas = ['0,0,0','1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
-
-
-
-
     parametros.setN(tamInstancia)
-    # print(parametros.TAMCROMOSSOMO)
+    
     populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
 
-    # print('executando ...')
+    
     somatorio = 0
 
     mi = []
     mf = []
     melhorResultado = parametros.INFINITO
     for i in range(numExecucoes): 
-        # print("entrei")
+        
         heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())  
-        # print("thomson")  
+        
         heuristicaEscolha.inicializar(heuristicas)
-        # print("inicializado")
+        
         funcaoObjetivo.gerarPopulacao(populacao)
-        # print("gerado")
+        
         funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-        # print("avaliado")
+        
         idExecucao = novaExecucao()
         parametros.idExecucao = idExecucao
 
         utils.bubbleSort(populacao)
-        # print(idExecucao)
+        
         mi.append(populacao[0][parametros.TAMCROMOSSOMO - 1])
 
 
         salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         
-        for i in range(2):
+        for i in range(2*tamInstancia):
             utils.setCodigosHeuriticas(codHeuristicas, heuristicaEscolha.escolher())
             
             melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
@@ -73,12 +69,9 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
         somatorio = somatorio + melhorResultado
         mf.append(melhorResultado)
    
-
-
-    # print(mi)
-    # print("")
-    # print(mf)
-    return
+    print(mi)
+    print('')
+    print(mf)
 
 
         

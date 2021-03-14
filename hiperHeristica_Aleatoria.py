@@ -15,57 +15,58 @@ from random import *
 from storage.files.operacaoArquivos import *
 
 
-
-
-arquivo = ArquivosManager('storage/files/nug20.dat','r')
-fluxo =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
-distancias =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
-arquivo.lerFluxo(fluxo)
-arquivo.lerDistancias(distancias)
-
-parametros = Parametros()
-
-utils = Utils(parametros)
-selecaoPais = SelecaoPais(parametros)
-funcaoObjetivo = FuncaoObjetivo(parametros)
-mutacao = Mutacao(parametros)
-reproducao = Reproduzir(parametros, funcaoObjetivo, mutacao)
-buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
-codHeuristicas = CodHeuristicas()
-
-heuristicaEscolha = HeuristicaEscolha(ThompsonSampling())
-
-
-populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
-
-heuristicaEscolha  = HeuristicaEscolha(RandomChoice())    
-heuristicaEscolha.inicializar([codHeuristicas.qtdReproducao,codHeuristicas.qtdBuscaLocal,codHeuristicas.qtdMutacao])
-
-somatorio = 0
-for i in range(10):
-
-    funcaoObjetivo.gerarPopulacao(populacao)
-    funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-    idExecucao = novaExecucao()
-    parametros.idExecucao = idExecucao
-    print(' ')
-    print("Id da execucao ", idExecucao)
-    utils.bubbleSort(populacao)
-    print('Melhor inicial ', populacao[0][parametros.TAMCROMOSSOMO - 1])
-    for i in range(10):
-        codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
-        melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes):
     
-        salvarResultado(idExecucao, codHeuristicas, melhorResultado, utils.mediaPopulacao(populacao) )
-    somatorio = somatorio + melhorResultado
-    print('Melhor Individuo ', melhorResultado)
-print("Media final -> ", somatorio/10)   
+    
+
+    parametros = Parametros()
+    utils = Utils(parametros)
+    selecaoPais = SelecaoPais(parametros)
+    funcaoObjetivo = FuncaoObjetivo(parametros)
+    mutacao = Mutacao(parametros)
+    reproducao = Reproduzir(parametros, funcaoObjetivo, mutacao)
+    buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
+    codHeuristicas = CodHeuristicas()
+    
+    parametros.setN(tamInstancia)
+    
+    heuristicaEscolha = HeuristicaEscolha(RandomChoice())
+    heuristicaEscolha.inicializar([codHeuristicas.qtdReproducao,codHeuristicas.qtdBuscaLocal,codHeuristicas.qtdMutacao])
+
+    populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
+
+    
+    somatorio = 0
+
+    mi = []
+    mf = []
+    melhorResultado = parametros.INFINITO
+    for i in range(numExecucoes): 
+
+        funcaoObjetivo.gerarPopulacao(populacao)
+        funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
+        idExecucao = novaExecucao()
+        parametros.idExecucao = idExecucao
+        print(' ')
+        print("Id da execucao ", idExecucao)
+        utils.bubbleSort(populacao)
+        for i in range(tamInstancia * 2):
+            codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
+            melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
         
-    
-    
-    
-    
-    
+            salvarResultado(idExecucao, codHeuristicas, melhorResultado, utils.mediaPopulacao(populacao) )
+        somatorio = somatorio + melhorResultado
+        
+    print(mi)
+    print('')
+    print(mf)
+  
+            
+        
+        
+        
+        
+        
 
 
 
