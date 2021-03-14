@@ -21,33 +21,35 @@ class ArquivosManager:
         tamanho = self.dadosArquivo[0].split(' ')
         tamanho = tamanho[0].replace('\n','')
         return int(tamanho)
-    def lerDistancias(self, fluxo):
+    def lerDistancias(self, distancias):
         k = 2
         i = 0
         while(k < self.tam + 2):
-            fluxo[i] = self.dadosArquivo[k].split(' ')
+            
+            distancias[i] = self.dadosArquivo[k].split(' ')
+            
             for j in range(self.tam):
-                fluxo[i][j] = fluxo[i][j].replace('\n','')
+                distancias[i][j] = distancias[i][j].replace('\n','')
             k = k + 1
             i = i + 1
-        self.castToInt(fluxo)
+        self.castToInt(distancias)
     def retirarCampoVazio(self, vetor):
         # linhas = len(vetor[0])
         while '' in vetor:
             vetor.remove('')
 
-    def lerFluxo(self, distancias):
+    def lerFluxo(self, fluxo):
         k = self.tam + 3
         i = 0
         while(k < self.tam + self.tam + 3):
-            distancias[i] = self.dadosArquivo[k].split(' ')
-            self.retirarCampoVazio(distancias[i])
+            fluxo[i] = self.dadosArquivo[k].split(' ')
+            self.retirarCampoVazio(fluxo[i])
             for j in range(self.tam):
-                # print("aqui", distancias[i])
-                distancias[i][j] = distancias[i][j].replace('\n','')
+                # print("aqui", fluxo[i])
+                fluxo[i][j] = fluxo[i][j].replace('\n','')
             k = k + 1
             i = i + 1
-        self.castToInt(distancias)
+        self.castToInt(fluxo)
     def castToInt(self, matriz):
         linhas = len(matriz)
         colunas = len(matriz[0])

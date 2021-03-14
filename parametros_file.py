@@ -3,9 +3,9 @@ class Parametros:
     
     def __init__(self):
         
-        self.N = 20
+        self.N = 0
         self.TAMCROMOSSOMO = self.N + 1 
-        self.INFINITO = self.N + 10
+        self.INFINITO = 0
         self.TAMPOPULACAO = 100
         self.MAXAVALIACOES = 91100
         self.EVMA = 0.001
@@ -17,6 +17,10 @@ class Parametros:
         self.REPRODUCAO = 1
         self.MUTACAO = 3
         self.BUSCALOCAL = 2
+    def setN(self, N):
+        self.N = N
+        self.TAMCROMOSSOMO = self.N + 1 
+        self.INFINITO = self.N + 10
     def setParametros(self, porcentagemmutacoes, numaximofilhos, porcentagemreproducoes):
         self.PORCENTAGEMMUTACOES = porcentagemmutacoes    
         self.NUMMAXIMOFILHOS = numaximofilhos

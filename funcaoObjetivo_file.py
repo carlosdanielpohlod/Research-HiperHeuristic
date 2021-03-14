@@ -9,8 +9,7 @@ class FuncaoObjetivo:
         self.parametros = parametros
       
     def gerarPopulacao(self, populacao):
-        self.parametros.N 
-
+       
         novoIndividuo = [0] * self.parametros.TAMCROMOSSOMO  
         existe = False
         num = 0
@@ -18,11 +17,12 @@ class FuncaoObjetivo:
         locus = 0
 
         for individuo in range(self.parametros.TAMPOPULACAO):
+            
             self.utils.zerar(novoIndividuo)
             # novoIndividuo =  [self.parametros.TAMCROMOSSOMO + 3] *len(novoIndividuo) *
             while(locus < self.parametros.N):
                 
-
+                
                 num = randint(0,self.parametros.N - 1)
                 existe = False
 
@@ -43,15 +43,15 @@ class FuncaoObjetivo:
             
             for j in range(self.parametros.TAMCROMOSSOMO - 1):
                 
-                # print(novoIndividuo[j])
+                
                 populacao[individuo][j] = novoIndividuo[j]
             
-            populacao[individuo][self.parametros.TAMCROMOSSOMO - 1] = 0
+            populacao[individuo][self.parametros.TAMCROMOSSOMO - 1] = self.parametros.INFINITO
         
     def avaliarIndividuo(self,individuo, fluxo, distancias):
         
         fitness = 0
-        
+        self.utils.infactivelCheck(individuo)
         for i in range(self.parametros.N):
             for j in range(self.parametros.N):
                 
