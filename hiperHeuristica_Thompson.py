@@ -31,10 +31,10 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
 
 
     parametros.setN(tamInstancia)
-    print(parametros.TAMCROMOSSOMO)
+    # print(parametros.TAMCROMOSSOMO)
     populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
 
-    print('executando ...')
+    # print('executando ...')
     somatorio = 0
 
     mi = []
@@ -75,9 +75,9 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
    
 
 
-    print(mi)
-    print("")
-    print(mf)
+    # print(mi)
+    # print("")
+    # print(mf)
     return
 
 
