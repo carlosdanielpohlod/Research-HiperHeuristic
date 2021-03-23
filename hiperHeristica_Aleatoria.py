@@ -38,8 +38,8 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes):
     
     somatorio = 0
 
-    mi = []
-    mf = []
+    piorFinal = [] #
+    melhorFinal = [] #
     melhorResultado = parametros.INFINITO
     for i in range(numExecucoes): 
 
@@ -56,10 +56,14 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes):
         
             salvarResultado(idExecucao, codHeuristicas, melhorResultado, utils.mediaPopulacao(populacao) )
         somatorio = somatorio + melhorResultado
-        
-    print(mi)
-    print('')
-    print(mf)
+        melhorFinal.append(melhorResultado)
+        piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1])
+    print('Piores finais', piorFinal)
+    print('melhores finais', melhorFinal)
+    print('media melhores',mean(melhorFinal))
+    print('melhor final', min(melhorFinal))
+    print('desvo padrao', std(melhorFinal))
+    print('Pior final',max(piorFinal, key=int))
   
             
         

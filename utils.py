@@ -11,7 +11,12 @@ class Utils:
     def zerar(self, individuo):
         for i in range(self.parametros.TAMCROMOSSOMO):
             individuo[i] = self.parametros.INFINITO
-        
+    def buscarPiorIndividuo(self, populacao):
+        pior = 0
+        for i in range(self.parametros.TAMPOPULACAO):
+            if(populacao[i][self.parametros.TAMCROMOSSOMO - 1] > populacao[pior][self.parametros.TAMCROMOSSOMO - 1]):
+                pior = i
+        return pior
     def persistirMelhores(self, matriz, populacao,  pai01,  pai02):
         for i in range(self.parametros.TAMCROMOSSOMO):
         

@@ -13,7 +13,7 @@ from mutacao_file import Mutacao
 from escolha.RandomChoice import RandomChoice
 from random import *
 from storage.files.operacaoArquivos import *
-
+from numpy import mean, std
 
 def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
 
@@ -27,17 +27,18 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
     codHeuristicas = CodHeuristicas()
     heuristicas = ['0,0,0','1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
     parametros.setN(tamInstancia)
-    
-    populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
-
-    
     somatorio = 0
 
-    mi = []
-    mf = []
-    melhorResultado = parametros.INFINITO
+    piorFinal = [] #
+    melhorFinal = [] #
+    
     for i in range(numExecucoes): 
+        populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
+
+    
         
+
+        melhorResultado = parametros.INFINITO
         heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())  
         
         heuristicaEscolha.inicializar(heuristicas)
@@ -48,11 +49,9 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
         
         idExecucao = novaExecucao()
         parametros.idExecucao = idExecucao
-
+        print('id', idExecucao)
         utils.bubbleSort(populacao)
         
-        mi.append(populacao[0][parametros.TAMCROMOSSOMO - 1])
-
 
         salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         
@@ -67,11 +66,18 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
             utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
             
         somatorio = somatorio + melhorResultado
-        mf.append(melhorResultado)
+
+        melhorFinal.append(melhorResultado) #
+        piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
    
-    print(mi)
-    print('')
-    print(mf)
+
+    print('Piores finais', piorFinal)
+    print('melhores finais', melhorFinal)
+    print('media melhores',mean(melhorFinal))
+    print('melhor final', min(melhorFinal))
+    print('desvo padrao', std(melhorFinal))
+    print('Pior final',max(piorFinal, key=int))
+    
 
 
         
