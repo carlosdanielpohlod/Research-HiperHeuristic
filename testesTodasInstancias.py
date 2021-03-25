@@ -2,7 +2,7 @@
 from hiperHeristica_Aleatoria import *
 arquivo = ArquivosManager()
 nomes = arquivo.allFilesDir(prefix=True)
-del(nomes[0])
+del(nomes[0:8])
 for nome in nomes:
     # try:
         

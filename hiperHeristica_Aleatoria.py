@@ -13,7 +13,7 @@ from mutacao_file import Mutacao
 from escolha.RandomChoice import RandomChoice
 from random import *
 from storage.files.operacaoArquivos import *
-
+from numpy import mean, std
 
 def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes):
     
@@ -47,8 +47,8 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes):
         funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
         idExecucao = novaExecucao()
         parametros.idExecucao = idExecucao
-        print(' ')
-        print("Id da execucao ", idExecucao)
+        # print(' ')
+        # print("Id da execucao ", idExecucao)
         utils.bubbleSort(populacao)
         for i in range(tamInstancia * 2):
             codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
@@ -58,6 +58,7 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes):
         somatorio = somatorio + melhorResultado
         melhorFinal.append(melhorResultado)
         piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1])
+    print(' ')
     print('Piores finais', piorFinal)
     print('melhores finais', melhorFinal)
     print('media melhores',mean(melhorFinal))
