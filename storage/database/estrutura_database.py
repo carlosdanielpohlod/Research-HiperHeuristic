@@ -24,6 +24,19 @@ class TipoHeuristica(peewee.Model):
         database = db
         
         db_table = 'tipoheuristica'
+class Resultado_N_Execucoes(peewee.Model):
+    id = peewee.IntegerField(primary_key=True)
+  
+    idExecucaoInicial = peewee.IntegerField(null = True)
+    idExecucaoFinal = peewee.IntegerField(null = True)
+    piorFinal = peewee.DoubleField(null = True) 
+    mediaMelhores = peewee.DoubleField(null = True)
+    melhorIndividuo = peewee.DoubleField(null = True)
+    desvioPadrao = peewee.DoubleField(null = True)
+    instancia = peewee._StringField(null = True)
+    class Meta:
+        database = db
+        db_table = 'resultado_N_execucoes'
 class HeuristicaUsada(peewee.Model):
     heuristicaUsada_id = peewee.IntegerField(primary_key=True)
     tipoHeuristica = peewee.ForeignKeyField(TipoHeuristica,to_field= 'tipoHeuristica_id')
@@ -40,6 +53,12 @@ class ScoreHeuristica(peewee.Model):
     class Meta:
         database = db
 def criarTabelas():
+    try:
+        resultado_n_execucoes = Resultado_N_Execucoes()
+        resultado_n_execucoes.create_table()
+        print("Resultado_N_Execucoes criada")
+    except NameError:
+        print("erro", NameError)
     try:
         execucao = Execucao()
         execucao.create_table()
@@ -79,3 +98,5 @@ def criarTabelas():
 # criarTabelas()
 
 
+tipoHeuristica = Resultado_N_Execucoes()
+tipoHeuristica.create_table()

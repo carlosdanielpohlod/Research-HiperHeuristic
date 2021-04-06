@@ -15,7 +15,7 @@ from random import *
 from storage.files.operacaoArquivos import *
 from numpy import mean, std
 
-def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
+def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes, instancia):
 
     parametros = Parametros()
     utils = Utils(parametros)
@@ -49,13 +49,13 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
         
         idExecucao = novaExecucao()
         parametros.idExecucao = idExecucao
-        print('id', idExecucao)
+        # print('id', idExecucao)
         utils.bubbleSort(populacao)
         
 
         salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         
-        for i in range(2*tamInstancia):
+        for i in range(tamInstancia * 10):
             utils.setCodigosHeuriticas(codHeuristicas, heuristicaEscolha.escolher())
             
             melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
@@ -70,20 +70,12 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes):
         melhorFinal.append(melhorResultado) #
         piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
    
-
-    print('Piores finais', piorFinal)
-    print('melhores finais', melhorFinal)
-    print('media melhores',mean(melhorFinal))
-    print('melhor final', min(melhorFinal))
-    print('desvo padrao', std(melhorFinal))
-    print('Pior final',max(piorFinal, key=int))
-    
+    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = std(melhorFinal))
 
 
         
 
         
-
 
 
 

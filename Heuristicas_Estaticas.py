@@ -33,7 +33,7 @@ reproducao = Reproduzir(parametros, funcaoObjetivo, mutacao)
 buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
 
-heuristicas = ['2,2,3','1,3,1','1,2,3','3,1,1','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
+heuristicas = ['0,0,0','1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
 populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
 
 for string in heuristicas:

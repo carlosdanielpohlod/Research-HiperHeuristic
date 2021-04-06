@@ -1,7 +1,7 @@
 from utils import *
 from random import randint
 from copy import *
-from storage.database.crud import salvarHeuristicaUsada
+# from storage.database.crud import salvarHeuristicaUsada
 
 class BuscaLocal:
     def __init__(self, parametros, funcaoObjetivo):
@@ -48,7 +48,7 @@ class BuscaLocal:
         # print(original, individuo)
         self.calcularScore(original[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
         
-        salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.BUSCALOCAL, 1, self.score)
+        # salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.BUSCALOCAL, 1, self.score)
 
     def buscaLocal02(self, individuo, fluxo, distancias):     
 
@@ -85,7 +85,7 @@ class BuscaLocal:
 
         self.calcularScore(original[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
         
-        salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.BUSCALOCAL, 2, self.score)
+        # salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.BUSCALOCAL, 2, self.score)
     
     def subOrdenacao(self, individuo, fluxo, distancias):  
         original = copy(individuo)
@@ -106,6 +106,6 @@ class BuscaLocal:
                 indice = randint(0, self.parametros.TAMCROMOSSOMO - 2)
         self.calcularScore(original[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])  
         
-        salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.BUSCALOCAL, 3, self.score)
+        # salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.BUSCALOCAL, 3, self.score)
                 
         

@@ -46,7 +46,7 @@ class FuncoesEstatisticas:
         ultimo = Execucao.select(Execucao.execucao_id).limit(1).order_by(Execucao.execucao_id.desc()).execute()
         for i in ultimo :
             return i.execucao_id
-
+    
     def exibirEstatisticasIndividuais(self,k, heuristica):
 
         score = getScoreHeuristicaSimplified(heuristica,k,ultimaExecucao())

@@ -46,15 +46,15 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes):
         funcaoObjetivo.gerarPopulacao(populacao)
         funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
         idExecucao = novaExecucao()
-        parametros.idExecucao = idExecucao
+        # parametros.idExecucao = idExecucao
         # print(' ')
         # print("Id da execucao ", idExecucao)
-        utils.bubbleSort(populacao)
-        for i in range(tamInstancia * 2):
+        # utils.bubbleSort(populacao)
+        for i in range(tamInstancia * 10):
             codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
             melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
         
-            salvarResultado(idExecucao, codHeuristicas, melhorResultado, utils.mediaPopulacao(populacao) )
+            # salvarResultado(idExecucao, codHeuristicas, melhorResultado, utils.mediaPopulacao(populacao) )
         somatorio = somatorio + melhorResultado
         melhorFinal.append(melhorResultado)
         piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1])
@@ -65,6 +65,7 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes):
     print('melhor final', min(melhorFinal))
     print('desvo padrao', std(melhorFinal))
     print('Pior final',max(piorFinal, key=int))
+    
   
             
         

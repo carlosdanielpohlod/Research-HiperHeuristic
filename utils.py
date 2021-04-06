@@ -72,7 +72,7 @@ class Utils:
     def getTodasCombinacoes(self,codHeuristicas):
         
 
-        return [['1,2,3'],['3,1,1'],['1,3,2'],['2,3,1'],['2,1,2'],['1,2,1'],['2,2,1'],['1,1,1'],['2,2,2'],['2,3,3'],['2,1,3'],['2,1,1'],['1,2,2'],['1,3,3']]
+        return ['0,0,0','1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
     def infactivelCheck(self, individuo, msg = ''):
         for i in range(len(individuo) - 1):
             val = individuo[i]

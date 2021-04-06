@@ -9,5 +9,6 @@ def bestXmediaPop(id):
 def areaSimples(id):
     grafico.graficoSimples(funcoes.codesPorExecucao(id))
 
-for i in range(512, 512 + 9):  
+for i in range(2173, 2173 + 30):  
     bestXmediaPop(i)
+
