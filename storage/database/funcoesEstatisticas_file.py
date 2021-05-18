@@ -47,10 +47,10 @@ class FuncoesEstatisticas:
         for i in ultimo :
             return i.execucao_id
     
-    def exibirEstatisticasIndividuais(self,k, heuristica):
+    def exibirEstatisticasIndividuais(self,tipo, heuristica):
 
-        score = getScoreHeuristicaSimplified(heuristica,k,ultimaExecucao())
-
+        score = self.getScoreHeuristicaSimplified(heuristica,tipo,self.ultimaExecucao())
+        
         count = 0
         somatorio = 0
         for i in score:
@@ -64,16 +64,17 @@ class FuncoesEstatisticas:
             print("Numero de chamadas ",len(score))
         
             print("media ",numpy.mean(int(somatorio)))
-        print("\n", heuristica, k)
+        print("\n", heuristica, tipo)
         print("zeros ", count)
-        print("Execução id", ultimaExecucao())
+        print("Execução id", self.ultimaExecucao())
         
 
     def exibirEstatisticasGerais(self,execucao_id,codReproducao,codMutacao,codBuscaLocal):
         result = Resultados.select().where(Resultados.codReproducao == codReproducao, Resultados.codMutacao == codMutacao, Resultados.codBuscaLocal == codBuscaLocal, Resultados.execucao_id == execucao_id).order_by(Resultados.fitness.desc()).execute()
-        # print(result)
+        
         print(f'execucao da sequencia {codReproducao,codMutacao,codBuscaLocal}')
         for i in result:
+            print(i.fitness)
             try:
                 print(i.fitness)
             except:
@@ -84,4 +85,5 @@ class FuncoesEstatisticas:
         return extrairCodesResultados(Resultados.select(Resultados.codReproducao, Resultados.codBuscaLocal, Resultados.codMutacao).where(Resultados.execucao_id == execucao_id).execute())
 
 
-
+o = FuncoesEstatisticas()
+o.exibirEstatisticasIndividuais('reproducao',1)

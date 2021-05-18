@@ -1,7 +1,7 @@
 from mutacao_file import *
 from utils import *
 from random import *
-# from storage.database.crud import salvarHeuristicaUsada
+from storage.database.crud import salvarHeuristicaUsada
 class Reproduzir:
     def __init__(self, parametros, funcaoObjetivo, mutacao):
         self.parametros = parametros
@@ -43,7 +43,7 @@ class Reproduzir:
 
             if(individuoCopia[self.parametros.TAMCROMOSSOMO - 1] < novoIndividuo[self.parametros.TAMCROMOSSOMO - 1]):
                 novoIndividuo = copy.deepcopy(individuoCopia)
-            # salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.MUTACAO, self.codMutacao, self.score)    
+            salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.MUTACAO, self.codMutacao, self.score)    
             
         else:
             self.mutacao.score = 0
@@ -115,7 +115,7 @@ class Reproduzir:
 
 
         
-        # salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.REPRODUCAO, 1, self.score)
+        salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.REPRODUCAO, 1, self.score)
     
     def reproduzir02(self, populacao, fluxo, distancias, pai01, pai02):
         
@@ -174,4 +174,4 @@ class Reproduzir:
         utils.persistirMelhores(listaAuxiliar, populacao, pai01, pai02)
 
         # print(f'manteve {listaAuxiliar[0][self.parametros.TAMCROMOSSOMO - 1]} | {listaAuxiliar[1][self.parametros.TAMCROMOSSOMO - 1]} score: {self.score}')
-        # salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.REPRODUCAO, 2, self.score)
+        salvarHeuristicaUsada(self.parametros.idExecucao, self.parametros.REPRODUCAO, 2, self.score)

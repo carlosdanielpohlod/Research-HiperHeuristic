@@ -15,29 +15,178 @@ from random import *
 from storage.files.operacaoArquivos import *
 from numpy import mean, std
 
-def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes, instancia):
+parametros = Parametros()
+    
+utils = Utils(parametros)
+selecaoPais = SelecaoPais(parametros)
+funcaoObjetivo = FuncaoObjetivo(parametros)
+mutacao = Mutacao(parametros)
+reproducao = Reproduzir(parametros, funcaoObjetivo, mutacao)
+buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
+codHeuristicas = CodHeuristicas()
+multiplicador = 20
 
-    parametros = Parametros()
-    utils = Utils(parametros)
-    selecaoPais = SelecaoPais(parametros)
-    funcaoObjetivo = FuncaoObjetivo(parametros)
-    mutacao = Mutacao(parametros)
-    reproducao = Reproduzir(parametros, funcaoObjetivo, mutacao)
-    buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
-    codHeuristicas = CodHeuristicas()
-    heuristicas = ['0,0,0','1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
-    parametros.setN(tamInstancia)
+def reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia):
+    heuristicas = ['1','2']
     somatorio = 0
+    parametros.setN(tamInstancia)
+
+    codHeuristicas.buscaLocal, codHeuristicas.codMutacao = [3,3]
 
     piorFinal = [] #
     melhorFinal = [] #
     
     for i in range(numExecucoes): 
+       
         populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
-
-    
+        melhorResultado = parametros.INFINITO
+        heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())  
+        
+        heuristicaEscolha.inicializar(heuristicas)
+        
+        funcaoObjetivo.gerarPopulacao(populacao)
+        
+        funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
+        
+        idExecucao = novaExecucao()
+        parametros.idExecucao = idExecucao
+        
+        utils.bubbleSort(populacao)
         
 
+        salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
+        
+        for i in range(tamInstancia * multiplicador):
+
+            stringAlgoritmoUsado = heuristicaEscolha.escolher()
+            codHeuristicas.codReproducao = int(stringAlgoritmoUsado)
+            
+            melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+            
+            reward = int(reproducao.score)
+            utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
+            
+        somatorio = somatorio + melhorResultado
+
+        melhorFinal.append(melhorResultado) #
+        piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
+   
+    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
+
+
+def mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia):
+    heuristicas = ['1','2','3']
+    somatorio = 0
+    parametros.setN(tamInstancia)
+
+    codHeuristicas.reproducao, codHeuristicas.buscaLocal = [2,2]
+
+#1,1
+    piorFinal = [] #
+    melhorFinal = [] #
+    
+    for i in range(numExecucoes): 
+       
+        populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
+        melhorResultado = parametros.INFINITO
+        heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())  
+        
+        heuristicaEscolha.inicializar(heuristicas)
+        
+        funcaoObjetivo.gerarPopulacao(populacao)
+        
+        funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
+        
+        idExecucao = novaExecucao()
+        parametros.idExecucao = idExecucao
+        
+        utils.bubbleSort(populacao)
+        
+
+        salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
+        
+        for i in range(tamInstancia * multiplicador):
+
+            stringAlgoritmoUsado = heuristicaEscolha.escolher()
+            codHeuristicas.mutacao = int(stringAlgoritmoUsado)
+            
+            melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+            
+            reward = int(mutacao.score)
+            utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
+            
+        somatorio = somatorio + melhorResultado
+
+        melhorFinal.append(melhorResultado) #
+        piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
+   
+    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
+ 
+
+
+
+
+def buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia):
+    heuristicas = ['1','2','3']
+    somatorio = 0
+    parametros.setN(tamInstancia)
+
+    codHeuristicas.reproducao, codHeuristicas.codMutacao = [2,2]
+
+    piorFinal = [] #
+    melhorFinal = [] #
+    
+    for i in range(numExecucoes): 
+       
+        populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
+        melhorResultado = parametros.INFINITO
+        heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())  
+        
+        heuristicaEscolha.inicializar(heuristicas)
+        
+        funcaoObjetivo.gerarPopulacao(populacao)
+        
+        funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
+        
+        idExecucao = novaExecucao()
+        parametros.idExecucao = idExecucao
+        
+        utils.bubbleSort(populacao)
+        
+
+        salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
+        
+        for i in range(tamInstancia * multiplicador):
+
+            stringAlgoritmoUsado = heuristicaEscolha.escolher()
+            codHeuristicas.buscaLocal = int(stringAlgoritmoUsado)
+            
+            melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+            
+            reward = int(buscaLocal.score)
+            utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
+            
+        somatorio = somatorio + melhorResultado
+
+        melhorFinal.append(melhorResultado) #
+        piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
+   
+    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
+      
+
+
+
+def geral(fluxo, distancias, tamInstancia, numExecucoes, instancia):
+    heuristicas = ['1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
+    parametros.setN(tamInstancia)
+    somatorio = 0
+    instancia = f'{instancia} thompson geral'
+    piorFinal = [] #
+    melhorFinal = [] #
+    
+    for i in range(numExecucoes): 
+       
+        populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
         melhorResultado = parametros.INFINITO
         heuristicaEscolha  = HeuristicaEscolha(ThompsonSampling())  
         
@@ -55,7 +204,8 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes, inst
 
         salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         
-        for i in range(tamInstancia * 10):
+        for j in range(tamInstancia * multiplicador):
+            
             utils.setCodigosHeuriticas(codHeuristicas, heuristicaEscolha.escolher())
             
             melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
@@ -71,6 +221,9 @@ def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes, inst
         piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
    
     resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = std(melhorFinal))
+
+def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes, instancia):
+   geral(fluxo, distancias, tamInstancia, numExecucoes, instancia)
 
 
         

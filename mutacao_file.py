@@ -30,7 +30,7 @@ class Mutacao:
         aux = individuo[locus01]
         individuo[locus01] = individuo[locus02]
         individuo[locus02] = aux
-        # self.calcularScore(copiaIndividuo[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
+        self.calcularScore(copiaIndividuo[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
         return individuo
         # print(copiaIndividuo, individuo)
     def mutar02(self, individuo, fluxo, distancias):
@@ -45,7 +45,7 @@ class Mutacao:
         aux = individuo[pivo - 1]
         individuo[pivo - 1] = individuo[valor]
         individuo[valor] = aux
-        # self.calcularScore(copiaIndividuo[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
+        self.calcularScore(copiaIndividuo[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
         return individuo
         
     def mutar03(self, individuo, fluxo, distancias):
@@ -58,7 +58,7 @@ class Mutacao:
         individuo[pivo - 2] = subCadeia[0]
         individuo[pivo - 1] = subCadeia[1]
         individuo[pivo] = subCadeia[2]
-        # self.calcularScore(copiaIndividuo[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
+        self.calcularScore(copiaIndividuo[self.parametros.TAMCROMOSSOMO - 1], individuo[self.parametros.TAMCROMOSSOMO - 1])
         return individuo
     def chanceMutar(self):
        

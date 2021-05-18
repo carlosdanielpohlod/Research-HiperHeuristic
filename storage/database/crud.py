@@ -20,8 +20,8 @@ def salvarHeuristicaUsada(idExecucao, tipoHeuristica, codHeuristica, score ):
     result = HeuristicaUsada.get_or_create(tipoHeuristica_id = tipoHeuristica, execucao_id = idExecucao, codHeuristica = codHeuristica)
     salvarScore(result[0].heuristicaUsada_id, codHeuristica, score)     
     return 
-def resultado_N_Execucoes(instancia, idExecucaoInicial, idExecucaoFinal, piorFinal, mediaMelhores, melhorIndividuo, desvioPadrao):
-    r = Resultado_N_Execucoes(instancia = instancia, idExecucaoInicial = idExecucaoInicial, idExecucaoFinal = idExecucaoFinal, piorFinal = piorFinal, mediaMelhores = mediaMelhores, melhorIndividuo = melhorIndividuo, desvioPadrao = desvioPadrao)
+def resultado_N_Execucoes(instancia, idExecucaoInicial, idExecucaoFinal, piorFinal, mediaMelhores, melhorIndividuo, desvioPadrao, ):
+    r = Resultado_N_Execucoes(instancia = instancia, idExecucaoInicial = idExecucaoInicial, idExecucaoFinal = idExecucaoFinal, piorFinal = piorFinal, mediaMelhores = mediaMelhores, melhorIndividuo = melhorIndividuo, desvioPadrao = desvioPadrao )
     r.save()
     db.close()
     return

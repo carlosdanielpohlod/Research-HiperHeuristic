@@ -34,6 +34,7 @@ class Resultado_N_Execucoes(peewee.Model):
     melhorIndividuo = peewee.DoubleField(null = True)
     desvioPadrao = peewee.DoubleField(null = True)
     instancia = peewee._StringField(null = True)
+    comentarios = peewee._StringField(null = True)
     class Meta:
         database = db
         db_table = 'resultado_N_execucoes'
@@ -98,5 +99,5 @@ def criarTabelas():
 # criarTabelas()
 
 
-tipoHeuristica = Resultado_N_Execucoes()
-tipoHeuristica.create_table()
+# tipoHeuristica = Resultado_N_Execucoes()
+# tipoHeuristica.create_table()
