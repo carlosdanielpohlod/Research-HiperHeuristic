@@ -1,6 +1,6 @@
 import peewee
-
-db = peewee.SqliteDatabase('conhecimento.db')
+from storage.config import storage_path
+db = peewee.SqliteDatabase(f'{storage_path}/conhecimento.db')
 class Execucao(peewee.Model):
     execucao_id = peewee.IntegerField(primary_key=True)
     class Meta:
@@ -96,7 +96,7 @@ def criarTabelas():
     db.execute_sql("INSERT INTO tipoheuristica (nome) VALUES('mutação')")
     print("Tipos de heuristicas inseridos")
 # criarTipos()
-# criarTabelas()
+criarTabelas()
 
 
 # tipoHeuristica = Resultado_N_Execucoes()

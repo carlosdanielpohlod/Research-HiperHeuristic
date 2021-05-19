@@ -1,6 +1,7 @@
 from storage.database.estrutura_database import Resultados,db,ScoreHeuristica,Execucao,HeuristicaUsada,Resultado_N_Execucoes
+from storage.config import storage_path
 import peewee
-db = peewee.SqliteDatabase('conhecimento.db')
+db = peewee.SqliteDatabase(f'{storage_path}/conhecimento.db')
 
 
 

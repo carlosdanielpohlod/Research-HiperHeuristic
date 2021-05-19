@@ -1,4 +1,5 @@
 import os
+from storage.config import storage_path
 class ArquivosManager:
     def __init__(self):
         self.file = None
@@ -10,7 +11,7 @@ class ArquivosManager:
         self.dadosArquivo = self.file.readlines()
         self.tam = self.tamanhoInstancia()
     
-    def allFilesDir(self, pasta = 'storage/files/nug', prefix = False):
+    def allFilesDir(self, pasta = f'{storage_path}/files/nug', prefix = False):
         caminhos = [os.path.join(pasta, nome) for nome in os.listdir(pasta)]
         if not prefix:
             caminhos = [i.removeprefix(f'{pasta}\\') for i in caminhos]
