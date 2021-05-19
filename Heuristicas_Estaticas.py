@@ -46,8 +46,8 @@ def heuristicasEstaticas(fluxo, distancias, tamInstancia, numExecucoes, instanci
             
             
             melhorResultado = construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-            # salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
-       
+        salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
+        # resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
 
 
     

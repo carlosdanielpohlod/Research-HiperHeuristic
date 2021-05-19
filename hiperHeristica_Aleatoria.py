@@ -15,7 +15,7 @@ from random import *
 from storage.files.operacaoArquivos import *
 from numpy import mean, std
 
-def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, instancia):
+def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
     instancia = f'{instancia} aleatoria * 20'
     
 
@@ -50,7 +50,7 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, ins
         # print(' ')
         # print("Id da execucao ", idExecucao)
         # utils.bubbleSort(populacao)
-        for j in range(tamInstancia * 20):
+        for j in range(tamInstancia * multiplicador):
             codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
             melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
         
