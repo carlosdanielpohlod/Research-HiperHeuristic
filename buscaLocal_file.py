@@ -12,6 +12,8 @@ class BuscaLocal:
     def calcularScore(self, original, perturbado):
         diferenca = ((original - perturbado)) 
         self.score = (diferenca * original) / 10000
+
+
     def busca(self, individuo, fluxo, distancias, indiceBuscaLocal):
         if indiceBuscaLocal == 1:
             self.buscaLocal01(individuo, fluxo, distancias)
@@ -19,7 +21,7 @@ class BuscaLocal:
             self.buscaLocal02(individuo, fluxo, distancias)
         if indiceBuscaLocal == 3:
             self.subOrdenacao(individuo, fluxo, distancias)
-    # def buscaLocal02(self, individuo, fluxi, distancias):
+    
 
     def buscaLocal01(self, individuo, fluxo, distancias):     
         original = copy(individuo)

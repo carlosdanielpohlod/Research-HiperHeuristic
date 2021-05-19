@@ -1,2 +1,0 @@
-SELECT scoreheuristica.score FROM scoreheuristica JOIN heuristicausada ON heuristicausada.heuristicaUsada_id = scoreheuristica.heuristicaUsada_id
-WHERE heuristicaUsada.execucao_id = 2 and heuristicaUsada.tipoHeuristica_id = 2 and heuristicaUsada.codHeuristica = 3
