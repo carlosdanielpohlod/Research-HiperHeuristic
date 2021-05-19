@@ -1,7 +1,7 @@
-ambiente = 'local'
+hambiente = 'colab'
 
-if(ambiente == 'local'):
+if(hambiente == 'local'):
     storage_path = 'storage'
 
-if(ambiente == 'colab'):
+if(hambiente == 'colab'):
     storage_path = '/content/HiperHeuristic/storage'
