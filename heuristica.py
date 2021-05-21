@@ -19,6 +19,7 @@ def construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selec
         escolhido = randint(0, 5)
         buscaLocal.busca(populacao[escolhido], fluxo, distancias, codHeuristicas.codBuscaLocal)  
         melhor = utils.buscarMelhorIndividuo(populacao)  
+        # print(populacao[melhor][parametros.TAMCROMOSSOMO - 1])
         salvarResultado(mediaPopulacao = utils.mediaPopulacao(populacao), codExecucao=parametros.idExecucao, codHeuristicas = codHeuristicas, fitness=float(populacao[melhor][parametros.TAMCROMOSSOMO - 1]))
     return populacao[melhor][parametros.TAMCROMOSSOMO - 1]
 

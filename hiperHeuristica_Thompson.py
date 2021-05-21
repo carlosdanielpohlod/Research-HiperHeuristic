@@ -66,7 +66,7 @@ def reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
             codHeuristicas.codReproducao = int(stringAlgoritmoUsado)
             
             melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-            
+            # print(melhorResultado)
             reward = int(reproducao.score)
             utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
             

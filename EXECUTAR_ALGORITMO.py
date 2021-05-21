@@ -1,4 +1,5 @@
 from hiperHeuristica_Thompson import *
+from Heuristicas_Estaticas import heuristica_estatica
 # from hiperHeristica_Aleatoria import *
 arquivo = ArquivosManager()
 nomes = arquivo.allFilesDir(prefix=True)
@@ -13,7 +14,7 @@ for nome in nomes:
     distancias =  utils.declararMatriz(linhas=arquivo.tam, colunas=arquivo.tam)
     arquivo.lerFluxo(fluxo)
     arquivo.lerDistancias(distancias)
-    # comentarios = f'mutação variando, multiplicador: 1 * instancia'
+    heuristica_estatica(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome,multiplicador = 20)
     # hiperHeuristica_Aleatoria(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome)
-    hiperHeuristica_Thompson(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome)
+    # hiperHeuristica_Thompson(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome)
 print("Execução finalizada !")

@@ -6,14 +6,10 @@ from reproducao_file import Reproduzir
 from codHeuristicas import CodHeuristicas
 from storage.database.crud import *
 from heuristica import *
-from escolha.ThompsonSampling import *
 from escolha.HeuristicaEscolha import *
 from utils import *
 from mutacao_file import Mutacao
-from escolha.RandomChoice import RandomChoice
-from random import *
-from storage.files.operacaoArquivos import *
-
+from numpy import mean, std
 
 idExecucao = novaExecucao()
 
@@ -27,27 +23,41 @@ reproducao = Reproduzir(parametros, funcaoObjetivo, mutacao)
 buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
 
-heuristicas = ['1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
-populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
-def heuristicasEstaticas(fluxo, distancias, tamInstancia, numExecucoes, instancia):
+# ['1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
+heuristicas = ['1,1,1','1,1,2','1,1,3','1,2,1','1,2,2','1,2,3','1,3,1','1,3,2','1,3,3','2,1,1','2,1,2','2,1,3','2,2,1','2,2,2','2,2,3','2,3,1','2,3,2','2,3,3']
+
+def heuristica_estatica(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
+    infoInstancia = ''
+    parametros.setN(tamInstancia)
     for string in heuristicas:
-        melhorResultado = 0
+        piorFinal = [] #
+        melhorFinal = [] #
         somatorio = 0
-        funcaoObjetivo.gerarPopulacao(populacao)
-        funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
-        idExecucao = novaExecucao()
-        parametros.idExecucao = idExecucao
-        utils.bubbleSort(populacao)
-        
-        codHeuristicas.codReproducao = string[0]
-        codHeuristicas.codBuscaLocal = string[2]
-        codHeuristicas.codMutacao = string[4]
-        for i in range(numGeracoes):
+        infoInstancia = f'{instancia} reproducao = {string[0]} busca local = {string[2]} mutacao = {string[4]}'
+       
+        for j in range(0, numExecucoes):
+
+            idExecucao = novaExecucao()
+            parametros.idExecucao = idExecucao
+
+            melhorResultado = 999999999999999
+            populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
+            funcaoObjetivo.gerarPopulacao(populacao)
+            funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
             
-            
-            melhorResultado = construirHeuristica(populacao, reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-        salvarResultado(idExecucao, codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao, melhorResultado )
-        # resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
+            # print(populacao)
+            codHeuristicas.codReproducao = string[0]
+            codHeuristicas.codBuscaLocal = string[2]
+            codHeuristicas.codMutacao = string[4]
+
+            for i in range(tamInstancia * multiplicador): 
+                melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
+                # print('melhorResultado',melhorResultado)
+            somatorio = somatorio + melhorResultado
+            melhorFinal.append(melhorResultado) #
+            # print('somatorio e melhorFinal', somatorio, melhorFinal)
+            piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) 
+        resultado_N_Execucoes(instancia = infoInstancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
 
 
     

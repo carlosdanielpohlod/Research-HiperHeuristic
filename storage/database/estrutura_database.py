@@ -96,7 +96,7 @@ def criarTabelas():
     db.execute_sql("INSERT INTO tipoheuristica (nome) VALUES('mutação')")
     print("Tipos de heuristicas inseridos")
 # criarTipos()
-# criarTabelas()
+criarTabelas()
 
 
 # tipoHeuristica = Resultado_N_Execucoes()
