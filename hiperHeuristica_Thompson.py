@@ -135,8 +135,8 @@ def buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
     somatorio = 0
     parametros.setN(tamInstancia)
 
-    codHeuristicas.reproducao, codHeuristicas.codMutacao = [2,2]
-
+    codHeuristicas.reproducao, codHeuristicas.codMutacao = [0,0]
+    instancia = '{instancia} r =  m ='
     piorFinal = [] #
     melhorFinal = [] #
     
@@ -160,7 +160,7 @@ def buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
 
         # salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         
-        for i in range(tamInstancia * multiplicador):
+        for j in range(tamInstancia * multiplicador):
 
             stringAlgoritmoUsado = heuristicaEscolha.escolher()
             codHeuristicas.buscaLocal = int(stringAlgoritmoUsado)
