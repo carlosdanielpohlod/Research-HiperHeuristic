@@ -227,7 +227,7 @@ def geral(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicado
     resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = std(melhorFinal))
 
 def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
-   reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia)
+   buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia)
 
 
         
