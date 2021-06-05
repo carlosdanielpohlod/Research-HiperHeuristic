@@ -84,7 +84,7 @@ def mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, mul
     parametros.setN(tamInstancia)
 
     codHeuristicas.reproducao, codHeuristicas.buscaLocal = [2,2]
-
+    instancia = '{instancia} r =  m ='
 #1,1
     piorFinal = [] #
     melhorFinal = [] #
@@ -227,7 +227,7 @@ def geral(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicado
     resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = std(melhorFinal))
 
 def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
-   buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia)
+   mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia)
 
 
         
