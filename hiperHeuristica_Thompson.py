@@ -26,17 +26,14 @@ buscaLocal = BuscaLocal(parametros, funcaoObjetivo)
 codHeuristicas = CodHeuristicas()
 # multiplicador = 20
 
-def reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
-    reproducao_heuristicas = ['1','2']
-    buscaLocal_heuristicas = ['1','2','3']
-    mutacao_heuristicas = ['1','2','3']
-
+def reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador, arrayFixo):
+ 
     heuristicas = ['1','2']
     somatorio = 0
     parametros.setN(tamInstancia)
 
-    codHeuristicas.buscaLocal, codHeuristicas.codMutacao = [3,3]
-    instancia = '{instancia} b =  m ='
+    codHeuristicas.buscaLocal, codHeuristicas.codMutacao = arrayFixo
+    instancia = f'{instancia} r = {arrayFixo[0]} m = {arrayFixo[1]}'
     piorFinal = [] #
     melhorFinal = [] #
     
@@ -58,7 +55,7 @@ def reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
         utils.bubbleSort(populacao)
         
 
-        # salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
+        salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         
         for i in range(tamInstancia * multiplicador):
 
@@ -69,22 +66,22 @@ def reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
             # print(melhorResultado)
             reward = int(reproducao.score)
             utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
-            
+            salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         somatorio = somatorio + melhorResultado
 
         melhorFinal.append(melhorResultado) #
         piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
    
-    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
+    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
 
 
-def mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
+def mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador, arrayFixo):
     heuristicas = ['1','2','3']
     somatorio = 0
     parametros.setN(tamInstancia)
 
-    codHeuristicas.reproducao, codHeuristicas.buscaLocal = [2,2]
-    instancia = '{instancia} r =  m ='
+    codHeuristicas.reproducao, codHeuristicas.buscaLocal = arrayFixo
+    instancia = f'{instancia} r = {arrayFixo[0]} m = {arrayFixo[1]}'
 #1,1
     piorFinal = [] #
     melhorFinal = [] #
@@ -107,7 +104,7 @@ def mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, mul
         utils.bubbleSort(populacao)
         
 
-        # salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
+        salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         
         for i in range(tamInstancia * multiplicador):
 
@@ -118,25 +115,25 @@ def mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, mul
             
             reward = int(mutacao.score)
             utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
-            
+            salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         somatorio = somatorio + melhorResultado
 
         melhorFinal.append(melhorResultado) #
         piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
    
-    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
+    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
  
 
 
 
 
-def buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
+def buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador, arrayFixo):
     heuristicas = ['1','2','3']
     somatorio = 0
     parametros.setN(tamInstancia)
 
-    codHeuristicas.reproducao, codHeuristicas.codMutacao = [0,0]
-    instancia = '{instancia} r =  m ='
+    codHeuristicas.reproducao, codHeuristicas.codMutacao = arrayFixo
+    instancia = f'{instancia} r = {arrayFixo[0]} m = {arrayFixo[1]}'
     piorFinal = [] #
     melhorFinal = [] #
     
@@ -158,7 +155,7 @@ def buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
         utils.bubbleSort(populacao)
         
 
-        # salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
+        salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         
         for j in range(tamInstancia * multiplicador):
 
@@ -174,8 +171,8 @@ def buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
 
         melhorFinal.append(melhorResultado) #
         piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
-   
-    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
+        salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
+    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
       
 
 
@@ -206,7 +203,7 @@ def geral(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicado
         utils.bubbleSort(populacao)
         
 
-        # salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
+        salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         
         for j in range(tamInstancia * multiplicador):
             
@@ -218,16 +215,23 @@ def geral(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicado
             stringAlgoritmoUsado = utils.codToString(codHeuristicas)
             
             utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
-            
+            salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
         somatorio = somatorio + melhorResultado
 
         melhorFinal.append(melhorResultado) #
         piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) #
-   
+
     resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = std(melhorFinal))
 
-def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
-   mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia)
+def hiperHeuristica_Thompson(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador, arrayFixo, variar):
+    if(variar == 'reproducao'):
+        return reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia,multiplicador, arrayFixo)
+    if(variar == 'busca local'):
+        return buscaLocal(fluxo, distancias, tamInstancia, numExecucoes, instancia,multiplicador, arrayFixo)
+    if(variar == 'mutacao'):
+        return mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia,multiplicador, arrayFixo)
+    if(variar == 'geral'):
+        return geral(fluxo, distancias, tamInstancia, numExecucoes, instancia,multiplicador)
 
 
         
