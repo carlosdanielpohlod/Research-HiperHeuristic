@@ -22,7 +22,7 @@ for nome in nomes:
         
     print('Instancia Sendo executada: ', nome)
     arrayFixo = [1,1]
-    variar = 'reproducao'
+    variar = 'mutacao'
 
     arquivo.setParams(nome , 'r')
 
