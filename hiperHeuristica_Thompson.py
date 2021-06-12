@@ -33,7 +33,7 @@ def reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
     parametros.setN(tamInstancia)
 
     codHeuristicas.buscaLocal, codHeuristicas.codMutacao = arrayFixo
-    instancia = f'{instancia} r = {arrayFixo[0]} m = {arrayFixo[1]}'
+    instancia = f'{instancia} b = {arrayFixo[0]} m = {arrayFixo[1]}'
     piorFinal = [] #
     melhorFinal = [] #
     
@@ -81,7 +81,7 @@ def mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, mul
     parametros.setN(tamInstancia)
 
     codHeuristicas.reproducao, codHeuristicas.buscaLocal = arrayFixo
-    instancia = f'{instancia} r = {arrayFixo[0]} m = {arrayFixo[1]}'
+    instancia = f'{instancia} r = {arrayFixo[0]} b = {arrayFixo[1]}'
 #1,1
     piorFinal = [] #
     melhorFinal = [] #
