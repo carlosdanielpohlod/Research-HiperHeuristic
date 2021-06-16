@@ -57,7 +57,7 @@ def heuristica_estatica(fluxo, distancias, tamInstancia, numExecucoes, instancia
             melhorFinal.append(melhorResultado) #
             # print('somatorio e melhorFinal', somatorio, melhorFinal)
             piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1]) 
-        resultado_N_Execucoes(instancia = infoInstancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
+        resultado_N_Execucoes(instancia = infoInstancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = std(melhorFinal))
 
 
     
