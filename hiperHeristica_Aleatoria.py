@@ -58,7 +58,7 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, ins
         somatorio = somatorio + melhorResultado
         melhorFinal.append(melhorResultado)
         piorFinal.append(populacao[utils.buscarPiorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1])
-    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores = int(mean(melhorFinal)), melhorIndividuo = min(melhorFinal), desvioPadrao = int(std(melhorFinal)))
+    resultado_N_Execucoes(instancia = instancia,idExecucaoInicial = idExecucao - numExecucoes, idExecucaoFinal = idExecucao, piorFinal = max(piorFinal, key=int), mediaMelhores =mean(melhorFinal), melhorIndividuo = min(melhorFinal), desvioPadrao = std(melhorFinal))
     
   
             
