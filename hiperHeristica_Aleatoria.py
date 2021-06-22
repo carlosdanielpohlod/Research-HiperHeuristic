@@ -46,7 +46,7 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, ins
         funcaoObjetivo.gerarPopulacao(populacao)
         funcaoObjetivo.avaliarPopulacao(populacao, fluxo, distancias)
         idExecucao = novaExecucao()
-        # parametros.idExecucao = idExecucao
+        parametros.idExecucao = idExecucao
         # print(' ')
         # print("Id da execucao ", idExecucao)
         # utils.bubbleSort(populacao)
