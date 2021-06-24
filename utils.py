@@ -1,6 +1,5 @@
 from operator import itemgetter
 from random import *
-from codHeuristicas import CodHeuristicas
 
 class Utils:
     def __init__(self, parametros = None):
@@ -75,13 +74,15 @@ class Utils:
         
 
         return ['1,3,1','1,2,3','1,3,2','2,3,1','2,1,2','1,2,1','2,2,1','1,1,1','2,2,2','2,3,3','2,1,3','2,1,1','1,2,2','1,3,3']
-    def infactivelCheck(self, individuo, msg = ''):
+    def infactivelCheck(self, individuo):
+       
         for i in range(len(individuo) - 1):
             val = individuo[i]
             for j in range(len(individuo) - i):
                 if(i != j and individuo[j] == val):
-                    print("Infactivel -> ", individuo[j], 'repetiu em ', individuo, msg)     
+                    print("Infactivel -> ", individuo[j], 'repetiu em ', individuo)     
                     return 
+        
 
     def ordenar(self,matriz):
         aux = [0] * self.parametros.TAMCROMOSSOMO

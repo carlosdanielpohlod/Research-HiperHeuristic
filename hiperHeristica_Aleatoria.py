@@ -16,7 +16,7 @@ from storage.files.operacaoArquivos import *
 from numpy import mean, std
 
 def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
-    instancia = f'{instancia} aleatoria * 20'
+    # instancia = f'{instancia} aleatoria * 20'
     
 
     parametros = Parametros()
@@ -33,7 +33,7 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, ins
     heuristicaEscolha = HeuristicaEscolha(RandomChoice())
     heuristicaEscolha.inicializar([codHeuristicas.qtdReproducao,codHeuristicas.qtdBuscaLocal,codHeuristicas.qtdMutacao])
 
-    populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
+    
 
     
     somatorio = 0
@@ -41,6 +41,7 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, ins
     piorFinal = [] #
     melhorFinal = [] #
     melhorResultado = parametros.INFINITO
+    populacao = utils.declararMatriz(linhas = parametros.TAMPOPULACAO, colunas = parametros.TAMCROMOSSOMO)
     for i in range(numExecucoes): 
 
         funcaoObjetivo.gerarPopulacao(populacao)
@@ -54,7 +55,10 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, ins
         for j in range(tamInstancia * multiplicador):
             codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher()    
             melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-        
+            
+            for individuo in populacao:
+                funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
+
             salvarResultado(idExecucao, codHeuristicas, melhorResultado, utils.mediaPopulacao(populacao) )
         somatorio = somatorio + melhorResultado
         melhorFinal.append(melhorResultado)
