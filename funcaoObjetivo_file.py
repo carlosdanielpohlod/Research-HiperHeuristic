@@ -83,7 +83,7 @@ class FuncaoObjetivo:
         self.avaliarIndividuo(individuo, fluxo, distancias)
         
         if(individuo[self.parametros.TAMCROMOSSOMO - 1] < int(bestInstancia[instancia])):
-            print('infactivel', individuo)
+            print(f'indivi infactivel {individuo}, best: {bestInstancia[instancia]}, instancia: {instancia}')
 
 
         for i in range(len(individuo) - 1):
