@@ -2,20 +2,27 @@
 # from Heuristicas_Estaticas import heuristica_estatica
 from hiperHeristica_Aleatoria import *
 arquivo = ArquivosManager()
-nomes =  [
-    'storage/files/nug/nug12.dat',
-    'storage/files/nug/nug14.dat',
-    'storage/files/nug/nug15.dat',
-    'storage/files/nug/nug16a.dat',
-    'storage/files/nug/nug16b.dat',
-    'storage/files/nug/nug17.dat',
-    'storage/files/nug/nug18.dat',
-    'storage/files/nug/nug20.dat',
-    'storage/files/nug/nug21.dat',
-    'storage/files/nug/nug22.dat',
-    'storage/files/nug/nug25.dat',
-    'storage/files/nug/nug27.dat',
-    'storage/files/nug/nug28.dat'
+nomes = [
+    '/content/HiperHeuristic/storage/files/nug/nug12.dat',
+    '/content/HiperHeuristic/storage/files/nug/nug14.dat',
+    '/content/HiperHeuristic/storage/files/nug/nug15.dat',
+    '/content/HiperHeuristic/storage/files/nug/nug16a.dat',
+    '/content/HiperHeuristic/storage/files/nug/nug16b.dat',
+    '/content/HiperHeuristic/storage/files/nug/nug17.dat',
+    '/content/HiperHeuristic/storage/files/nug/nug18.dat',
+
+'/content/HiperHeuristic/storage/files/nug/nug20.dat',
+
+'/content/HiperHeuristic/storage/files/nug/nug21.dat',
+'/content/HiperHeuristic/storage/files/nug/nug22.dat',
+'/content/HiperHeuristic/storage/files/nug/nug25.dat',
+'/content/HiperHeuristic/storage/files/nug/nug27.dat',
+
+
+'/content/HiperHeuristic/storage/files/nug/nug28.dat'
+
+
+
 ]
 for nome in nomes:
 
