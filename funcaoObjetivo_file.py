@@ -71,7 +71,7 @@ class FuncaoObjetivo:
             ('nug14.dat',	1014),
             ('nug15.dat',	1150),
             ('nug16a.dat',	1610),
-            ('nug16b.dat',	1610),
+            ('nug16b.dat',	1240),
             ('nug17.dat',	1732),
             ('nug18.dat',	1930),
             ('nug20.dat',	2570),
