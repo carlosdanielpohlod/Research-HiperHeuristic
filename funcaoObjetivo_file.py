@@ -51,13 +51,14 @@ class FuncaoObjetivo:
     def avaliarIndividuo(self,individuo, fluxo, distancias):
         
         fitness = 0
-        self.utils.infactivelCheck(individuo)
+        
         for i in range(self.parametros.N):
             for j in range(self.parametros.N):
                 
                 fitness = fitness + distancias[i][j] * fluxo[ individuo[i] ] [individuo[j] ]
-    
-        individuo[self.parametros.TAMCROMOSSOMO - 1] = fitness
+   
+        individuo[-1] = fitness
+        
         
     def infactivelCheck(self,fluxo, distancias,individuo, instancia):
         
@@ -67,18 +68,18 @@ class FuncaoObjetivo:
         
         bestInstancia = dict([
             ('nug12.dat',	578),
-            ('nug14.dat',	1016),
+            ('nug14.dat',	1014),
             ('nug15.dat',	1150),
-            ('nug16a.dat',	1612),
+            ('nug16a.dat',	1610),
             ('nug16b.dat',	1610),
             ('nug17.dat',	1732),
-            ('nug18.dat',	1948),
+            ('nug18.dat',	1930),
             ('nug20.dat',	2570),
             ('nug21.dat',	2450),
             ('nug22.dat',	3596),
             ('nug25.dat',	3744),
             ('nug27.dat',	5264),
-            ('nug28.dat',	518),
+            ('nug28.dat',	5166),
         ])
         self.avaliarIndividuo(individuo, fluxo, distancias)
         
