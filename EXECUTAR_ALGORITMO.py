@@ -39,6 +39,6 @@ for nome in nomes:
     arquivo.lerDistancias(distancias)
 
     # heuristica_estatica(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome,multiplicador = 20)
-    hiperHeuristica_Aleatoria(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome, multiplicador = 20)
-    # hiperHeuristica_Thompson(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome, multiplicador = 20, arrayFixo = arrayFixo, variar = variar)
+    # hiperHeuristica_Aleatoria(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome, multiplicador = 20)
+    hiperHeuristica_Thompson(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome, multiplicador = 20, arrayFixo = arrayFixo, variar = variar)
 print("Execução finalizada !")
