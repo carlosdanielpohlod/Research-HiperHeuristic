@@ -1,4 +1,4 @@
-hambiente = 'local'
+hambiente = 'storage'
 
 if(hambiente == 'local'):
     storage_path = 'storage'
