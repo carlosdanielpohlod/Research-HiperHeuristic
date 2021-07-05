@@ -3,9 +3,9 @@ class HeuristicaEscolha:
     
     def __init__(self, method):
         self.dependencia = method
-    def escolher(self, info = None):
-        if(info != None):
-            return self.dependencia.escolher(info)
+    def escolher(self, excluir = None):
+        if(excluir != None):
+            return self.dependencia.escolher(excluir)
         else:
             return self.dependencia.escolher()
     def inicializar(self, info):
