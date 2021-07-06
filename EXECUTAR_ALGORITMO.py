@@ -3,23 +3,25 @@ from hiperHeuristica_Thompson import *
 from hiperHeristica_Aleatoria import *
 arquivo = ArquivosManager()
 nomes = [
-    '/content/HiperHeuristic/storage/files/nug/nug12.dat',
-    '/content/HiperHeuristic/storage/files/nug/nug14.dat',
-    '/content/HiperHeuristic/storage/files/nug/nug15.dat',
-    '/content/HiperHeuristic/storage/files/nug/nug16a.dat',
-    '/content/HiperHeuristic/storage/files/nug/nug16b.dat',
-    '/content/HiperHeuristic/storage/files/nug/nug17.dat',
-    '/content/HiperHeuristic/storage/files/nug/nug18.dat',
+#     '/content/HiperHeuristic/storage/files/nug/nug12.dat',
+#     '/content/HiperHeuristic/storage/files/nug/nug14.dat',
+#     '/content/HiperHeuristic/storage/files/nug/nug15.dat',
+#     '/content/HiperHeuristic/storage/files/nug/nug16a.dat',
+#     '/content/HiperHeuristic/storage/files/nug/nug16b.dat',
+#     '/content/HiperHeuristic/storage/files/nug/nug17.dat',
+#     '/content/HiperHeuristic/storage/files/nug/nug18.dat',
 
-'/content/HiperHeuristic/storage/files/nug/nug20.dat',
+# '/content/HiperHeuristic/storage/files/nug/nug20.dat',
 
-'/content/HiperHeuristic/storage/files/nug/nug21.dat',
-'/content/HiperHeuristic/storage/files/nug/nug22.dat',
-'/content/HiperHeuristic/storage/files/nug/nug25.dat',
-'/content/HiperHeuristic/storage/files/nug/nug27.dat',
+# '/content/HiperHeuristic/storage/files/nug/nug21.dat',
+# '/content/HiperHeuristic/storage/files/nug/nug22.dat',
+# '/content/HiperHeuristic/storage/files/nug/nug24.dat',
+# '/content/HiperHeuristic/storage/files/nug/nug25.dat',
+# '/content/HiperHeuristic/storage/files/nug/nug27.dat',
 
 
-'/content/HiperHeuristic/storage/files/nug/nug28.dat'
+# '/content/HiperHeuristic/storage/files/nug/nug28.dat',
+'/content/HiperHeuristic/storage/files/nug/nug30.dat',
 
 
 
@@ -38,6 +40,7 @@ for nome in nomes:
     arquivo.lerFluxo(fluxo)
     arquivo.lerDistancias(distancias)
 
+    
     # heuristica_estatica(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome,multiplicador = 20)
     # hiperHeuristica_Aleatoria(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome, multiplicador = 20)
     hiperHeuristica_Thompson(fluxo = fluxo, distancias = distancias, tamInstancia = arquivo.tam, numExecucoes = 30, instancia = nome, multiplicador = 20, arrayFixo = arrayFixo, variar = variar)

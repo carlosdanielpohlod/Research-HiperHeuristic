@@ -67,8 +67,8 @@ def reproducaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
             reward = int(reproducao.score)
             utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
             salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
-            for individuo in populacao:
-                funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
+            # for individuo in populacao:
+            #     funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
         somatorio = somatorio + melhorResultado
 
         melhorFinal.append(melhorResultado) #
@@ -118,8 +118,8 @@ def mutacaoVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, mul
             reward = int(mutacao.score)
             utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
             salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
-            for individuo in populacao:
-                funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
+            # for individuo in populacao:
+            #     funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
         somatorio = somatorio + melhorResultado
 
         melhorFinal.append(melhorResultado) #
@@ -171,8 +171,8 @@ def buscaLocalVariada(fluxo, distancias, tamInstancia, numExecucoes, instancia, 
             reward = int(buscaLocal.score)
             utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
             
-            for individuo in populacao:
-                funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
+            # for individuo in populacao:
+            #     funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
         somatorio = somatorio + melhorResultado
 
         melhorFinal.append(melhorResultado) #
@@ -226,8 +226,8 @@ def geral(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicado
             
             utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
             salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
-            for individuo in populacao:
-                funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
+            # for individuo in populacao:
+            #     funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
         somatorio = somatorio + melhorResultado
 
         melhorFinal.append(melhorResultado) #
