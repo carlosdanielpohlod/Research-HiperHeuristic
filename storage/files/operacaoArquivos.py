@@ -42,15 +42,26 @@ class ArquivosManager:
     def lerFluxo(self, fluxo):
         k = self.tam + 3
         i = 0
+        
         while(k < self.tam + self.tam + 3):
-            fluxo[i] = self.dadosArquivo[k].split(' ')
-            self.retirarCampoVazio(fluxo[i])
-            for j in range(self.tam):
-                # print("aqui", fluxo[i])
-                fluxo[i][j] = fluxo[i][j].replace('\n','')
-            k = k + 1
-            i = i + 1
+            # try:
+                
+                fluxo[i] = self.dadosArquivo[k].split(' ')
+                self.retirarCampoVazio(fluxo[i])
+                for j in range(self.tam):
+                    # print("aqui", fluxo[i])
+                    fluxo[i][j] = fluxo[i][j].replace('\n','')
+                k = k + 1
+                i = i + 1
+            # except Exception as ist:
+            #     print(ist.args)
+                
+            #     print('k: ', k)
+            #     print('dados arquivo de k: ', self.dadosArquivo[33:59])
+            #     # print('fluxo ', fluxo)
+            #     input("pressione uma tecla")
         self.castToInt(fluxo)
+      
     def castToInt(self, matriz):
         linhas = len(matriz)
         colunas = len(matriz[0])
