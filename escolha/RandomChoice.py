@@ -16,10 +16,9 @@ class RandomChoice:
             return [random.randint(1, self.qtdReproducao),random.randint(1, self.qtdBuscaLocal), random.randint(1, self.qtdMutacao)]
         else:
             combinacao = [random.randint(1, self.qtdReproducao),random.randint(1, self.qtdBuscaLocal), random.randint(1, self.qtdMutacao)]
-            print(combinacao, excluir)
+            
             while(combinacao in excluir):
-                print("refeito a combinacao")
-                print(combinacao, excluir)
+                
                 combinacao = [random.randint(1, self.qtdReproducao),random.randint(1, self.qtdBuscaLocal), random.randint(1, self.qtdMutacao)]
             return combinacao
 

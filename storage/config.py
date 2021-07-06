@@ -1,4 +1,4 @@
-hambiente = 'local'
+hambiente = 'colab'
 
 if(hambiente == 'local'):
     storage_path = 'storage'

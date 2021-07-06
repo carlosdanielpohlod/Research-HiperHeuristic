@@ -56,9 +56,6 @@ def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, ins
             codHeuristicas.codReproducao,codHeuristicas.codBuscaLocal, codHeuristicas.codMutacao = heuristicaEscolha.escolher(excluir = [[2,1,1], [2,2,1], [2,2,2], [2,2,3], [2,3,3]]) #excluir esses    
             melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
             
-            for individuo in populacao:
-                funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
-
             salvarResultado(idExecucao, codHeuristicas, melhorResultado, utils.mediaPopulacao(populacao) )
         somatorio = somatorio + melhorResultado
         melhorFinal.append(melhorResultado)
