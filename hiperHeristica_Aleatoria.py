@@ -16,7 +16,7 @@ from storage.files.operacaoArquivos import *
 from numpy import mean, std
 
 def hiperHeuristica_Aleatoria(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicador = 20):
-    # instancia = f'{instancia} aleatoria * 20'
+    instancia = f'{instancia} aleatoria * 20'
     
 
     parametros = Parametros()

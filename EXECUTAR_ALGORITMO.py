@@ -21,7 +21,7 @@ nomes = [
 
 
 # '/content/HiperHeuristic/storage/files/nug/nug28.dat',
-'storage/files/nug/nug30.dat',
+'/content/HiperHeuristic/storage/files/nug/nug30.dat',
 
 
 
