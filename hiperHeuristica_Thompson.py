@@ -224,7 +224,11 @@ def geral(fluxo, distancias, tamInstancia, numExecucoes, instancia, multiplicado
             reward = int(reproducao.score + mutacao.score + buscaLocal.score)
             stringAlgoritmoUsado = utils.codToString(codHeuristicas)
             
-            utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
+            # utils.sumRecompensas(reward, stringAlgoritmoUsado, heuristicaEscolha)
+            if(reward > 0):
+                heuristicaEscolha.atualizar([{'label':stringAlgoritmoUsado, 'reward':1}])
+            else:
+                heuristicaEscolha.atualizar([{'label':stringAlgoritmoUsado, 'reward':0}])
             salvarResultado(codExecucao = idExecucao, codHeuristicas = codHeuristicas, fitness = populacao[utils.buscarMelhorIndividuo(populacao)][parametros.TAMCROMOSSOMO - 1], mediaPopulacao = utils.mediaPopulacao(populacao) )
             # for individuo in populacao:
             #     funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)

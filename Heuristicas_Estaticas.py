@@ -52,9 +52,7 @@ def heuristica_estatica(fluxo, distancias, tamInstancia, numExecucoes, instancia
 
             for i in range(tamInstancia * multiplicador): 
                 melhorResultado = construirHeuristica(populacao,reproducao, buscaLocal, funcaoObjetivo, selecaoPais, fluxo, distancias, parametros, codHeuristicas)
-                # for individuo in populacao:
-                #     funcaoObjetivo.infactivelCheck(fluxo, distancias,individuo, instancia)
-                # print('melhorResultado',melhorResultado)
+  
             somatorio = somatorio + melhorResultado
             melhorFinal.append(melhorResultado) #
             # print('somatorio e melhorFinal', somatorio, melhorFinal)
