@@ -85,5 +85,5 @@ class FuncoesEstatisticas:
         return extrairCodesResultados(Resultados.select(Resultados.codReproducao, Resultados.codBuscaLocal, Resultados.codMutacao).where(Resultados.execucao_id == execucao_id).execute())
 
 
-o = FuncoesEstatisticas()
-o.exibirEstatisticasIndividuais('reproducao',1)
+# o = FuncoesEstatisticas()
+# o.exibirEstatisticasIndividuais('reproducao',1)
