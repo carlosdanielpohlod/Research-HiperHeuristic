@@ -1,3 +1,1 @@
-Arquivo principal: HiperHeuristica.py
-
-Demais arquivos: Separação dos tipos de reprodução, tipos de seleção de pais, buscas locais etc.
+This app is referenced a a published article: https://sol.sbc.org.br/index.php/eniac/article/view/18249
